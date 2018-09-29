@@ -17,8 +17,8 @@ public class PlayerCombatController
         _physBody = view._rigidBody;
         _config = config;
 
+        _physBody.drag = _config.movement.drag;
         _moveDirection = Vector3.zero;
-        
     }
     
 	public void SetAimPosition(Vector3 aimPos)
@@ -34,11 +34,13 @@ public class PlayerCombatController
 	// Update is called once per frame
 	public void Tick(float deltaTime)
     {
-
+        _physBody.drag = _config.movement.drag;
+        _view.SetAimPosition(_aimPosition);
     }
 
     public void FixedTick(float fixedDeltaTime)
     {
-        _physBody.AddForce(_moveDirection * _config.movement.speed);
+        Vector3 force = _moveDirection * _config.movement.speed;
+        _physBody.AddForce(force);
     }
 }

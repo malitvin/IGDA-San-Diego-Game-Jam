@@ -15,6 +15,9 @@ public class GameInstaller : ScriptableObjectInstaller
     {
         JamStateFactory gameStateInstaller = Container.Instantiate<JamStateFactory>();
         gameStateInstaller.InstallBindings();
+        
+        GameSystemInstaller gameSystemsInstaller = Container.Instantiate<GameSystemInstaller>();
+        gameSystemsInstaller.InstallBindings();
 
         Container.Bind<IEventDispatcher>().WithId(GLOBAL_DISPATCHER).To<EventDispatcher>().AsSingle();
 

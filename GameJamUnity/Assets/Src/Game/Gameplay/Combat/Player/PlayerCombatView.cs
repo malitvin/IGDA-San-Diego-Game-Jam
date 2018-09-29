@@ -30,8 +30,14 @@ public class PlayerCombatView : MonoBehaviour
         set { _rotateTransform.rotation = value; }
     }
 
+    public void SetAimPosition(Vector3 aimPosition)
+    {
+        _rotateTransform.LookAt(aimPosition);
+    }
+
     public void SetCurrentWeapon(string weapon)
     {
+
     }
 
     public void VisualFireWeapon(Vector3 target)

@@ -2,6 +2,7 @@
 using System.Collections;
 using GhostGen;
 using DG.Tweening;
+using Zenject;
 
 public class GameplayState : IGameState
 {
@@ -9,6 +10,9 @@ public class GameplayState : IGameState
     private GuiManager _gui;
     private GameplayResources _gameplayResources;
     private GameConfig _gameConfig;
+    private DiContainer _diContainer;
+
+    private PlayerCombatSystem _playerCombatSystem;
 
     private PlayerCombatController playerCombatController;
 
@@ -16,35 +20,35 @@ public class GameplayState : IGameState
         GameStateMachine<JameStateType> gameStateMachine,
         GuiManager gui,
         GameConfig gameConfig,
+        DiContainer diContainer,
         GameplayResources gameplayResources)
     {
         _gameStateMachine = gameStateMachine;
         _gui = gui;
         _gameConfig = gameConfig;
         _gameplayResources = gameplayResources;
+        _diContainer = diContainer;
     }
 
     public void Init(Hashtable changeStateData)
 	{
+        _playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
         // Get CombatPlayerView
-        PlayerCombatView view = GameObject.Instantiate<PlayerCombatView>(_gameplayResources.playerCombatView);
-        playerCombatController = new PlayerCombatController(view, _gameConfig.playerConfig);
     }
     
     public void Step( float p_deltaTime )
 	{
-        if(playerCombatController != null)
+        if(_playerCombatSystem != null)
         {
-            
-            playerCombatController.Tick(p_deltaTime);
+            _playerCombatSystem.Tick(p_deltaTime);
         }
     }
 
     public void FixedStep( float fixedDeltaTime)
     {
-        if(playerCombatController != null)
+        if(_playerCombatSystem != null)
         {
-            playerCombatController.FixedTick(fixedDeltaTime);
+            _playerCombatSystem.FixedTick(fixedDeltaTime);
         }
     }
 

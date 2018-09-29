@@ -8,9 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0edc47667b2b6f44bbec5af92863d1c, type: 3}
-  m_Name: PlayerConfig
+  m_Script: {fileID: 11500000, guid: 5ef1a2ccf89713d46af3dbc06ad05ec8, type: 3}
+  m_Name: GameSystemsInstaller
   m_EditorClassIdentifier: 
-  movement:
-    speed: 1000
-    drag: 0.94
+  gameplayResources: {fileID: 0}
+  gameConfig: {fileID: 0}
