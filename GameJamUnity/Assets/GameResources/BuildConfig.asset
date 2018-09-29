@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Name: BuildConfig
   m_EditorClassIdentifier: 
   startingBuildType: 0
-  buildRechargeRate: 0.25
   _collisionLayerMask:
     serializedVersion: 2
     m_Bits: 513
@@ -28,6 +27,7 @@ MonoBehaviour:
     currencyCost: 5
     key: 0
     buildSpace: 0
+    buildRechargeRate: 0.01
     fallHeight: 2
     buildTime: 0.75
     buildEaseType: 30
@@ -39,6 +39,7 @@ MonoBehaviour:
     currencyCost: 20
     key: 1
     buildSpace: 1
+    buildRechargeRate: 0.25
     fallHeight: 15
     buildTime: 0.5
     buildEaseType: 15

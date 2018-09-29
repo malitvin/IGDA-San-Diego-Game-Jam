@@ -2,6 +2,7 @@
 using UnityEngine;
 using Zenject;
 using Gameplay.Building;
+using Gameplay.Inventory;
 
 [CreateAssetMenu(menuName = "IDGA/Game System Installer")]
 public class GameSystemInstaller : ScriptableObjectInstaller
@@ -11,7 +12,7 @@ public class GameSystemInstaller : ScriptableObjectInstaller
         Container.Bind<PlayerCombatSystem>().AsSingle();
         Container.Bind<BuildingSystem>().AsSingle();
         Container.Bind<EnemySystem>().AsSingle();
-
+        Container.Bind<InventorySystem>().AsSingle();
         //Container.Bind<GameState>().AsSingle();
         //Container.Bind<GameTimerManager>().AsSingle();
         //Container.Bind<WaveAISystem>().AsSingle();

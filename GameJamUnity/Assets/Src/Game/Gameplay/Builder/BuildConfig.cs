@@ -12,7 +12,7 @@ using Common.Util;
 
 namespace Gameplay.Building
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "IDGA/Build Config")]
     public class BuildConfig : ScriptableObject
     {
         [System.Serializable]
@@ -31,6 +31,9 @@ namespace Gameplay.Building
             public Buildable.TYPE key;
             [Tooltip("Build space in terms of sea level At is basically 0")]
             public Buildable.BuildSpace buildSpace;
+
+            [Range(0.01f, 2f)]
+            public float buildRechargeRate = 0.25f;
 
             //anim
             [Range(0,15)]
@@ -58,9 +61,6 @@ namespace Gameplay.Building
         }
 
         public Buildable.TYPE startingBuildType;
-
-        [Range(0.01f,2f)]
-        public float buildRechargeRate = 0.25f;
 
         public LayerMask _collisionLayerMask;
         public string _boardTag;

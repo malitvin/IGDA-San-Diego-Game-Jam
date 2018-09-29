@@ -29,6 +29,7 @@ namespace Gameplay.Building
         private GenericPooler _buildingGenerator;
         private Buildable.TYPE _currentBuildType;
         private bool _collisionDetectionEnabled;
+        private float _buildRechargeRate;
 
         private BuildConfig _buildConfig;
 
@@ -38,7 +39,6 @@ namespace Gameplay.Building
             _gameplayCam = UnityEngine.Object.FindObjectOfType<GameplayCamera>().camera;
             _buildConfig = gameConfig.bulidConfig;
             _gameBoard = GameObject.FindObjectOfType<GameBoard>();
-            ////GameObject.FindGameObjectWithTag(_buildConfig._boardTag).GetComponent<GameBoard>();
             if (!_gameBoard)
             {
                 Debug.LogError("NO GAME BOARD FOUND ON BUILDINGSYSTEM");
@@ -81,6 +81,7 @@ namespace Gameplay.Building
             _buildHologram.SetScale(blueprint.hologramScale);
 
             _collisionDetectionEnabled = blueprint.enableCollisionDetection;
+            _buildRechargeRate = blueprint.buildRechargeRate;
         }
 
         #region Update
