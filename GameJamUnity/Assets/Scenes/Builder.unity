@@ -140,8 +140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d050d62486ab544382f9af30e391ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buildConfig: {fileID: 11400000, guid: 1caba337e96c04240a605af0e573f8bb, type: 2}
   _boardTag: GameBoard
   _buildModeEnabled: 1
+  _collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 259
 --- !u!4 &42046861
 Transform:
   m_ObjectHideFlags: 0
@@ -1015,7 +1019,7 @@ GameObject:
   - component: {fileID: 1278737988}
   - component: {fileID: 1278737987}
   - component: {fileID: 1278737986}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hologram
   m_TagString: Untagged
   m_Icon: {fileID: 0}

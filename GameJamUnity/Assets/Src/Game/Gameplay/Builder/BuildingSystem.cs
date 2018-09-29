@@ -4,13 +4,19 @@ using UnityEngine;
 //C#
 using System;
 
+//Game
+using Common.Pooling;
+
 namespace Gameplay.Building
 {
     public class BuildingSystem : MonoBehaviour
     {
+        public BuildConfig _buildConfig;
+
         public string _boardTag;
 
         public bool _buildModeEnabled;
+        public LayerMask _collisionLayerMask;
 
         private Camera _mainCam;
 
@@ -59,7 +65,16 @@ namespace Gameplay.Building
                     GridPosition gridPos = GetHoloGramPosition(hitPoint);
                     _buildHologram.SetPosition(gridPos);
                     Debug.DrawRay(hitPoint, Vector3.up, Color.blue);
-                    Debug.Log(hitPoint);
+
+                    Collider[] overlap = Physics.OverlapBox(_buildHologram.GetPosition(), (_buildHologram.GetScale() / 2.1f), Quaternion.identity, _collisionLayerMask);
+                    bool colliding = overlap.Length > 0;
+                    _buildHologram.UpdateHologram(colliding, _buildConfig.hologramData);
+
+                    //TRY TO BUILD
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+           
+                    }
                 }
             }
         }
