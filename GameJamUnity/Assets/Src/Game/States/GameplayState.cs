@@ -4,6 +4,7 @@ using GhostGen;
 using DG.Tweening;
 using Zenject;
 using Gameplay.Building;
+using Gameplay.Inventory;
 
 public class GameplayState : IGameState
 {
@@ -15,6 +16,7 @@ public class GameplayState : IGameState
 
     private PlayerCombatSystem _playerCombatSystem;
     private BuildingSystem _buildSystem;
+    private InventorySystem _inventorySystem;
 
     private PlayerCombatController playerCombatController;
 
@@ -36,6 +38,7 @@ public class GameplayState : IGameState
 	{
         //_playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
         _buildSystem = _diContainer.Resolve<BuildingSystem>();
+        _inventorySystem = _diContainer.Resolve<InventorySystem>();
         // Get CombatPlayerView
     }
     
