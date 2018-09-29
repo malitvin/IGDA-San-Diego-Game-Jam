@@ -11,6 +11,7 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
 
     private RaycastHit[] _hitResults = new RaycastHit[5];
     private int _boardLayer;
+    private bool _isEnabled;
 
     public PlayerCombatSystem(
         GameplayResources gameplayResources,
@@ -26,6 +27,20 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
 
         PlayerCombatView view = GameObject.Instantiate<PlayerCombatView>(_gameplayResources.playerCombatView);
         _playerCombatController = new PlayerCombatController(view, _gameConfig.playerConfig);
+        isEnabled = false;
+    }
+
+    public bool isEnabled
+    {
+        get { return _isEnabled; }
+        set
+        {
+            _isEnabled = value;
+            if(_playerCombatController != null)
+            {
+                _playerCombatController.isEnabled = value;
+            }
+        }
     }
     
     public PlayerCombatController playerController

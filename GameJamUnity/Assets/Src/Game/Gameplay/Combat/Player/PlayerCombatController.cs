@@ -12,7 +12,8 @@ public class PlayerCombatController
     private Vector3 _aimPosition;
     private float _fireTimer;
     private RaycastHit[] rayHits = new RaycastHit[10];
-    
+    private bool _isEnabled;
+
     public PlayerCombatController(PlayerCombatView view, PlayerConfig config)
     {
         _view = view;
@@ -23,6 +24,19 @@ public class PlayerCombatController
         _moveDirection = Vector3.zero;
     }
     
+    public bool isEnabled
+    {
+        get { return _isEnabled; }
+        set
+        {
+            _isEnabled = value;
+            if(_view != null)
+            {
+                _view.gameObject.SetActive(value);
+            }
+        }
+    }
+
     public Transform transform
     {
         get { return _physBody.transform; }
@@ -35,7 +49,7 @@ public class PlayerCombatController
 
     public void FireWeapon(Vector3 targetPos)
     {
-        if(_fireTimer > 0)
+        if(_fireTimer > 0 || !isEnabled)
             return;
         
         Vector3 weaponPos = _view.weaponBarrelPosition;
@@ -53,7 +67,6 @@ public class PlayerCombatController
         {
             target.TakeDamage(hit.point, viewDir * 110.0f, 5.0f);
             adjustedPos = hit.point;
-            Debug.Log("Target Hit");
         }
         
         Debug.DrawRay(adjustedPos, Vector3.up, Color.red);
@@ -69,6 +82,11 @@ public class PlayerCombatController
 	// Update is called once per frame
 	public void Tick(float deltaTime)
     {
+        if(!isEnabled)
+        {
+            return;
+        }
+
         _physBody.drag = _config.movement.drag;
         _view.SetAimPosition(_aimPosition);
 
@@ -80,6 +98,11 @@ public class PlayerCombatController
 
     public void FixedTick(float fixedDeltaTime)
     {
+        if(!isEnabled)
+        {
+            return;
+        }
+
         Vector3 force = _moveDirection * _config.movement.speed;
         _physBody.AddForce(force, ForceMode.Acceleration); // Already applies fixedDeltaTime, Fuck ya.
     }
