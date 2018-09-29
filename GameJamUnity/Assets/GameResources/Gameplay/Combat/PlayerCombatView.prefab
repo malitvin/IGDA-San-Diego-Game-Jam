@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1249388341476264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.341, y: 1.324, z: 0.406}
+  m_LocalPosition: {x: 0.088, y: 1.324, z: 0.406}
   m_LocalScale: {x: 0.06897573, y: 0.07900028, z: 1.0035876}
   m_Children:
   - {fileID: 4742559341293532}
@@ -304,6 +304,8 @@ MonoBehaviour:
   _rigidBody: {fileID: 54492376441048836}
   _weaponEndPoint: {fileID: 4742559341293532}
   _rotateTransform: {fileID: 4129549093235034}
+  _bulletFXPrefab: {fileID: 1374911264970584, guid: e5970b0ae835d4545b9cc110a6dc2036,
+    type: 2}
 --- !u!136 &136456601660863650
 CapsuleCollider:
   m_ObjectHideFlags: 1

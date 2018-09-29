@@ -27,6 +27,7 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         PlayerCombatView view = GameObject.Instantiate<PlayerCombatView>(_gameplayResources.playerCombatView);
         _playerCombatController = new PlayerCombatController(view, _gameConfig.playerConfig);
     }
+    
     public void Tick(float deltaTime)
     {
         if(_playerCombatController != null)
@@ -37,6 +38,10 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
             Vector3 aimPos = getAimPosition();
             _playerCombatController.SetAimPosition(aimPos);
 
+            if(Input.GetMouseButton(0))
+            {
+                _playerCombatController.FireWeapon(aimPos);
+            }
             _playerCombatController.Tick(deltaTime);
         }
     }
@@ -80,7 +85,8 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         {
             Vector3 hitPoint = _hitResults[0].point;
             result = hitPoint;
-            Debug.Log("Reslt: " + result);
+
+            Debug.DrawRay(hitPoint, Vector3.up, Color.blue);
         }
         return result;
     }

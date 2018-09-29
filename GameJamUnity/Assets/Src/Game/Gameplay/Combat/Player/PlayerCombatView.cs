@@ -1,19 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerCombatView : MonoBehaviour
 {
+    private const int kFXPoolSize = 50;
+
+
     public Rigidbody _rigidBody;
     public Transform _weaponEndPoint;
     public Transform _rotateTransform;
 
-	// Use this for initialization
-	void Start ()
+    // (This should all be in a weapon class)
+    public GameObject _bulletFXPrefab;
+    private TrailRenderer[] _fxPool;
+    private Tween _fxTween;
+    private int _fxIndex;
+
+    // Use this for initialization
+    void Awake ()
     {
-		
-	}
-	
+        setupFXPool();
+    }
+
     public Vector3 rigidPosition
     {
         get { return _rigidBody.position; }
@@ -40,8 +50,57 @@ public class PlayerCombatView : MonoBehaviour
 
     }
 
-    public void VisualFireWeapon(Vector3 target)
+    public void VisualFireWeapon(float speed, Vector3 target)
     {
+        Vector3 startPos = _weaponEndPoint.position;
 
+        TrailRenderer fx = getNextFX();
+        fx.Clear();
+        float time = fx.time;
+        fx.time = 0;
+        fx.transform.position = startPos;
+        
+        _fxTween = fx.transform.DOMove(target, speed);
+        _fxTween.SetEase(Ease.Linear);
+        _fxTween.SetSpeedBased(true);
+
+        _fxTween.OnStart(() =>
+        {
+            fx.time = time;
+            fx.transform.position = startPos;
+            fx.gameObject.SetActive(true);
+            fx.emitting = (true);
+            fx.Clear();
+        });
+
+        _fxTween.OnComplete(()=>
+        {
+            fx.Clear();
+            fx.emitting = (false);
+            fx.gameObject.SetActive(false);
+            _fxTween = null;
+        });
     }
+
+    private TrailRenderer getNextFX()
+    {
+        TrailRenderer fx = _fxPool[_fxIndex];
+        _fxIndex = (_fxIndex + 1) % _fxPool.Length;
+        return fx;
+    }
+
+    private void setupFXPool()
+    {
+        _fxIndex = 0;
+        _fxPool = new TrailRenderer[kFXPoolSize];
+
+        for(int i = 0; i < kFXPoolSize; ++i)
+        {
+            GameObject fxObj = GameObject.Instantiate<GameObject>(_bulletFXPrefab, transform.position, transform.rotation);
+            _fxPool[i] = fxObj.GetComponent<TrailRenderer>();
+            _fxPool[i].gameObject.SetActive(false);
+            _fxPool[i].emitting = (false);
+        }
+    }
+    
 }

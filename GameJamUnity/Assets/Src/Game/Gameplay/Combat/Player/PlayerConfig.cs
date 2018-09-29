@@ -12,6 +12,16 @@ public class PlayerConfig : ScriptableObject
         public float drag;
     }
 
+    [System.Serializable]
+    public class Weapon
+    {
+        public float bulletSpeed;
+        public float fireCooldown;
+    }
+
     public Movement movement;
+    public Weapon weapon;
+
+
 
 }

@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   movement:
-    speed: 1000
-    drag: 0.94
+    speed: 164.01
+    drag: 7.98
+  weapon:
+    bulletSpeed: 27.07
+    fireCooldown: 0.1
