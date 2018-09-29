@@ -62,6 +62,9 @@ namespace Gameplay.Building
         [Range(0.01f,2f)]
         public float buildRechargeRate = 0.25f;
 
+        public LayerMask _collisionLayerMask;
+        public string _boardTag;
+        public BuildHologram buildHologram;
         public HologramData hologramData;
 
         public BuildableBlueprint[] buildables;

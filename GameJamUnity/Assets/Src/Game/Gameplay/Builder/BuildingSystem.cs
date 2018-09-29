@@ -9,21 +9,14 @@ using Common.Pooling;
 
 namespace Gameplay.Building
 {
-    public class BuildingSystem : MonoBehaviour
+    public class BuildingSystem : GhostGen.EventDispatcher
     {
-        public BuildConfig _buildConfig;
-
-        public string _boardTag;
-
-        public bool _buildModeEnabled;
+        public bool _buildModeEnabled = true;
 
         private float buildTimer;
         private bool _builderRecharging;
 
-        public LayerMask _collisionLayerMask;
-
-        private Camera _mainCam;
-
+        private Camera _gameplayCam;
         private GameBoard _gameBoard;
         private BuildHologram _buildHologram;
 
@@ -37,20 +30,19 @@ namespace Gameplay.Building
         private Buildable.TYPE _currentBuildType;
         private bool _collisionDetectionEnabled;
 
+        private BuildConfig _buildConfig;
+
         #region Init
-        private void Start()
+        public BuildingSystem(GameConfig gameConfig)
         {
-            _mainCam = Camera.main;
-            if (!_mainCam)
-            {
-                Debug.LogError("NO MAIN CAM FOUND ON BUILDINGSYSTEM");
-            }
-            _gameBoard = GameObject.FindGameObjectWithTag(_boardTag).GetComponent<GameBoard>();
+            _gameplayCam = UnityEngine.Object.FindObjectOfType<GameplayCamera>().camera;
+            _buildConfig = gameConfig.bulidConfig;
+            _gameBoard = GameObject.FindGameObjectWithTag(_buildConfig._boardTag).GetComponent<GameBoard>();
             if (!_gameBoard)
             {
                 Debug.LogError("NO GAME BOARD FOUND ON BUILDINGSYSTEM");
             }
-            _buildHologram = GetComponentInChildren<BuildHologram>();
+            _buildHologram = GameObject.Instantiate<BuildHologram>(_buildConfig.buildHologram);
             if (!_buildHologram)
             {
                 Debug.LogError("NO BUILD HOLOGRAM FOUND ON BUILDINGSYSTEM");
@@ -61,7 +53,12 @@ namespace Gameplay.Building
         private void InitBuilder()
         {
             //init building pool
-            _buildingGenerator = new GenericPooler(transform);
+            GameObject pool = GameObject.FindGameObjectWithTag("ScenePool");
+            if(!pool)
+            {
+                Debug.LogError("NO SCENE POOL TRANSFORM FOUND IN SCENE");
+            }
+            _buildingGenerator = new GenericPooler(pool ? pool.transform : null);
             BuildConfig.BuildableBlueprint[] blueprints = _buildConfig.buildables;
             for (int i = 0; i < blueprints.Length; i++)
             {
@@ -86,13 +83,13 @@ namespace Gameplay.Building
         }
 
         #region Update
-        private void Update()
+        public void Tick(float deltaTime)
         {
             #region Build Recharge Timer
             //Build recharge timer
             if (_builderRecharging)
             {
-                buildTimer += Time.deltaTime;
+                buildTimer += deltaTime;
                 if (buildTimer > _buildConfig.buildRechargeRate)
                 {
                     _builderRecharging = false;
@@ -105,7 +102,7 @@ namespace Gameplay.Building
             if (_buildModeEnabled && !_builderRecharging)
             {
                 //Set our hologram position
-                Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
+                Ray ray = _gameplayCam.ScreenPointToRay(Input.mousePosition);
                 //IF WE ARE ON THE GAMEBOARD
                 if (Physics.RaycastNonAlloc(ray, _hitResults, 100, _gameBoard.GetLayer()) > 0)
                 {
@@ -119,7 +116,7 @@ namespace Gameplay.Building
                     bool colliding = false;
                     if (_collisionDetectionEnabled)
                     {
-                        Collider[] overlap = Physics.OverlapBox(_buildHologram.GetPosition(), (_buildHologram.GetScale() / 2.1f), Quaternion.identity, _collisionLayerMask);
+                        Collider[] overlap = Physics.OverlapBox(_buildHologram.GetPosition(), (_buildHologram.GetScale() / 2.1f), Quaternion.identity, _buildConfig._collisionLayerMask);
                         colliding = overlap.Length > 0;
                         _buildHologram.UpdateHologram(colliding, _buildConfig.hologramData);
                     }
@@ -148,15 +145,6 @@ namespace Gameplay.Building
         /// <returns></returns>
         private GridPosition GetHoloGramPosition(Vector3 hitPoint)
         {
-            float boardSize = _gameBoard.GetSize();
-            float xOffset = _gameBoard.GetPosition().x;
-            float zOffset = _gameBoard.GetPosition().z;
-
-            Vector3 hologramScale = _buildHologram.GetScale();
-
-            float moveByX = (hologramScale.x % 2 == 0) ? 1 : 0.5f;
-            float moveByZ = (hologramScale.z % 2 == 0) ? 1 : 0.5f;
-
             //X
             float x = (hitPoint.x * 2);
             x = (float)Math.Round(x, MidpointRounding.AwayFromZero);

@@ -1,7 +1,7 @@
 ﻿using GhostGen;
 using UnityEngine;
 using Zenject;
-
+using Gameplay.Building;
 
 [CreateAssetMenu(menuName = "IDGA/Game System Installer")]
 public class GameSystemInstaller : ScriptableObjectInstaller
@@ -9,6 +9,7 @@ public class GameSystemInstaller : ScriptableObjectInstaller
     public override void InstallBindings()
     {
         Container.Bind<PlayerCombatSystem>().AsSingle();
+        Container.Bind<BuildingSystem>().AsSingle();
         //Container.Bind<GameState>().AsSingle();
         //Container.Bind<GameTimerManager>().AsSingle();
         //Container.Bind<WaveAISystem>().AsSingle();

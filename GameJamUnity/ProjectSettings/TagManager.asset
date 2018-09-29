@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GuiObject
   - GameBoard
+  - ScenePool
   layers:
   - Default
   - TransparentFX

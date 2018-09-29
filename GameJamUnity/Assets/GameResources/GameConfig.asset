@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialState: 1
   playerConfig: {fileID: 11400000, guid: 6ad3e6dfb5edf2b478ff0d8ef32d7c28, type: 2}
+  bulidConfig: {fileID: 11400000, guid: 1caba337e96c04240a605af0e573f8bb, type: 2}

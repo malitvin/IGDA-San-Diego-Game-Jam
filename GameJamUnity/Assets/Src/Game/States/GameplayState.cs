@@ -3,6 +3,7 @@ using System.Collections;
 using GhostGen;
 using DG.Tweening;
 using Zenject;
+using Gameplay.Building;
 
 public class GameplayState : IGameState
 {
@@ -13,6 +14,7 @@ public class GameplayState : IGameState
     private DiContainer _diContainer;
 
     private PlayerCombatSystem _playerCombatSystem;
+    private BuildingSystem _buildSystem;
 
     private PlayerCombatController playerCombatController;
 
@@ -32,7 +34,8 @@ public class GameplayState : IGameState
 
     public void Init(Hashtable changeStateData)
 	{
-        _playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
+        //_playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
+        _buildSystem = _diContainer.Resolve<BuildingSystem>();
         // Get CombatPlayerView
     }
     
@@ -41,6 +44,10 @@ public class GameplayState : IGameState
         if(_playerCombatSystem != null)
         {
             _playerCombatSystem.Tick(p_deltaTime);
+        }
+        if(_buildSystem != null)
+        {
+            _buildSystem.Tick(p_deltaTime);
         }
     }
 
