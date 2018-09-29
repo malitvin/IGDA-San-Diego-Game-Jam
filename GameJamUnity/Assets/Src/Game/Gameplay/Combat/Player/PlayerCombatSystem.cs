@@ -28,12 +28,17 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         _playerCombatController = new PlayerCombatController(view, _gameConfig.playerConfig);
     }
     
+    public PlayerCombatController playerController
+    {
+        get { return _playerCombatController; }
+    }
+
     public void Tick(float deltaTime)
     {
         if(_playerCombatController != null)
         {
             Vector3 moveDir = getMoveDirection();
-            _playerCombatController.Move(moveDir);
+            _playerCombatController.SetMoveDirection(moveDir);
 
             Vector3 aimPos = getAimPosition();
             _playerCombatController.SetAimPosition(aimPos);

@@ -16,8 +16,11 @@ public class GameplayState : IGameState
 
     private PlayerCombatSystem _playerCombatSystem;
     private BuildingSystem _buildSystem;
-    private InventorySystem _inventorySystem;
+<<<<<<< HEAD
     private EnemySystem _enemySystem;
+=======
+    private InventorySystem _inventorySystem;
+>>>>>>> master
 
     private PlayerCombatController playerCombatController;
 
@@ -40,10 +43,12 @@ public class GameplayState : IGameState
 	{
         _playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
         _buildSystem = _diContainer.Resolve<BuildingSystem>();
-        _inventorySystem = _diContainer.Resolve<InventorySystem>();
+<<<<<<< HEAD
         _enemySystem = _diContainer.Resolve<EnemySystem>();
-    
+=======
+        _inventorySystem = _diContainer.Resolve<InventorySystem>();
         // Get CombatPlayerView
+>>>>>>> master
     }
     
     public void Step( float p_deltaTime )

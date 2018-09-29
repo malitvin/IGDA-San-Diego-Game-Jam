@@ -50,6 +50,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4431454745041336}
   - component: {fileID: 114909365597833806}
+  - component: {fileID: 136957406144815164}
+  - component: {fileID: 54989138336555428}
   m_Layer: 0
   m_Name: PlayerCombatView
   m_TagString: Untagged
@@ -99,8 +101,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4977479553914320}
-  - component: {fileID: 136456601660863650}
-  - component: {fileID: 54492376441048836}
   m_Layer: 0
   m_Name: positionContainer
   m_TagString: Untagged
@@ -185,7 +185,7 @@ Transform:
   m_GameObject: {fileID: 1873169988615966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.34, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4129549093235034}
   m_Father: {fileID: 4431454745041336}
@@ -275,12 +275,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1575048909335444}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54492376441048836
+--- !u!54 &54989138336555428
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873169988615966}
+  m_GameObject: {fileID: 1106269766868640}
   serializedVersion: 2
   m_Mass: 10
   m_Drag: 1
@@ -301,17 +301,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e4e6bc720d06d4bbe8748466b3cef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidBody: {fileID: 54492376441048836}
+  _rigidBody: {fileID: 54989138336555428}
   _weaponEndPoint: {fileID: 4742559341293532}
   _rotateTransform: {fileID: 4129549093235034}
   _bulletFXPrefab: {fileID: 1374911264970584, guid: e5970b0ae835d4545b9cc110a6dc2036,
     type: 2}
---- !u!136 &136456601660863650
+--- !u!136 &136957406144815164
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873169988615966}
+  m_GameObject: {fileID: 1106269766868640}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

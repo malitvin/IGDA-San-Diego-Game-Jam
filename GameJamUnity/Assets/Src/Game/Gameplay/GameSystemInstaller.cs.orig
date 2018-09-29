@@ -11,8 +11,12 @@ public class GameSystemInstaller : ScriptableObjectInstaller
     {
         Container.Bind<PlayerCombatSystem>().AsSingle();
         Container.Bind<BuildingSystem>().AsSingle();
+<<<<<<< HEAD
         Container.Bind<EnemySystem>().AsSingle();
+
+=======
         Container.Bind<InventorySystem>().AsSingle();
+>>>>>>> master
         //Container.Bind<GameState>().AsSingle();
         //Container.Bind<GameTimerManager>().AsSingle();
         //Container.Bind<WaveAISystem>().AsSingle();
