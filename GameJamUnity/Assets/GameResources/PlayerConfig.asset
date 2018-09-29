@@ -15,5 +15,5 @@ MonoBehaviour:
     speed: 164.01
     drag: 7.98
   weapon:
-    bulletSpeed: 45
+    bulletSpeed: 90
     fireCooldown: 0.1

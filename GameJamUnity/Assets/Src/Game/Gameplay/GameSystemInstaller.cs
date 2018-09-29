@@ -10,6 +10,8 @@ public class GameSystemInstaller : ScriptableObjectInstaller
     {
         Container.Bind<PlayerCombatSystem>().AsSingle();
         Container.Bind<BuildingSystem>().AsSingle();
+        Container.Bind<EnemySystem>().AsSingle();
+
         //Container.Bind<GameState>().AsSingle();
         //Container.Bind<GameTimerManager>().AsSingle();
         //Container.Bind<WaveAISystem>().AsSingle();
@@ -25,5 +27,5 @@ public class GameSystemInstaller : ScriptableObjectInstaller
         //Container.BindFactory<string, CreepSpawnInfo, Creep, Creep.Factory>();
         //Container.BindFactory<SyncStepper, SyncStepper.Factory>().WithFactoryArguments<GameObject>(syncCommanderPrefab);
 
-     }
+    }
 }

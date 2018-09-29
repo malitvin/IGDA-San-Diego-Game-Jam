@@ -14,3 +14,5 @@ MonoBehaviour:
   gameplayCamera: {fileID: 0}
   playerCombatView: {fileID: 114909365597833806, guid: bdb60ff0811850d4c8b56f9a85e55b13,
     type: 2}
+  basicEnemyView: {fileID: 114602027809904032, guid: ec4a7d88e985cb24db42375e63078472,
+    type: 2}

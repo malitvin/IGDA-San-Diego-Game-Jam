@@ -15,6 +15,7 @@ public class GameplayState : IGameState
 
     private PlayerCombatSystem _playerCombatSystem;
     private BuildingSystem _buildSystem;
+    private EnemySystem _enemySystem;
 
     private PlayerCombatController playerCombatController;
 
@@ -30,13 +31,14 @@ public class GameplayState : IGameState
         _gameConfig = gameConfig;
         _gameplayResources = gameplayResources;
         _diContainer = diContainer;
+
     }
 
     public void Init(Hashtable changeStateData)
 	{
         _playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
         _buildSystem = _diContainer.Resolve<BuildingSystem>();
-        // Get CombatPlayerView
+        _enemySystem = _diContainer.Resolve<EnemySystem>();
     }
     
     public void Step( float p_deltaTime )
@@ -48,6 +50,10 @@ public class GameplayState : IGameState
         if(_buildSystem != null)
         {
             _buildSystem.Tick(p_deltaTime);
+        }
+        if(_enemySystem != null)
+        {
+            _enemySystem.Tick(p_deltaTime);
         }
     }
 
