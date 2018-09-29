@@ -27,29 +27,31 @@ namespace Gameplay.Building
         private GameBoard _gameBoard;
         private BuildHologram _buildHologram;
 
-        private const float SEA_LEVEL = 0.5f;
+        public const float ABOVE_SEA_LEVEL = 0.5f;
 
-        private Vector3 seaLevelPos = new Vector3(0, SEA_LEVEL, 0);
+        private Vector3 seaLevelPos = new Vector3(0, ABOVE_SEA_LEVEL, 0);
 
         private RaycastHit[] _hitResults = new RaycastHit[5];
 
         private GenericPooler _buildingGenerator;
+        private Buildable.TYPE _currentBuildType;
+        private bool _collisionDetectionEnabled;
 
-        #region Unity Methods
+        #region Init
         private void Start()
         {
             _mainCam = Camera.main;
-            if(!_mainCam)
+            if (!_mainCam)
             {
                 Debug.LogError("NO MAIN CAM FOUND ON BUILDINGSYSTEM");
             }
             _gameBoard = GameObject.FindGameObjectWithTag(_boardTag).GetComponent<GameBoard>();
-            if(!_gameBoard)
+            if (!_gameBoard)
             {
                 Debug.LogError("NO GAME BOARD FOUND ON BUILDINGSYSTEM");
             }
             _buildHologram = GetComponentInChildren<BuildHologram>();
-            if(!_buildHologram)
+            if (!_buildHologram)
             {
                 Debug.LogError("NO BUILD HOLOGRAM FOUND ON BUILDINGSYSTEM");
             }
@@ -58,15 +60,32 @@ namespace Gameplay.Building
 
         private void InitBuilder()
         {
+            //init building pool
             _buildingGenerator = new GenericPooler(transform);
             BuildConfig.BuildableBlueprint[] blueprints = _buildConfig.buildables;
-            for (int i=0; i < blueprints.Length; i++)
+            for (int i = 0; i < blueprints.Length; i++)
             {
                 BuildConfig.BuildableBlueprint blueprint = blueprints[i];
                 _buildingGenerator.InitPool(blueprint.GetKey(), 10, blueprint.prefab);
             }
+
+            //init builder
+            _currentBuildType = _buildConfig.startingBuildType;
+            SetBuildType(_currentBuildType);
+        }
+        #endregion
+
+        private void SetBuildType(Buildable.TYPE type)
+        {
+            //morph hologram
+            BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(type);
+            _buildHologram.SetMesh(blueprint.hollogramMesh);
+            _buildHologram.SetScale(blueprint.hologramScale);
+
+            _collisionDetectionEnabled = blueprint.enableCollisionDetection;
         }
 
+        #region Update
         private void Update()
         {
             #region Build Recharge Timer
@@ -97,17 +116,21 @@ namespace Gameplay.Building
                     _buildHologram.SetPosition(gridPos);
                     Debug.DrawRay(hitPoint, Vector3.up, Color.blue);
 
-                    Collider[] overlap = Physics.OverlapBox(_buildHologram.GetPosition(), (_buildHologram.GetScale() / 2.1f), Quaternion.identity, _collisionLayerMask);
-                    bool colliding = overlap.Length > 0;
-                    _buildHologram.UpdateHologram(colliding, _buildConfig.hologramData);
+                    bool colliding = false;
+                    if (_collisionDetectionEnabled)
+                    {
+                        Collider[] overlap = Physics.OverlapBox(_buildHologram.GetPosition(), (_buildHologram.GetScale() / 2.1f), Quaternion.identity, _collisionLayerMask);
+                        colliding = overlap.Length > 0;
+                        _buildHologram.UpdateHologram(colliding, _buildConfig.hologramData);
+                    }
 
                     //TRY TO BUILD
                     if (!colliding && Input.GetKey(KeyCode.Mouse0))
                     {
                         //BUILD!
-                        BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(Buildable.TYPE.Block);
-                        Buildable building =_buildingGenerator.GetPooledObject(blueprint.GetKey()) as Buildable;
-                        building.Build(_buildHologram.GetPosition(),blueprint.buildTime);
+                        BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(_currentBuildType);
+                        Buildable building = _buildingGenerator.GetPooledObject(blueprint.GetKey()) as Buildable;
+                        building.Build(_buildHologram.GetPosition(), blueprint.buildTime, blueprint.fallHeight, blueprint.buildEaseType);
 
                         _builderRecharging = true;
                     }
@@ -135,12 +158,12 @@ namespace Gameplay.Building
             float moveByZ = (hologramScale.z % 2 == 0) ? 1 : 0.5f;
 
             //X
-            float x = (hitPoint.x*2);
+            float x = (hitPoint.x * 2);
             x = (float)Math.Round(x, MidpointRounding.AwayFromZero);
             x = x / 2;
 
             //Y
-            float y = SEA_LEVEL;
+            float y = _buildConfig.GetBuildSpace(_currentBuildType) == Buildable.BuildSpace.Above ? ABOVE_SEA_LEVEL : 0;
 
             //Z
             float z = (hitPoint.z * 2);
@@ -148,7 +171,7 @@ namespace Gameplay.Building
             z = z / 2;
 
             //RETURN NEW POS
-            return GridPosition.Create(x,y,z);
+            return GridPosition.Create(x, y, z);
 
         }
         #endregion

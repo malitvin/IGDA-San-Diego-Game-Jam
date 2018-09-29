@@ -3,10 +3,17 @@ using UnityEngine;
 
 namespace Gameplay.Building
 {
+    [RequireComponent(typeof(MeshFilter))]
     public class BuildHologram : MonoBehaviour
     {
         private Vector3 _setPosition = new Vector3(0, 0, 0);
         private Renderer _renderer;
+
+        private MeshFilter _mesh;
+        private MeshFilter _meshFilter
+        {
+            get { return _mesh ?? (_mesh = GetComponent<MeshFilter>()); }
+        }
 
         private void Start()
         {
@@ -20,6 +27,17 @@ namespace Gameplay.Building
             transform.position = _setPosition;
         }
 
+        public void SetMesh(Mesh mesh)
+        {
+            if(mesh)
+            {
+                _meshFilter.mesh = mesh;
+            }else
+            {
+                Debug.LogError("NO MESH IS VALID FOR HOLOGRAM");
+            }
+        }
+
         public Vector3 GetPosition()
         {
             return transform.position;
@@ -28,6 +46,11 @@ namespace Gameplay.Building
         public Vector3 GetScale()
         {
             return transform.localScale;
+        }
+
+        public void SetScale(float scale)
+        {
+            transform.localScale = new Vector3(scale, scale, scale);
         }
 
         public float GetSize()

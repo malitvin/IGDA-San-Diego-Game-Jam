@@ -11,7 +11,15 @@ namespace Gameplay.Building
     {
         public enum TYPE
         {
-            Block
+            Block,
+            HelixBomb
+        }
+
+        public enum BuildSpace
+        {
+            Above,
+            At,
+            Below
         }
 
         private BoxCollider _collider;
@@ -20,17 +28,10 @@ namespace Gameplay.Building
             get { return _collider ?? (_collider = GetComponent<BoxCollider>()); }
         }
 
-        public void Build(Vector3 finalPos,float buildTime)
+        public virtual void Build(Vector3 finalPos,float buildTime,int fallheight,Ease easeType)
         {
-            Vector3 startPosition = finalPos + (Vector3.up * 2);
+            Vector3 startPosition = finalPos + (Vector3.up * fallheight);
             transform.position = startPosition;
-            Tween t = transform.DOMove(finalPos, buildTime).SetEase(Ease.OutBounce).OnUpdate(() =>
-            {
-                Vector3 center = _boxCollider.center;
-                center.y = -transform.position.y+0.5f;
-                _boxCollider.center = center;
-            });
-
         }
     }
 }
