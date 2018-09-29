@@ -19,6 +19,7 @@ public class JamStateFactory : ScriptableObjectInstaller, IStateFactory<JameStat
     public override void InstallBindings()
     {
         Container.Bind<IntroState>().AsTransient();
+        Container.Bind<GameplayState>().AsTransient();
     }
 
     public IGameState CreateState(JameStateType stateId)
@@ -28,7 +29,7 @@ public class JamStateFactory : ScriptableObjectInstaller, IStateFactory<JameStat
             case JameStateType.INTRO:                     return Container.Resolve<IntroState>();
             case JameStateType.MAIN_MENU:                 break;
             case JameStateType.LOAD_GAMEPLAY:             break;
-            case JameStateType.GAMEPLAY:                  break;//return new GameplayState();
+            case JameStateType.GAMEPLAY:                  return Container.Resolve<GameplayState>();
             case JameStateType.CREDITS:                   break;
         }
 

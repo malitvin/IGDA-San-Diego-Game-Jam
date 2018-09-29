@@ -3,37 +3,35 @@ using System.Collections;
 using GhostGen;
 using DG.Tweening;
 
-public class IntroState : IGameState
+public class GameplayState : IGameState
 {
     private GameStateMachine<JameStateType> _gameStateMachine;
     private GuiManager _gui;
+    private PlayerCombatController playerCombatController;
 
-    public IntroState(
+    public GameplayState(
         GameStateMachine<JameStateType> gameStateMachine,
         GuiManager gui)
     {
         _gameStateMachine = gameStateMachine;
         _gui = gui;
     }
-    
+
     public void Init(Hashtable changeStateData)
 	{
-		Debug.Log ("Entering In Intro State");
-        DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
-        // More initialization
 
-        _gameStateMachine.ChangeState(JameStateType.GAMEPLAY);
-        _gui.screenFader.FadeIn();
+        // Get CombatPlayerView
+        playerCombatController = new PlayerCombatController();
     }
     
     public void Step( float p_deltaTime )
 	{
-
+        playerCombatController.Tick(p_deltaTime);
     }
 
     public void Exit( )
 	{
-		Debug.Log ("Exiting In Intro State");
+
         
     }    
     

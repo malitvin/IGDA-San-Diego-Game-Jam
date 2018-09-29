@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameplayResources : ScriptableObject
 {
     public GameObject gameplayCamera;
-
+    
     //public CreepHealthUIView creepHealthUIPrefab;
     //public CreepUIItemView creepUIItemPrefab;
     //public TowerHighlighter highlighterPrefab; 
