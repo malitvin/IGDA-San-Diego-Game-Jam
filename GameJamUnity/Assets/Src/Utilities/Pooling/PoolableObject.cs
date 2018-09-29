@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Common.Pooling
 {
-    public class PoolableObject : MonoBehaviour, IPoolable
+  public class PoolableObject : MonoBehaviour, IPoolable
     {
         private GenericPooler _pooler;
         private string _poolKey;

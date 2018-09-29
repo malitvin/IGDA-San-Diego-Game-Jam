@@ -24,12 +24,12 @@ namespace Gameplay.Building
         private BuildHologram _buildHologram;
 
         private const float SEA_LEVEL = 0.5f;
-        private const int KINTERVAL = 1;
-        private const int KHALFINTERVAL = KINTERVAL / 1;
 
         private Vector3 seaLevelPos = new Vector3(0, SEA_LEVEL, 0);
 
         private RaycastHit[] _hitResults = new RaycastHit[5];
+
+        private GenericPooler _buildingGenerator;
 
         #region Unity Methods
         private void Start()
@@ -49,7 +49,20 @@ namespace Gameplay.Building
             {
                 Debug.LogError("NO BUILD HOLOGRAM FOUND ON BUILDINGSYSTEM");
             }
+            InitBuilder();
         }
+
+        private void InitBuilder()
+        {
+            _buildingGenerator = new GenericPooler(transform);
+            BuildConfig.BuildableBlueprint[] blueprints = _buildConfig.buildables;
+            for (int i=0; i < blueprints.Length; i++)
+            {
+                BuildConfig.BuildableBlueprint blueprint = blueprints[i];
+                _buildingGenerator.InitPool(blueprint.GetKey(), 10, blueprint.prefab);
+            }
+        }
+
         private void Update()
         {
             if (_buildModeEnabled)
@@ -71,9 +84,12 @@ namespace Gameplay.Building
                     _buildHologram.UpdateHologram(colliding, _buildConfig.hologramData);
 
                     //TRY TO BUILD
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    if (!colliding && Input.GetKeyDown(KeyCode.Mouse0))
                     {
-           
+                        //BUILD!
+                        BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(Buildable.TYPE.Block);
+                        Buildable building =_buildingGenerator.GetPooledObject(blueprint.GetKey()) as Buildable;
+                        building.Build(_buildHologram.GetPosition(),blueprint.buildTime);
                     }
                 }
             }
