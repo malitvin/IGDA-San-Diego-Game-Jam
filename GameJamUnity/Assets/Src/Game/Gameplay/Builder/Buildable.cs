@@ -12,7 +12,8 @@ namespace Gameplay.Building
         public enum TYPE
         {
             Block,
-            HelixBomb
+            HelixBomb,
+            ExplosiveBarrel
         }
 
         public enum BuildSpace

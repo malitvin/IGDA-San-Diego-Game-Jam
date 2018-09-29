@@ -37,8 +37,8 @@ public class GameplayState : IGameState
     public void Init(Hashtable changeStateData)
 	{
         //_playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
-        _buildSystem = _diContainer.Resolve<BuildingSystem>();
         _inventorySystem = _diContainer.Resolve<InventorySystem>();
+        _buildSystem = _diContainer.Resolve<BuildingSystem>();
         // Get CombatPlayerView
     }
     

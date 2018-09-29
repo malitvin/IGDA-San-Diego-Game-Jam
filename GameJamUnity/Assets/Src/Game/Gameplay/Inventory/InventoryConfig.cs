@@ -12,8 +12,17 @@ namespace Gameplay.Inventory
             public string displayName;
             public Inventory.Type key;
             public int startAmount;
+            public Sprite inventoryUISprite;
+        }
+
+        [System.Serializable]
+        public class UISpawnData
+        {
+            public BuildCurrencyItem _buildItem;
         }
 
         public InventoryItem[] inventoryItems;
+
+        public UISpawnData uiSpawnData;
     }
 }

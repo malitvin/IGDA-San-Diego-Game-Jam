@@ -31,6 +31,16 @@ namespace Gameplay.Inventory
             }
         }
         #endregion
+
+        public Dictionary<Inventory.Type, InventoryConfig.InventoryItem> GetInventory()
+        {
+            return _inventory;
+        }
+
+        public InventoryConfig.UISpawnData GetSpawnData()
+        {
+            return _inventoryConfig.uiSpawnData;
+        }
     }
 
     public class Inventory

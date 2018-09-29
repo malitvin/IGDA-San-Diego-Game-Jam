@@ -6,24 +6,27 @@ using System;
 
 //Game
 using Common.Pooling;
+using UI.Building;
+using Gameplay.Inventory;
 
 namespace Gameplay.Building
 {
     public class BuildingSystem : GhostGen.EventDispatcher
     {
-        public bool _buildModeEnabled = true;
-
+        //is build mode enabled
+        private bool _buildModeEnabled = true;
         private float buildTimer;
         private bool _builderRecharging;
 
+        //Components
         private Camera _gameplayCam;
         private GameBoard _gameBoard;
         private BuildHologram _buildHologram;
 
         public const float ABOVE_SEA_LEVEL = 0.5f;
-
         private Vector3 seaLevelPos = new Vector3(0, ABOVE_SEA_LEVEL, 0);
 
+        //cached build hit results
         private RaycastHit[] _hitResults = new RaycastHit[5];
 
         private GenericPooler _buildingGenerator;
@@ -31,23 +34,23 @@ namespace Gameplay.Building
         private bool _collisionDetectionEnabled;
         private float _buildRechargeRate;
 
+        //build config
         private BuildConfig _buildConfig;
 
+        //UI
+        private InventorySystem _inventorySystem;
+        private BuildViewController _buildViewController;
+
         #region Init
-        public BuildingSystem(GameConfig gameConfig)
+        public BuildingSystem(GameConfig gameConfig,InventorySystem inventorySystem)
         {
+            _inventorySystem = inventorySystem;
             _gameplayCam = UnityEngine.Object.FindObjectOfType<GameplayCamera>().camera;
             _buildConfig = gameConfig.bulidConfig;
             _gameBoard = GameObject.FindObjectOfType<GameBoard>();
-            if (!_gameBoard)
-            {
-                Debug.LogError("NO GAME BOARD FOUND ON BUILDINGSYSTEM");
-            }
             _buildHologram = GameObject.Instantiate<BuildHologram>(_buildConfig.buildHologram);
-            if (!_buildHologram)
-            {
-                Debug.LogError("NO BUILD HOLOGRAM FOUND ON BUILDINGSYSTEM");
-            }
+
+            //init builder
             InitBuilder();
         }
 
@@ -67,13 +70,22 @@ namespace Gameplay.Building
                 _buildingGenerator.InitPool(blueprint.GetKey(), 10, blueprint.prefab);
             }
 
-            //init builder
+            //init currenty build type
             _currentBuildType = _buildConfig.startingBuildType;
             SetBuildType(_currentBuildType);
+
+            //UI
+            _buildViewController = new BuildViewController(_inventorySystem,_buildConfig);
+
         }
         #endregion
 
-        private void SetBuildType(Buildable.TYPE type)
+        public void EnableSystem(bool on)
+        {
+            _buildModeEnabled = on;
+        }
+
+        public void SetBuildType(Buildable.TYPE type)
         {
             //morph hologram
             BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(type);

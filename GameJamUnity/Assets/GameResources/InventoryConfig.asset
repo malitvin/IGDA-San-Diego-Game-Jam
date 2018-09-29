@@ -15,3 +15,8 @@ MonoBehaviour:
   - displayName: Coins
     key: 0
     startAmount: 10
+    inventoryUISprite: {fileID: 21300000, guid: 982d39a7be54ee24c880c84f021d330f,
+      type: 3}
+  uiSpawnData:
+    _buildItem: {fileID: 114948461914811384, guid: a8352630b9420564b92f3ea542041fb1,
+      type: 2}

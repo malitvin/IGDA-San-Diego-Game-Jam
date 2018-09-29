@@ -25,6 +25,7 @@ namespace Gameplay.Building
         [System.Serializable]
         public class BuildableBlueprint
         {
+            public KeyCode buildHotKey;
             public string displayName;
             public bool enableCollisionDetection;
             public int currencyCost;
@@ -60,6 +61,12 @@ namespace Gameplay.Building
             public float hologramScale;
         }
 
+        [System.Serializable]
+        public class BuildUIData
+        {
+            public BuildableUIItem _itemPrefabUI;
+        }
+
         public Buildable.TYPE startingBuildType;
 
         public LayerMask _collisionLayerMask;
@@ -68,6 +75,7 @@ namespace Gameplay.Building
         public HologramData hologramData;
 
         public BuildableBlueprint[] buildables;
+        public BuildUIData _uiData;
 
         #region Quick buildable lookup by type
 
