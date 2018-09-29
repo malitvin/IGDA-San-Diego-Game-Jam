@@ -34,6 +34,11 @@ public class PlayerCombatView : MonoBehaviour
         get { return _rotateTransform.position; }
     }
 
+    public Vector3 weaponBarrelPosition
+    {
+        get { return _weaponEndPoint.transform.position; }
+    }
+
     public Quaternion rotation
     {
         get { return _rotateTransform.rotation; }

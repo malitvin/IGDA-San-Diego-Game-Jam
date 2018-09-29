@@ -37,7 +37,8 @@ namespace Gameplay.Building
         {
             _gameplayCam = UnityEngine.Object.FindObjectOfType<GameplayCamera>().camera;
             _buildConfig = gameConfig.bulidConfig;
-            _gameBoard = GameObject.FindGameObjectWithTag(_buildConfig._boardTag).GetComponent<GameBoard>();
+            _gameBoard = GameObject.FindObjectOfType<GameBoard>();
+            ////GameObject.FindGameObjectWithTag(_buildConfig._boardTag).GetComponent<GameBoard>();
             if (!_gameBoard)
             {
                 Debug.LogError("NO GAME BOARD FOUND ON BUILDINGSYSTEM");

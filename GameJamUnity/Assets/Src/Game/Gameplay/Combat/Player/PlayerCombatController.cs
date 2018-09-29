@@ -32,9 +32,15 @@ public class PlayerCombatController
         if(_fireTimer > 0)
             return;
 
-        Vector3 adjustedPos = (targetPos - _view.viewPosition).normalized * 50.0f;
-        adjustedPos.y = targetPos.y;
 
+        //targetPos.y = 0;
+        Vector3 weaponPos = _view.weaponBarrelPosition;
+        Vector3 viewDir = (targetPos - weaponPos).normalized * 50.0f;
+        viewDir.y = 0;
+
+        Vector3 adjustedPos = weaponPos + viewDir;
+
+        Debug.DrawRay(adjustedPos, Vector3.up, Color.red);
         _view.VisualFireWeapon(_config.weapon.bulletSpeed, adjustedPos);
         _fireTimer = _config.weapon.fireCooldown;
     }
