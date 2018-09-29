@@ -31,6 +31,11 @@ public class IntroState : IGameState
 
     }
 
+    public void FixedStep(float fixedDeltaTime)
+    {
+
+    }
+
     public void Exit( )
 	{
 		Debug.Log ("Exiting In Intro State");

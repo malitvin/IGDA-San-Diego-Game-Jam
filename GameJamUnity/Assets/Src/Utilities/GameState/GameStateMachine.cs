@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GhostGen
 {
-	public class GameStateMachine<T> : ITickable
+	public class GameStateMachine<T> : ITickable, IFixedTickable
 	{
 		public GameStateMachine( IStateFactory<T> p_stateFactory )
 		{
@@ -19,6 +19,12 @@ namespace GhostGen
 			if( _currentState != null )
 				_currentState.Step( Time.deltaTime );
 		}
+
+        public void FixedTick()
+        {
+            if(_currentState != null)
+                _currentState.FixedStep(Time.fixedDeltaTime);
+        }
 
 		public void ChangeState( T stateId, Hashtable changeStateInfo = null )
 		{

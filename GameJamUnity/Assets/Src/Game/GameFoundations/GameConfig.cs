@@ -8,9 +8,7 @@ using GhostGen;
 public class GameConfig : ScriptableObject, IPostInit
 {
     public JameStateType initialState;
-
-    public GuiManager guiManager;
-    //public GameplayResources gameplayResources;
+    public PlayerConfig playerConfig;
 
     public void PostInit()
     {

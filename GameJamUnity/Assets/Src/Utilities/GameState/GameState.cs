@@ -7,6 +7,7 @@ namespace GhostGen
 		void Init( Hashtable changeStateData );
 
 		void Step( float deltaTime );
+        void FixedStep(float deltaTime);
 
 		void Exit();
 	}

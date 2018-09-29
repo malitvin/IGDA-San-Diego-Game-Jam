@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: GameplayResources
   m_EditorClassIdentifier: 
   gameplayCamera: {fileID: 0}
+  playerCombatView: {fileID: 114909365597833806, guid: bdb60ff0811850d4c8b56f9a85e55b13,
+    type: 2}
