@@ -16,6 +16,10 @@ namespace Gameplay.Building
         public string _boardTag;
 
         public bool _buildModeEnabled;
+
+        private float buildTimer;
+        private bool _builderRecharging;
+
         public LayerMask _collisionLayerMask;
 
         private Camera _mainCam;
@@ -65,7 +69,21 @@ namespace Gameplay.Building
 
         private void Update()
         {
-            if (_buildModeEnabled)
+            #region Build Recharge Timer
+            //Build recharge timer
+            if (_builderRecharging)
+            {
+                buildTimer += Time.deltaTime;
+                if (buildTimer > _buildConfig.buildRechargeRate)
+                {
+                    _builderRecharging = false;
+                    buildTimer = 0;
+                }
+            }
+            #endregion
+
+            #region Building Logic
+            if (_buildModeEnabled && !_builderRecharging)
             {
                 //Set our hologram position
                 Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
@@ -84,14 +102,17 @@ namespace Gameplay.Building
                     _buildHologram.UpdateHologram(colliding, _buildConfig.hologramData);
 
                     //TRY TO BUILD
-                    if (!colliding && Input.GetKeyDown(KeyCode.Mouse0))
+                    if (!colliding && Input.GetKey(KeyCode.Mouse0))
                     {
                         //BUILD!
                         BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(Buildable.TYPE.Block);
                         Buildable building =_buildingGenerator.GetPooledObject(blueprint.GetKey()) as Buildable;
                         building.Build(_buildHologram.GetPosition(),blueprint.buildTime);
+
+                        _builderRecharging = true;
                     }
                 }
+                #endregion
             }
         }
         #endregion

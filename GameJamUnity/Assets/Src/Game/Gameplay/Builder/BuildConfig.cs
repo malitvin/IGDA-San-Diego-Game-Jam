@@ -37,6 +37,9 @@ namespace Gameplay.Building
             public Buildable prefab;
         }
 
+        [Range(0.01f,2f)]
+        public float buildRechargeRate = 0.25f;
+
         public HologramData hologramData;
 
         public BuildableBlueprint[] buildables;
