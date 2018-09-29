@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: AOTGenerationConfig
   m_EditorClassIdentifier: 
   excludeAssemblyDefinitionsWithEditorReference: 0
-  automateBeforeBuilds: 0
+  automateBeforeBuilds: 1
   deleteDllAfterBuilds: 1
   automateForPlatforms: 0900000014000000
-  lastScan: 0
+  lastScan: 636737695543872970
   supportSerializedTypes: []
