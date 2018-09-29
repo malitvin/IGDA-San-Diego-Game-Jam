@@ -1,6 +1,9 @@
 ﻿//Unity
 using UnityEngine;
 
+//C#
+using System;
+
 namespace Gameplay.Building
 {
     public class BuildingSystem : MonoBehaviour
@@ -15,6 +18,12 @@ namespace Gameplay.Building
         private BuildHologram _buildHologram;
 
         private const float SEA_LEVEL = 0.5f;
+        private const int KINTERVAL = 1;
+        private const int KHALFINTERVAL = KINTERVAL / 1;
+
+        private Vector3 seaLevelPos = new Vector3(0, SEA_LEVEL, 0);
+
+        private RaycastHit[] _hitResults = new RaycastHit[5];
 
         #region Unity Methods
         private void Start()
@@ -41,16 +50,55 @@ namespace Gameplay.Building
             {
                 //Set our hologram position
                 Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
                 //IF WE ARE ON THE GAMEBOARD
-                if (Physics.Raycast(ray, out hit, 100, _gameBoard.GetLayer()))
+                if (Physics.RaycastNonAlloc(ray, _hitResults, 100, _gameBoard.GetLayer()) > 0)
                 {
-                    Debug.Log(hit.transform.name);
-                    Vector3 hitPosition = hit.point;
-                    _buildHologram.transform.position = new Vector3(hitPosition.x, SEA_LEVEL, hitPosition.z);
+                    Vector3 hitPoint = _hitResults[0].point;
+                    seaLevelPos.x = hitPoint.x;
+                    seaLevelPos.z = hitPoint.z;
+                    GridPosition gridPos = GetHoloGramPosition(hitPoint);
+                    _buildHologram.SetPosition(gridPos);
+                    Debug.DrawRay(hitPoint, Vector3.up, Color.blue);
+                    Debug.Log(hitPoint);
                 }
             }
-            #endregion
         }
+        #endregion
+
+        #region Hologram position helper
+        /// <summary>
+        /// Gets the correct Hologram position on the grid
+        /// </summary>
+        /// <param name="hitPoint"></param>
+        /// <returns></returns>
+        private GridPosition GetHoloGramPosition(Vector3 hitPoint)
+        {
+            float boardSize = _gameBoard.GetSize();
+            float xOffset = _gameBoard.GetPosition().x;
+            float zOffset = _gameBoard.GetPosition().z;
+
+            Vector3 hologramScale = _buildHologram.GetScale();
+
+            float moveByX = (hologramScale.x % 2 == 0) ? 1 : 0.5f;
+            float moveByZ = (hologramScale.z % 2 == 0) ? 1 : 0.5f;
+
+            //X
+            float x = (hitPoint.x*2);
+            x = (float)Math.Round(x, MidpointRounding.AwayFromZero);
+            x = x / 2;
+
+            //Y
+            float y = SEA_LEVEL;
+
+            //Z
+            float z = (hitPoint.z * 2);
+            z = (float)Math.Round(z, MidpointRounding.AwayFromZero);
+            z = z / 2;
+
+            //RETURN NEW POS
+            return GridPosition.Create(x,y,z);
+
+        }
+        #endregion
     }
 }
