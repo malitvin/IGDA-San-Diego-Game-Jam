@@ -16,6 +16,7 @@ public class GameplayState : IGameState
 
     private PlayerCombatSystem _playerCombatSystem;
     private BuildingSystem _buildSystem;
+    private InventorySystem _inventorySystem;
     private EnemySystem _enemySystem;
 
     private PlayerCombatController playerCombatController;

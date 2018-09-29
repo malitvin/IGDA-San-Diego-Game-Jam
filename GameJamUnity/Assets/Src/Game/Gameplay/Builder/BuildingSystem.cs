@@ -92,7 +92,7 @@ namespace Gameplay.Building
             if (_builderRecharging)
             {
                 buildTimer += deltaTime;
-                if (buildTimer > _buildConfig.buildRechargeRate)
+                if (buildTimer > _buildRechargeRate)
                 {
                     _builderRecharging = false;
                     buildTimer = 0;
