@@ -29,6 +29,7 @@ public class GameplayState : IGameState
     private InventorySystem _inventorySystem;
     private EnemySystem _enemySystem;
     private ParticleGOD _particleGod;
+    private MonsterGenerator _monsterGenerator;
     private GameMode _gameMode;
 
     private PlayerCombatController playerCombatController;
@@ -60,6 +61,7 @@ public class GameplayState : IGameState
         _inventorySystem = _diContainer.Resolve<InventorySystem>();
         _enemySystem = _diContainer.Resolve<EnemySystem>();
         _particleGod = _diContainer.Resolve<ParticleGOD>();
+        _monsterGenerator = _diContainer.Resolve<MonsterGenerator>();
 
         // Get CombatPlayerView
         //_playerCombatSystem.isEnabled = true;
@@ -79,6 +81,10 @@ public class GameplayState : IGameState
         if(_enemySystem != null)
         {
             _enemySystem.Tick(p_deltaTime);
+        }
+        if(_monsterGenerator != null)
+        {
+            _monsterGenerator.OnUpdate(p_deltaTime);
         }
 
         if(Input.GetKeyDown(KeyCode.X))

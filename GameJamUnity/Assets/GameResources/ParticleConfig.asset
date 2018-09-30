@@ -40,3 +40,10 @@ MonoBehaviour:
     characteristics:
       autoDestruct: 1
       lifeTime: 1.5
+  - displayName: Escape
+    type: 4
+    particlePrefab: {fileID: 114802075612915088, guid: 3a7dc38b871a40e4992e01a02225f384,
+      type: 2}
+    characteristics:
+      autoDestruct: 1
+      lifeTime: 1.5

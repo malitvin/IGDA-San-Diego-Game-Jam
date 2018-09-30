@@ -38,7 +38,6 @@ public class IntroState : IGameState
 
     public void Exit( )
 	{
-		Debug.Log ("Exiting In Intro State");
         
     }    
     
