@@ -2,6 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using Gameplay.Particles;
+using Gameplay.Particles;
 
 namespace Gameplay.Building
 {
@@ -46,6 +47,7 @@ namespace Gameplay.Building
 
             if(isDead && result.prevHealth > 0.0f)
             {
+                Singleton.instance.particleGod.GenerateParticle(Particle.Type.Break, transform.position);
                 RemoveFromPool();
             }
             return result;

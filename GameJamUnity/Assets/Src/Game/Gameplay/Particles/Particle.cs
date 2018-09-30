@@ -13,7 +13,8 @@ namespace Gameplay.Particles
             HelixBomb,
             BuildingGlow,
             Escape,
-            EnemyDeath
+            EnemyDeath,
+            Break
         }
 
         public struct SpawnData
