@@ -40,7 +40,7 @@ public class EnemyController
             NavMeshPath path = _agent.path;
             if(path.status != NavMeshPathStatus.PathInvalid)
             {
-                Debug.Log("Path Found!");
+                //Debug.Log("Path Found!");
             }
         }
     }

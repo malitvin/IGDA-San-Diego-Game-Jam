@@ -1,6 +1,7 @@
 ﻿//Unity
 using DG.Tweening;
 using UnityEngine;
+using Gameplay.Particles;
 
 namespace Gameplay.Building
 {
@@ -11,6 +12,7 @@ namespace Gameplay.Building
             base.Build(finalPos, buildTime, fallheight, easeType);
             Tween t = transform.DOMove(finalPos, buildTime).SetEase(easeType).OnComplete(() =>
             {
+                Singleton.instance.particleGod.GenerateParticle(Particle.Type.BaseExplosion, finalPos);
                 RemoveFromPool();
             });
         }

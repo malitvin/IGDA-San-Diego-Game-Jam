@@ -4,6 +4,7 @@ using UnityEngine;
 using GhostGen;
 using Gameplay.Building;
 using Gameplay.Inventory;
+using Gameplay.Particles;
 
 
 [CreateAssetMenu(menuName = "IDGA/Game Config")]
@@ -13,6 +14,7 @@ public class GameConfig : ScriptableObject, IPostInit
     public PlayerConfig playerConfig;
     public BuildConfig bulidConfig;
     public InventoryConfig inventoryConfig;
+    public ParticleConfig particleConfig;
 
     public void PostInit()
     {

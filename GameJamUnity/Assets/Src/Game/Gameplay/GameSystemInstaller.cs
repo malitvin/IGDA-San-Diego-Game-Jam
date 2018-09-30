@@ -3,6 +3,7 @@ using UnityEngine;
 using Zenject;
 using Gameplay.Building;
 using Gameplay.Inventory;
+using Gameplay.Particles;
 
 [CreateAssetMenu(menuName = "IDGA/Game System Installer")]
 public class GameSystemInstaller : ScriptableObjectInstaller
