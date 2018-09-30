@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using GhostGen;
 using Gameplay.Particles;
+using Audio;
 
 public class EnemyController
 {
@@ -63,6 +64,7 @@ public class EnemyController
         {
             Debug.Log("Enemy Dead!");
             Singleton.instance.particleGod.GenerateParticle(Particle.Type.EnemyDeath, _view.transform.position);
+            Singleton.instance.audioSystem.PlaySound(SoundBank.Type.MonsterDeath, null, true);
             _view.Die();
             _dispatcher.DispatchEvent(GameplayEventType.ENEMY_KILLED, false, this);
         }

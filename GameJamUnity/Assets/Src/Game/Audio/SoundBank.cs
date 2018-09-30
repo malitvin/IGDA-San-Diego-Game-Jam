@@ -10,7 +10,9 @@ namespace Audio
             HelixBomb,
             BuildSwitch,
             Teleport,
-            WeaponFire
+            WeaponFire,
+            MonsterDeath,
+            Build
         }
     }
 }

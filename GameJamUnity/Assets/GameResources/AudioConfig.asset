@@ -47,3 +47,10 @@ MonoBehaviour:
     pitch: 1
     group: {fileID: 0}
     key: 4
+  - name: Monster Death
+    clip: {fileID: 8300000, guid: 354ef05212d7d1841b0077f1ff997c65, type: 3}
+    volume: 0.5
+    spatialBlend: 0
+    pitch: 1
+    group: {fileID: 0}
+    key: 5
