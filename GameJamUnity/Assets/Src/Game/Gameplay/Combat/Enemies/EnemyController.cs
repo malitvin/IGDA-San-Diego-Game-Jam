@@ -69,7 +69,7 @@ public class EnemyController
             _view.DebugDraw(position, 0.75f);
         }
 
-        Collider[] targets = Physics.OverlapSphere(position, 0.75f, _def.targetMask);
+        Collider[] targets = Physics.OverlapSphere(position, 0.75f);//, _def.targetMask);
         if(targets != null)
         {
             for(int i = 0; i < targets.Length; ++i)

@@ -18,6 +18,7 @@ public class PlayerCombatController
     {
         health = config.startHealth;
         _view = view;
+        _view.controller = this;
         _physBody = view._rigidBody;
         _config = config;
 
@@ -52,6 +53,7 @@ public class PlayerCombatController
 
     public DamageResult TakeDamage(object attacker, float damage)
     {
+        Debug.Log("Take some fucken' damage!!!");
         DamageResult result = new DamageResult();
         result.prevHealth = health;
         health = Mathf.Max(health - damage, 0.0f);
@@ -81,9 +83,9 @@ public class PlayerCombatController
         {
             Vector3 force = viewDir * 110.0f;
             target.TakeDamage(this, 5.0f);
-            if(target.rigidBody)
+            if(target.physbody)
             {
-                target.rigidBody.AddForceAtPosition(force, hit.point, ForceMode.Impulse);
+                target.physbody.AddForceAtPosition(force, hit.point, ForceMode.Impulse);
             }
 
             adjustedPos = hit.point;

@@ -9,13 +9,9 @@ public class PropDamageable : MonoBehaviour, IDamageable
     public float health
     {
         get { return 100; }
-        set
-        {
-        // don't set it
-        }
     }
 
-    public Rigidbody rigidBody { get { return _rigidBody; } }
+    public Rigidbody physbody { get { return _rigidBody; } }
 
     public DamageResult TakeDamage(object attacker, float damage)
     {

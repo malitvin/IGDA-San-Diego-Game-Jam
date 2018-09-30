@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class PlayerCombatView : GhostGen.EventDispatcherBehavior
+public class PlayerCombatView : GhostGen.EventDispatcherBehavior, IDamageable
 {
     private const int kFXPoolSize = 50;
 
@@ -31,6 +31,11 @@ public class PlayerCombatView : GhostGen.EventDispatcherBehavior
         get { return _rigidBody.position; }
     }
 
+    public Rigidbody physbody
+    {
+        get { return _rigidBody; }
+    }
+
     public Vector3 viewPosition
     {
         get { return _rotateTransform.position; }
@@ -49,6 +54,7 @@ public class PlayerCombatView : GhostGen.EventDispatcherBehavior
 
     public void SetAimPosition(Vector3 aimPosition)
     {
+        aimPosition.y = _rotateTransform.position.y;
         _rotateTransform.LookAt(aimPosition);
     }
 
@@ -58,10 +64,15 @@ public class PlayerCombatView : GhostGen.EventDispatcherBehavior
     }
 
 
+    public float health
+    {
+        get { return controller != null ? controller.health : 0; }
+    }
+
     public DamageResult TakeDamage(object attacker, float damage)
     {
         Debug.Log("Hit Player!");
-        return controller.TakeDamage(attacker, damage);
+        return controller != null ? controller.TakeDamage(attacker, damage) : null;
     }
 
     public void VisualFireWeapon(float speed, Vector3 target)
