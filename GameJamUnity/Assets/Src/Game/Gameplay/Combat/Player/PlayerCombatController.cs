@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GhostGen;
+using Audio;
 
 public class PlayerCombatController
 {
@@ -89,6 +90,8 @@ public class PlayerCombatController
         Vector3 rayPoint = _view.rigidPosition;
         rayPoint.y = weaponPos.y;
         Ray ray = new Ray(weaponPos, viewDir);
+
+        Singleton.instance.audioSystem.PlaySound(SoundBank.Type.WeaponFire, null, true);
 
         IDamageable target;
         RaycastHit hit;

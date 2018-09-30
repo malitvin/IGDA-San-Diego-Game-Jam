@@ -78,7 +78,7 @@ namespace Audio
             }
         }
 
-        public void PlaySound(SoundBank.Type key, GameObject obj = null)
+        public void PlaySound(SoundBank.Type key, GameObject obj = null,bool Randompitch = false)
         {
             if (!_levelAudioMap.ContainsKey(key))
             {
@@ -87,7 +87,7 @@ namespace Audio
             else
             {
                 SoundObject soundObj = _levelAudioMap[key];
-                soundObj.PlaySound(obj);
+                soundObj.PlaySound(obj, Randompitch);
             }
         }
     }
@@ -120,11 +120,15 @@ namespace Audio
             _clip = blueprint.clip;
         }
 
-        public void PlaySound(GameObject obj = null)
+        public void PlaySound(GameObject obj = null,bool randomPitch=false)
         {
             if (obj && _source.spatialBlend == 1)
             {
                 _sourceTR.position = obj.transform.position;
+            }
+            if(randomPitch)
+            {
+                _source.pitch = Random.Range(0.95f, 1.1f);
             }
             _source.PlayOneShot(_clip);
         }

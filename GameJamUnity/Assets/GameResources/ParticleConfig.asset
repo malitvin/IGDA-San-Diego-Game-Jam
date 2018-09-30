@@ -54,3 +54,10 @@ MonoBehaviour:
     characteristics:
       autoDestruct: 1
       lifeTime: 1.5
+  - displayName: Break
+    type: 6
+    particlePrefab: {fileID: 114857578773636414, guid: b03d0f8963df9544c8e8df24a5ebff38,
+      type: 2}
+    characteristics:
+      autoDestruct: 1
+      lifeTime: 2

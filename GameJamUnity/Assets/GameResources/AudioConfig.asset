@@ -28,9 +28,9 @@ MonoBehaviour:
     key: 2
   - name: Teleport
     clip: {fileID: 8300000, guid: ce47f5732ab68ba45b94069e6c7cbe80, type: 3}
-    volume: 1
+    volume: 0.4
     spatialBlend: 0
-    pitch: 1
+    pitch: 0.8
     group: {fileID: 0}
     key: 3
   - name: Monster Roar
@@ -40,3 +40,10 @@ MonoBehaviour:
     pitch: 0.5
     group: {fileID: 0}
     key: 0
+  - name: Weapon Fire
+    clip: {fileID: 8300000, guid: 919097b3330763f4bac557ebf9d3439f, type: 3}
+    volume: 0.5
+    spatialBlend: 0
+    pitch: 1
+    group: {fileID: 0}
+    key: 4
