@@ -25,7 +25,7 @@ public class DamageUtil
                 Rigidbody physBod = damageable.physbody;
                 if(physBod != null)
                 {
-                    physBod.AddExplosionForce(distMod * 2000.0f, epicenter, 20.0f);
+                    physBod.AddExplosionForce(distMod * 5000.0f, epicenter, 20.0f);
                 }
             }
         }
