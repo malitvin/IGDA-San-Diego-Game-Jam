@@ -39,13 +39,13 @@ public class EnemySystem : GhostGen.EventDispatcher
         _enemyPool.InitPool(ENEMY, 0, _gameplayResources.basicEnemyView);
     }
 
-    public void AddEnemy(EnemyDef def, Transform target, Vector3 position)
+    public void AddEnemy(Transform target, Vector3 position)
     {
         EnemyView enemyView = _enemyPool.GetPooledObject(ENEMY) as EnemyView;
         int id = enemyView.gameObject.GetInstanceID();
         if (!_lookup.ContainsKey(id))
         {
-            EnemyController enemy = new EnemyController(def, enemyView, target);
+            EnemyController enemy = new EnemyController(_enemyDef, enemyView, target);
             _enemyList.Add(enemy);
             _lookup.Add(id, enemyView);
         }

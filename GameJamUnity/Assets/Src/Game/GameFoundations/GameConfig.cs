@@ -18,6 +18,7 @@ public class GameConfig : ScriptableObject, IPostInit
     public ParticleConfig particleConfig;
     public EnemyConfig enemyConfig;
     public AudioConfig audioConfig;
+    public LevelConfig levelConfig;
 
     public void PostInit()
     {
