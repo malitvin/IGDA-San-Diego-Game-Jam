@@ -17,3 +17,4 @@ MonoBehaviour:
   inventoryConfig: {fileID: 11400000, guid: 20f651bd6d025074a857d56405911ee1, type: 2}
   particleConfig: {fileID: 11400000, guid: 132fa15ebb8c227498388b8cfcb903a4, type: 2}
   enemyConfig: {fileID: 11400000, guid: 2809fd324edc5484b9fec6430f534c0e, type: 2}
+  audioConfig: {fileID: 11400000, guid: 6cbb42d071514d54585359ddb45f61d2, type: 2}
