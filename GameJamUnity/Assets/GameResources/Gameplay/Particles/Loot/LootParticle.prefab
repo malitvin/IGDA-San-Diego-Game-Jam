@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 19897958}
   - component: {fileID: 19911582}
   m_Layer: 0
-  m_Name: T6GoldLootItem
+  m_Name: LootParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
