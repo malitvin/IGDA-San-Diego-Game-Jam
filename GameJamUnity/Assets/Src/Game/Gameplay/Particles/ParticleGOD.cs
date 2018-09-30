@@ -8,9 +8,6 @@ namespace Gameplay.Particles
 {
     public class ParticleGOD : GhostGen.EventDispatcher
     {
-        [Tooltip("Where do the particles parent to when spawned")]
-        public Transform _particleSpawnParent;
-
         private GenericPooler _particlePool;
 
         private ParticleConfig _particleConfig;
@@ -32,7 +29,8 @@ namespace Gameplay.Particles
         {
             if(_particleConfig)
             {
-                _particlePool = new GenericPooler(_particleSpawnParent);
+                GameObject pool = GameObject.FindGameObjectWithTag("ScenePool");
+                _particlePool = new GenericPooler(pool.transform);
                 AddToPool(_particleConfig.particles);
             }
             else

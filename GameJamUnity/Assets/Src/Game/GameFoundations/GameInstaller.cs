@@ -2,6 +2,7 @@
 using UnityEngine;
 using Zenject;
 using Gameplay.Particles;
+using Audio;
 
 
 [CreateAssetMenu(menuName = "IDGA/Game Installer")]
@@ -46,5 +47,6 @@ public class GameInstaller : ScriptableObjectInstaller
         Container.BindInterfacesAndSelfTo<NetworkManager>().FromNewComponentOnNewGameObject().AsSingle();
         Container.BindInterfacesAndSelfTo<Singleton>().AsSingle();
         Container.Bind<ParticleGOD>().AsSingle();
+        Container.Bind<AudioSystem>().AsSingle();
     }
 }

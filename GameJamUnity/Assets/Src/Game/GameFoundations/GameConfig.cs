@@ -5,6 +5,7 @@ using GhostGen;
 using Gameplay.Building;
 using Gameplay.Inventory;
 using Gameplay.Particles;
+using Audio;
 
 
 [CreateAssetMenu(menuName = "IDGA/Game Config")]
@@ -16,6 +17,7 @@ public class GameConfig : ScriptableObject, IPostInit
     public InventoryConfig inventoryConfig;
     public ParticleConfig particleConfig;
     public EnemyConfig enemyConfig;
+    public AudioConfig audioConfig;
 
     public void PostInit()
     {
