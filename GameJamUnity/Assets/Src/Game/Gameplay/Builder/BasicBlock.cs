@@ -7,6 +7,7 @@ namespace Gameplay.Building
 {
     public class BasicBlock : Buildable, IDamageable
     {
+        private Tween _damageShake;
         private Vector3 glowVector = new Vector3(0, 0.5f, 0);
         public override void Build(Vector3 finalPos, float buildTime, int fallheight, Ease easeType)
         {
