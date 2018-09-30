@@ -15,17 +15,13 @@ public class PropDamageable : MonoBehaviour, IDamageable
         }
     }
 
-    public DamageResult TakeDamage(Vector3 hitPosition, Vector3 force, float damage)
+    public Rigidbody rigidBody { get { return _rigidBody; } }
+
+    public DamageResult TakeDamage(object attacker, float damage)
     {
         DamageResult result = new DamageResult();
-        result.prevHealth = health;
-        result.newHealth = health;
-
-        if(_rigidBody)
-        {
-            _rigidBody.AddForceAtPosition(force, hitPosition, ForceMode.Impulse);
-        }
-
+        result.attacker = attacker;
+        result.victim =this;
         return result;
     }
 }
