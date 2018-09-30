@@ -36,6 +36,7 @@ MonoBehaviour:
     hollogramMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     hologramMat: {fileID: 2100000, guid: ca697b03c9b6b6f4780de54b45289546, type: 2}
     hologramScale: 1
+    hologramOffset: 0
   - buildHotKey: 50
     displayName: Helix Bomb
     enableCollisionDetection: 0
@@ -50,6 +51,7 @@ MonoBehaviour:
     hollogramMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
     hologramMat: {fileID: 2100000, guid: 0b0995e23113a014c92ff46354d53c08, type: 2}
     hologramScale: 0.2
+    hologramOffset: 0.1
   - buildHotKey: 51
     displayName: Explosive Barrel
     enableCollisionDetection: 1
@@ -64,6 +66,7 @@ MonoBehaviour:
     hollogramMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
     hologramMat: {fileID: 2100000, guid: ca697b03c9b6b6f4780de54b45289546, type: 2}
     hologramScale: 1
+    hologramOffset: 0
   _uiData:
     _itemPrefabUI: {fileID: 114989327213725004, guid: 343b30137c345b742918aa6260d64e7a,
       type: 2}
@@ -72,7 +75,7 @@ MonoBehaviour:
     drag: 15
     speed: 15000
     worldLimit:
-      x: 0
-      y: 0
-      width: 0
-      height: 0
+      x: -41
+      y: -43
+      width: 40
+      height: 50

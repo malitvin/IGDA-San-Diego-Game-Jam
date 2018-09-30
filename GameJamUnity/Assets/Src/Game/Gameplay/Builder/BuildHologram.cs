@@ -23,12 +23,12 @@ namespace Gameplay.Building
         {
             _renderer = GetComponent<Renderer>();
         }
-        public void SetPosition(GridPosition pos)
+        public void SetPosition(GridPosition pos, float yOffset)
         {
             _setPosition.x = pos.x;
             _setPosition.z = pos.z;
             _setPosition.y = pos.y;
-            transform.position = _setPosition;
+            transform.position = _setPosition + (Vector3.up * yOffset);
         }
 
         public void SetMesh(Mesh mesh)

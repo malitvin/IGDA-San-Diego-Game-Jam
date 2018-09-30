@@ -44,13 +44,13 @@ namespace Gameplay.Building
                 _acceleration.x = (_gameplayCam.transform.right).x;
             }
 
-            if (mouseY < _buildCamData.edgeLimit && camPos.z > _worldLimit.y)
-            {
-                _acceleration.z = (-_gameplayCam.transform.forward).z;
-            }
-            else if (mouseY > Screen.height - _buildCamData.edgeLimit && camPos.z < _worldLimit.height)
+            if (mouseY > Screen.height - _buildCamData.edgeLimit && camPos.z < _worldLimit.height)
             {
                 _acceleration.z = (_gameplayCam.transform.forward).z;
+            }
+            else if (mouseY < _buildCamData.edgeLimit && camPos.z > _worldLimit.y)
+            {
+                _acceleration.z = (-_gameplayCam.transform.forward).z;
             }
 
             float deltaTime = Time.fixedDeltaTime;

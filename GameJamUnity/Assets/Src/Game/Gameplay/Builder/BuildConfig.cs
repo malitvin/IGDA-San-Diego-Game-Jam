@@ -60,6 +60,7 @@ namespace Gameplay.Building
             public Material hologramMat;
             [Range(0.1f,5)]
             public float hologramScale;
+            public float hologramOffset;
         }
 
         [System.Serializable]
@@ -186,6 +187,24 @@ namespace Gameplay.Building
             if (_buildableLookup.ContainsKey(type))
             {
                 return _buildableLookup[type].currencyCost;
+            }
+            else
+            {
+                Debug.LogWarning("No buildables of type " + type + " found in buildables blueprint");
+                return 0;
+            }
+        }
+
+        public float GetOffset(Buildable.TYPE type)
+        {
+            if(_buildableLookup.Count == 0)
+            {
+                InitCharacteristics();
+            }
+
+            if(_buildableLookup.ContainsKey(type))
+            {
+                return _buildableLookup[type].hologramOffset;
             }
             else
             {

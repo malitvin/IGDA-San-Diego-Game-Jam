@@ -171,7 +171,8 @@ namespace Gameplay.Building
                 seaLevelPos.x = hitPoint.x;
                 seaLevelPos.z = hitPoint.z;
                 GridPosition gridPos = GetHoloGramPosition(hitPoint);
-                _buildHologram.SetPosition(gridPos);
+                float yOffset = _buildConfig.GetOffset(_currentBuildType);
+                _buildHologram.SetPosition(gridPos,yOffset);
                 Debug.DrawRay(hitPoint, Vector3.up, Color.blue);
 
                 bool colliding = false;
@@ -179,7 +180,13 @@ namespace Gameplay.Building
                 {
                     Collider[] overlap = Physics.OverlapBox(_buildHologram.GetPosition(), (_buildHologram.GetScale() / 2.1f), Quaternion.identity, _buildConfig._collisionLayerMask);
                     colliding = overlap.Length > 0;
+                    if(colliding)
+                    {
+                        Debug.Log(overlap[0].transform.name);
                 }
+                }
+
+
 
                 _buildHologram.UpdateHologram(!colliding && canBuy, _buildConfig.hologramData);
 
