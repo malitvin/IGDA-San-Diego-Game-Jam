@@ -54,3 +54,10 @@ MonoBehaviour:
     pitch: 1
     group: {fileID: 0}
     key: 5
+  - name: Build
+    clip: {fileID: 8300000, guid: 50317fbdcf60d5d44aa5ab6f430525dd, type: 3}
+    volume: 1
+    spatialBlend: 0
+    pitch: 1
+    group: {fileID: 0}
+    key: 6

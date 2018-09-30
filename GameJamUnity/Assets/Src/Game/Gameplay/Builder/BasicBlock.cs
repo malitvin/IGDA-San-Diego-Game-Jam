@@ -2,6 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using Gameplay.Particles;
+using Audio;
 
 namespace Gameplay.Building
 {
@@ -27,6 +28,7 @@ namespace Gameplay.Building
             s.InsertCallback(t.Duration() * 0.375f, () =>
             {
                 Singleton.instance.particleGod.GenerateParticle(Particle.Type.BuildingGlow, finalPos += glowVector);
+                Singleton.instance.audioSystem.PlaySound(SoundBank.Type.Build);
             });
         }
 

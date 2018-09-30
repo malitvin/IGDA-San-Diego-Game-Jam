@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using GhostGen;
 using Audio;
+using UI.HUD;
 
-public class PlayerCombatController
+public class PlayerCombatController : EventDispatcher
 {
     private PlayerCombatView _view;
     private PlayerConfig _config;
@@ -69,6 +70,8 @@ public class PlayerCombatController
         result.newHealth = health;
         result.victim = this;
         result.attacker = attacker;
+
+        DispatchEvent(GameplayEventType.DAMAGE_TAKEN,false, result);
 
         if(isDead && result.prevHealth > 0.0f)
         {

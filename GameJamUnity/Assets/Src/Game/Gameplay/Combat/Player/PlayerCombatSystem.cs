@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UI.HUD;
+using GhostGen;
 
 public class PlayerCombatSystem : GhostGen.EventDispatcher
 {
@@ -9,6 +11,7 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
     private GameplayCamera _gameplayCam;
     private CombatCamera _combatCamera;
     private PlayerCombatController _playerCombatController;
+    private HUDController _hudController;
 
     private RaycastHit[] _hitResults = new RaycastHit[5];
     private int _boardLayer;
@@ -26,11 +29,18 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
 
         PlayerCombatView view = GameObject.Instantiate<PlayerCombatView>(_gameplayResources.playerCombatView);
         _playerCombatController = new PlayerCombatController(view, _gameConfig.playerConfig);
+        _playerCombatController.AddListener(GameplayEventType.DAMAGE_TAKEN, OnPlayeDamageTake);
 
         _gameplayCam = GameObject.FindObjectOfType<GameplayCamera>();
         _combatCamera = new CombatCamera(_gameplayCam, _playerCombatController.transform);
 
         isEnabled = false;
+    }
+
+    public void Init(HUDController hudController)
+    {
+        _hudController = hudController;
+        _hudController.SetParenMaxHealth(_gameConfig.playerConfig.startHealth);
     }
 
     public bool isEnabled
@@ -123,7 +133,8 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         Vector3 result = Vector3.zero;
         Ray ray = _gameplayCam.camera.ScreenPointToRay(Input.mousePosition);
         //IF WE ARE ON THE GAMEBOARD
-        if(Physics.RaycastNonAlloc(ray, _hitResults, 1000, _boardLayer) > 0)
+        int count = Physics.RaycastNonAlloc(ray, _hitResults, 1000, _boardLayer);
+        if(count > 0)
         {
             Vector3 hitPoint = _hitResults[0].point;
             result = hitPoint;
@@ -131,5 +142,15 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
             Debug.DrawRay(hitPoint, Vector3.up, Color.blue);
         }
         return result;
+    }
+
+    private void OnPlayeDamageTake(GeneralEvent e)
+    {
+        DamageResult result = e.data as DamageResult;
+        if(result != null)
+        {
+            Debug.Log("SET PLAYER HEALTH TO " + result.newHealth);
+            _hudController.OnPlayerHealthChange(result.newHealth);
+        }
     }
 }

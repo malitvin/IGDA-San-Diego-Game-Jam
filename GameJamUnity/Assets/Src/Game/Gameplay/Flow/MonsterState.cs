@@ -60,7 +60,6 @@ public class MonsterState : FlowState {
         base.OnUpdate();
         if(_timer >= _currentGenTime && _monstersGenerated < _monstersToDestroyCount)
         {
-            Debug.Log("SPAWN " + _monstersGenerated);
             _currentGenTime = Random.Range(_currentWave.minSpawnIntervalTime, _currentWave.maxSpawnIntervalTime);
             _monstersGenerated++;
             _generator.GenerateEnemy(); //GENERATE MONSTER
