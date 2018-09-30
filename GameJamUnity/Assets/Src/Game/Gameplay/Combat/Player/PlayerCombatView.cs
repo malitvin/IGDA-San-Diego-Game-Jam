@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class PlayerCombatView : MonoBehaviour
+public class PlayerCombatView : GhostGen.EventDispatcherBehavior
 {
     private const int kFXPoolSize = 50;
 
@@ -17,6 +17,8 @@ public class PlayerCombatView : MonoBehaviour
     private TrailRenderer[] _fxPool;
     private Tween _fxTween;
     private int _fxIndex;
+
+    public PlayerCombatController controller { get; set; }
 
     // Use this for initialization
     void Awake ()
@@ -53,6 +55,13 @@ public class PlayerCombatView : MonoBehaviour
     public void SetCurrentWeapon(string weapon)
     {
 
+    }
+
+
+    public DamageResult TakeDamage(object attacker, float damage)
+    {
+        Debug.Log("Hit Player!");
+        return controller.TakeDamage(attacker, damage);
     }
 
     public void VisualFireWeapon(float speed, Vector3 target)

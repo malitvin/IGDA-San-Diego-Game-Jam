@@ -14,6 +14,7 @@ public class GameplayState : IGameState
     private GameplayResources _gameplayResources;
     private GameConfig _gameConfig;
     private DiContainer _diContainer;
+    private IEventDispatcher _dispatcher;
 
     private PlayerCombatSystem _playerCombatSystem;
     private BuildingSystem _buildSystem;
@@ -28,13 +29,16 @@ public class GameplayState : IGameState
         GuiManager gui,
         GameConfig gameConfig,
         DiContainer diContainer,
-        GameplayResources gameplayResources)
+        GameplayResources gameplayResources,
+        [Inject(Id = GameInstaller.GLOBAL_DISPATCHER)]
+        IEventDispatcher dispatcher)
     {
         _gameStateMachine = gameStateMachine;
         _gui = gui;
         _gameConfig = gameConfig;
         _gameplayResources = gameplayResources;
         _diContainer = diContainer;
+        _dispatcher = dispatcher;
 
     }
 
@@ -48,6 +52,7 @@ public class GameplayState : IGameState
 
         // Get CombatPlayerView
         _playerCombatSystem.isEnabled = true;
+        _dispatcher.AddListener(GameplayEventType.DAMAGE_TAKEN, onDamageTaken);
     }
     
     public void Step( float p_deltaTime )
@@ -80,8 +85,15 @@ public class GameplayState : IGameState
 
     public void Exit( )
 	{
+        _dispatcher.RemoveListener(GameplayEventType.DAMAGE_TAKEN, onDamageTaken);
 
-        
     }    
+
+    private void onDamageTaken(GeneralEvent e)
+    {
+        DamageResult data = e.data as DamageResult;
+        Debug.Log("new health: " + data.newHealth);
+        Debug.Log("Damge Taken: " + data.attacker.ToString() + ", " + data.victim.ToString());
+    }
     
 }

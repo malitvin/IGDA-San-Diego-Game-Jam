@@ -16,6 +16,7 @@ public class PlayerCombatController
 
     public PlayerCombatController(PlayerCombatView view, PlayerConfig config)
     {
+        health = config.startHealth;
         _view = view;
         _physBody = view._rigidBody;
         _config = config;
@@ -24,6 +25,8 @@ public class PlayerCombatController
         _moveDirection = Vector3.zero;
     }
     
+    public float health { get; set; }
+
     public bool isEnabled
     {
         get { return _isEnabled; }
@@ -47,6 +50,17 @@ public class PlayerCombatController
         _aimPosition = aimPos;
     }
 
+    public DamageResult TakeDamage(object attacker, float damage)
+    {
+        DamageResult result = new DamageResult();
+        result.prevHealth = health;
+        health = Mathf.Max(health - damage, 0.0f);
+        result.newHealth = health;
+        result.victim = this;
+        result.attacker = attacker;
+        return result;
+    }
+
     public void FireWeapon(Vector3 targetPos)
     {
         if(_fireTimer > 0 || !isEnabled)
@@ -65,7 +79,13 @@ public class PlayerCombatController
         RaycastHit hit;
         if(getTarget(ray, out hit, out target))
         {
-            target.TakeDamage(hit.point, viewDir * 110.0f, 5.0f);
+            Vector3 force = viewDir * 110.0f;
+            target.TakeDamage(this, 5.0f);
+            if(target.rigidBody)
+            {
+                target.rigidBody.AddForceAtPosition(force, hit.point, ForceMode.Impulse);
+            }
+
             adjustedPos = hit.point;
         }
         
