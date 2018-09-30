@@ -47,7 +47,7 @@ namespace Gameplay.Building
             private string keyCache;
             public string GetKey()
             {
-                if(keyCache == "")
+                if(string.IsNullOrEmpty(keyCache))
                 {
                     keyCache = key.ToString();
                 }
