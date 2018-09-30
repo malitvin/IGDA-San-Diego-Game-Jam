@@ -50,6 +50,7 @@ public class MonsterState : FlowState {
         _generator._currentWave = _currentWave;
         _monsterDestroyedCount = 0;
         _monstersToDestroyCount = _currentWave.enemyCount;
+        Debug.Log(_currentWave.enemyCount);
         _timer = 0;
         _currentGenTime = 0;
     }
@@ -57,8 +58,9 @@ public class MonsterState : FlowState {
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if(_timer >= _currentGenTime && _monstersGenerated != _monstersToDestroyCount)
+        if(_timer >= _currentGenTime && _monstersGenerated < _monstersToDestroyCount)
         {
+            Debug.Log("SPAWN " + _monstersGenerated);
             _currentGenTime = Random.Range(_currentWave.minSpawnIntervalTime, _currentWave.maxSpawnIntervalTime);
             _monstersGenerated++;
             _generator.GenerateEnemy(); //GENERATE MONSTER
@@ -80,5 +82,6 @@ public class MonsterState : FlowState {
     {
         base.Exit();
         _currentWaveIndex++;
+        _monstersGenerated = 0;
     }
 }
