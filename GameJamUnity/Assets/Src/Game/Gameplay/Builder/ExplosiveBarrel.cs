@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 using Gameplay.Particles;
+using Audio;
 
 namespace Gameplay.Building
 {
@@ -41,6 +42,7 @@ namespace Gameplay.Building
             {
                 DamageUtil.ApplyExplosionDamage(this, transform.position, _blueprint.explodeRadius, _blueprint.damage, _explosionMask, ref _cachedCollider);
                 Singleton.instance.particleGod.GenerateParticle(Particle.Type.BaseExplosion, transform.position);
+                Singleton.instance.audioSystem.PlaySound(SoundBank.Type.Explosion, null, true);
 
                 if(_dropTween != null)
                 {

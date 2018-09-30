@@ -21,4 +21,5 @@ MonoBehaviour:
     targetMask:
       serializedVersion: 2
       m_Bits: 1847
+    rewardsForKill: 10
     startHealth: 25

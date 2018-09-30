@@ -46,6 +46,8 @@ namespace Gameplay.Building
         //cam
         private BuildCam _buildCam;
 
+        private GhostGen.IEventDispatcher _dispatcher;
+
         #region Init
         public BuildingSystem(GameConfig gameConfig, InventorySystem inventorySystem)
         {
@@ -58,6 +60,10 @@ namespace Gameplay.Building
 
             //init builder
             InitBuilder();
+
+            // TODO: Klean it up!
+            _dispatcher = Singleton.instance.notificationDispatcher;
+            _dispatcher.AddListener(GameplayEventType.ENEMY_KILLED, onItemPickedUp);
         }
 
         private void InitBuilder()
@@ -227,7 +233,6 @@ namespace Gameplay.Building
         }
         #endregion
 
-
         #region Buy Buildable
         private void BuyBuildable(int cost)
         {
@@ -261,6 +266,14 @@ namespace Gameplay.Building
             //RETURN NEW POS
             return GridPosition.Create(x, y, z);
 
+        }
+        #endregion
+
+        #region Events
+        private void onItemPickedUp(GhostGen.GeneralEvent e)
+        {
+            Storeable.Type coin = Storeable.Type.Coin;
+            _buildViewController.UpdateInventoryUI(coin, _inventorySystem.GetAmount(coin));
         }
         #endregion
     }

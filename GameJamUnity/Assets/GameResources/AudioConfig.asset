@@ -61,3 +61,10 @@ MonoBehaviour:
     pitch: 1
     group: {fileID: 0}
     key: 6
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 239be2d3c978bf944963664f0f640490, type: 3}
+    volume: 1
+    spatialBlend: 0
+    pitch: 1
+    group: {fileID: 0}
+    key: 7

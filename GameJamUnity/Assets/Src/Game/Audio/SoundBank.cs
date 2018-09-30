@@ -12,7 +12,9 @@ namespace Audio
             Teleport,
             WeaponFire,
             MonsterDeath,
-            Build
+            Build,
+            Explosion,
+            Lose
         }
     }
 }
