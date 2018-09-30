@@ -16,7 +16,7 @@ MonoBehaviour:
     waveStartWaitTime: 5
     waves:
     - WAVE: '-----------------------------------------------------------------------'
-      enemyCount: 10
+      enemyCount: 1
       minSpawnIntervalTime: 0.5
       maxSpawnIntervalTime: 1
       waveCompleteWaitTime: 3

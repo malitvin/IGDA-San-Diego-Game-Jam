@@ -1,17 +1,21 @@
 ﻿//Unity
 using UnityEngine;
+using System;
 
 namespace UI.HUD
 {
     public class HUDController : BaseController
     {
-        public HUDController()
+        public HUDController(Action onComplete)
         {
             viewFactory.CreateAsync<HUDView>("GUI/PlayerHUD", (v) =>
             {
-                Debug.Log("HERE");
                 view = v;
                 OnCreationComplete();
+                if(onComplete != null)
+                {
+                    onComplete();
+                }
             });
         }
 
@@ -20,6 +24,11 @@ namespace UI.HUD
         private void OnCreationComplete()
         {
             _hudView.OnCreationComplete();
+        }
+
+        public void OnWaveChanged(int wave)
+        {
+            _hudView.OnWaveChanged(wave);
         }
     }
 }

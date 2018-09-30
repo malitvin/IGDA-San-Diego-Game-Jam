@@ -43,6 +43,11 @@ public class MonsterGenerator : EventDispatcher
         }
     }
 
+    public void Init(HUDController hudController)
+    {
+        _hudController = hudController;
+    }
+
     #region State Machine
     private void InitMonsterStateMachine()
     {

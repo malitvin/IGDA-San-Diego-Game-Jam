@@ -33,3 +33,10 @@ MonoBehaviour:
     pitch: 1
     group: {fileID: 0}
     key: 3
+  - name: Monster Roar
+    clip: {fileID: 8300000, guid: e6b54f16fe7fee64e9afe6d40e484f2f, type: 3}
+    volume: 1
+    spatialBlend: 0
+    pitch: 0.5
+    group: {fileID: 0}
+    key: 0
