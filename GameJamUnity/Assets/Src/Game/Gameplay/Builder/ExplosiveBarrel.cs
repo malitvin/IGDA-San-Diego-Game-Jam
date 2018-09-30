@@ -13,5 +13,11 @@ namespace Gameplay.Building
                
             });
         }
+
+        public override void RemovePhysics()
+        {
+            base.RemovePhysics();
+            Destroy(_rigidBody);
+        }
     }
 }
