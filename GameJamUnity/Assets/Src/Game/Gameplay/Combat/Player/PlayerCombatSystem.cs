@@ -41,6 +41,10 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
                 if(_playerCombatController != null)
                 {
                     _playerCombatController.isEnabled = value;
+
+                    Singleton.instance.particleGod.GenerateParticle(
+                        Gameplay.Particles.Particle.Type.Escape, 
+                        _playerCombatController.transform.position);
                 }
             }
         }

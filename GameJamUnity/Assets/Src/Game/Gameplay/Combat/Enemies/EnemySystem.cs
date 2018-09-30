@@ -40,7 +40,7 @@ public class EnemySystem : GhostGen.EventDispatcher
 
         for(int i = 0; i < 6; ++i)
         {
-            AddEnemy(_enemyDef, _playerController.transform, Vector3.zero);
+            AddEnemy(_playerController.transform, Vector3.zero);
         }
     }
 
