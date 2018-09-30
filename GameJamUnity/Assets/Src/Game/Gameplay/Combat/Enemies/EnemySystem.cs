@@ -21,18 +21,19 @@ public class EnemySystem : GhostGen.EventDispatcher
         _gameConfig = gameConfig;
         _playerController = playerCombatSystem.playerController;
 
+        EnemyDef testDef = _gameConfig.enemyConfig.basicEnemy;
         //Create a 
         for(int i = 0; i < 10; ++i)
         {
             Vector3 spawnPos = new Vector3(Random.Range(-12, 12), 0, Random.Range(-12, 12));
-            EnemyController enemy = AddEnemy(_playerController.transform, spawnPos);
+            EnemyController enemy = AddEnemy(testDef, _playerController.transform, spawnPos);
             enemy.speed = Random.Range(2.3f, 5.0f);
         }
     }
-    public EnemyController AddEnemy(Transform target, Vector3 position)
+    public EnemyController AddEnemy(EnemyDef def, Transform target, Vector3 position)
     {
         EnemyView enemyView = GameObject.Instantiate(_gameplayResources.basicEnemyView);
-        EnemyController enemy = new EnemyController(enemyView, target);
+        EnemyController enemy = new EnemyController(def, enemyView, target);
         _enemyList.Add(enemy);
         return enemy;
     }
@@ -44,6 +45,8 @@ public class EnemySystem : GhostGen.EventDispatcher
             for(int i = 0; i < _enemyList.Count; ++i)
             {
                 _enemyList[i].RefreshTarget(); // Delay this later
+                _enemyList[i].Tick(deltaTime);
+
             }
         }
     }

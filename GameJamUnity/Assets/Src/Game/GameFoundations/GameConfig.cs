@@ -13,6 +13,7 @@ public class GameConfig : ScriptableObject, IPostInit
     public PlayerConfig playerConfig;
     public BuildConfig bulidConfig;
     public InventoryConfig inventoryConfig;
+    public EnemyConfig enemyConfig;
 
     public void PostInit()
     {

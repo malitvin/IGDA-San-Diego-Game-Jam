@@ -581,7 +581,7 @@ PlayerSettings:
     1: ODIN_INSPECTOR
   platformArchitecture: {}
   scriptingBackend:
-    Standalone: 1
+    Standalone: 0
   il2cppCompilerConfiguration: {}
   incrementalIl2cppBuild: {}
   allowUnsafeCode: 0

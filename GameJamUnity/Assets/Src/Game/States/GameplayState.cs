@@ -44,7 +44,7 @@ public class GameplayState : IGameState
         _enemySystem = _diContainer.Resolve<EnemySystem>();
 
         // Get CombatPlayerView
-        _playerCombatSystem.isEnabled = false;
+        _playerCombatSystem.isEnabled = true;
     }
     
     public void Step( float p_deltaTime )
