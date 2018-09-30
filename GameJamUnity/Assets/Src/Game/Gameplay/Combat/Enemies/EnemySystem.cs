@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Common.Pooling;
 
 public class EnemySystem : GhostGen.EventDispatcher
 {
-    private List<EnemyController> _enemyList = new List<EnemyController>(20);
-
     private GameplayResources _gameplayResources;
     private GameConfig _gameConfig;
     private PlayerCombatController _playerController;
 
+
+    private GenericPooler _enemyPool;
+    private List<EnemyController> _enemyList = new List<EnemyController>();
+    private Dictionary<int, EnemyView> _lookup = new Dictionary<int, EnemyView>();
+
+    private EnemyDef _enemyDef;
+
+    private static string ENEMY = "ENEMY";
 
     public EnemySystem(
         GameplayResources gameplayResources,
@@ -21,21 +28,28 @@ public class EnemySystem : GhostGen.EventDispatcher
         _gameConfig = gameConfig;
         _playerController = playerCombatSystem.playerController;
 
-        EnemyDef testDef = _gameConfig.enemyConfig.basicEnemy;
-        //Create a 
-        for(int i = 0; i < 10; ++i)
+        _enemyDef = _gameConfig.enemyConfig.basicEnemy;
+
+        GameObject pool = GameObject.FindGameObjectWithTag("ScenePool");
+        if (!pool)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-40, 40), 0, Random.Range(-40, 40));
-            EnemyController enemy = AddEnemy(testDef, _playerController.transform, spawnPos);
-            enemy.speed = Random.Range(2.3f, 5.0f);
+            Debug.LogError("NO SCENE POOL TRANSFORM FOUND IN SCENE");
         }
+        _enemyPool = new GenericPooler(pool.transform);
+        _enemyPool.InitPool(ENEMY, 0, _gameplayResources.basicEnemyView);
     }
-    public EnemyController AddEnemy(EnemyDef def, Transform target, Vector3 position)
+
+    public void AddEnemy(EnemyDef def, Transform target, Vector3 position)
     {
-        EnemyView enemyView = GameObject.Instantiate(_gameplayResources.basicEnemyView, position, Quaternion.identity);
-        EnemyController enemy = new EnemyController(def, enemyView, target);
-        _enemyList.Add(enemy);
-        return enemy;
+        EnemyView enemyView = _enemyPool.GetPooledObject(ENEMY) as EnemyView;
+        int id = enemyView.gameObject.GetInstanceID();
+        if (!_lookup.ContainsKey(id))
+        {
+            EnemyController enemy = new EnemyController(def, enemyView, target);
+            _enemyList.Add(enemy);
+            _lookup.Add(id, enemyView);
+        }
+        enemyView.transform.position = position;
     }
 
     public void Tick(float deltaTime)
@@ -44,9 +58,8 @@ public class EnemySystem : GhostGen.EventDispatcher
         {
             for(int i = 0; i < _enemyList.Count; ++i)
             {
-                _enemyList[i].RefreshTarget(); // Delay this later
+                _enemyList[i].RefreshTarget(); 
                 _enemyList[i].Tick(deltaTime);
-
             }
         }
     }

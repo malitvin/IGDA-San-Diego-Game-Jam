@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Common.Pooling;
 
-public class EnemyView : MonoBehaviour
+public class EnemyView : PoolableObject
 {
     public NavMeshAgent _agent;
 
@@ -25,14 +26,8 @@ public class EnemyView : MonoBehaviour
         _DEBUG_pos = pos;
         _DEBUG_radius = radius;
     }
-    // Update is called once per frame
-    void Update ()
-    {
-        if(_agent != null && _target != null)
-        {
-            
-        }
-	}
+
+
 
     private void OnDrawGizmos()
     {
