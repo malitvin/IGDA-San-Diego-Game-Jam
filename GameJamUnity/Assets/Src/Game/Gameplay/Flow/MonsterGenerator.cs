@@ -13,6 +13,8 @@ public class MonsterGenerator : EventDispatcher
 
     public LevelConfig.LevelDef _levelDef;
 
+    public LevelConfig.WaveDef _currentWave;
+
     private Dictionary<FlowState.State, IFlowState> _stateMachine = new Dictionary<FlowState.State, IFlowState>(new FastEnumIntEqualityComparer<FlowState.State>());
 
     public MonsterGenerator(GameConfig gameConfig,EnemySystem enemySystem,PlayerCombatSystem playerSystem)
@@ -61,6 +63,7 @@ public class MonsterGenerator : EventDispatcher
 
     public void GenerateEnemy()
     {
+        //get angle around island then get direction of  angle and spawn in that direction by the spawn distance
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         Vector3 directionalPosition = new Vector3( Mathf.Cos(angle), 0, Mathf.Sin(angle));
         directionalPosition *= _levelDef.spawnDistance;
@@ -72,5 +75,10 @@ public class MonsterGenerator : EventDispatcher
     public void OnUpdate(float deltaTime)
     {
         _currentFlowState.OnUpdate();
+    }
+
+    public void OnMonsterDestroyed()
+    {
+        _currentFlowState.OnMonsterDestroyed();
     }
 }

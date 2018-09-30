@@ -35,4 +35,9 @@ public abstract class FlowState : IFlowState
     {
        
     }
+
+    public virtual void OnMonsterDestroyed()
+    {
+
+    }
 }

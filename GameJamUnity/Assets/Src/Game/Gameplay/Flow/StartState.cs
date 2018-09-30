@@ -5,12 +5,13 @@ public class StartState : FlowState {
 
     public StartState(MonsterGenerator generator, LevelConfig config) : base(generator, config)
     {
-        Singleton.instance.gui.screenFader.StartCoroutine(StartGame());
+        
     }
 
     public override void Enter()
     {
         base.Enter();
+        Singleton.instance.gui.screenFader.StartCoroutine(StartGame());
     }
 
     private IEnumerator StartGame()

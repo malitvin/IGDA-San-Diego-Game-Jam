@@ -17,16 +17,16 @@ MonoBehaviour:
     waves:
     - WAVE: '-----------------------------------------------------------------------'
       enemyCount: 10
-      minSpawnIntervalTime: 2
-      maxSpawnIntervalTime: 4
+      minSpawnIntervalTime: 0.5
+      maxSpawnIntervalTime: 1
       waveCompleteWaitTime: 3
     - WAVE: '-----------------------------------------------------------------------'
       enemyCount: 50
-      minSpawnIntervalTime: 2
-      maxSpawnIntervalTime: 5
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 1.5
       waveCompleteWaitTime: 4
     - WAVE: '-----------------------------------------------------------------------'
       enemyCount: 100
-      minSpawnIntervalTime: 2
-      maxSpawnIntervalTime: 4
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 2
       waveCompleteWaitTime: 5
