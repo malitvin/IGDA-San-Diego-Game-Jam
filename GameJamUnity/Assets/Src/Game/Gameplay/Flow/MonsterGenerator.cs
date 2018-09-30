@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using GhostGen;
 using Common.Util;
+using Zenject;
 
 using System.Collections.Generic;
 
@@ -14,11 +15,17 @@ public class MonsterGenerator : EventDispatcher
     public LevelConfig.LevelDef _levelDef;
 
     public LevelConfig.WaveDef _currentWave;
+    
+    private IEventDispatcher _dispatcher;
 
     private Dictionary<FlowState.State, IFlowState> _stateMachine = new Dictionary<FlowState.State, IFlowState>(new FastEnumIntEqualityComparer<FlowState.State>());
 
     public MonsterGenerator(GameConfig gameConfig,EnemySystem enemySystem,PlayerCombatSystem playerSystem)
     {
+        _dispatcher = Singleton.instance.notificationDispatcher;
+        // TODO: Klean it up!
+        _dispatcher.AddListener(GameplayEventType.ENEMY_KILLED, onEnemyKilled);
+
         _levelConfig = gameConfig.levelConfig;
         _enemySystem = enemySystem;
         _playerSystem = playerSystem;
@@ -80,5 +87,10 @@ public class MonsterGenerator : EventDispatcher
     public void OnMonsterDestroyed()
     {
         _currentFlowState.OnMonsterDestroyed();
+    }
+
+    private void onEnemyKilled(GhostGen.GeneralEvent e)
+    {
+        OnMonsterDestroyed();
     }
 }

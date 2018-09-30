@@ -12,7 +12,7 @@ public class EnemyController
     private EnemyDef _def;
     private float _attackTimer;
     private IEventDispatcher _dispatcher;
-    private int _enemyLayer;
+    private int _playerLayer;
 
     public EnemyController(EnemyDef def, EnemyView view, Transform target)
     {
@@ -22,8 +22,8 @@ public class EnemyController
         _agent = view.agent;
         _target = target;
         _dispatcher = Singleton.instance.notificationDispatcher;
-        string[] maskList = { "Enemy" };
-        _enemyLayer = LayerMask.GetMask(maskList);
+        string[] maskList = { "CombatPlayer" };
+        _playerLayer = LayerMask.GetMask(maskList);
     }
 
     public void Init()
@@ -60,13 +60,20 @@ public class EnemyController
 
         if(isDead && result.prevHealth > 0.0f)
         {
+            Debug.Log("Enemy Dead!");
             _view.Die();
+            _dispatcher.DispatchEvent(GameplayEventType.ENEMY_KILLED, false, this);
         }
         return result;
     }
 
     public void Tick(float deltaTime)
     {
+        if(isDead)
+        {
+            return;
+        }
+
         _attackTimer -= deltaTime;
         attackCheck();
     }
@@ -101,7 +108,7 @@ public class EnemyController
             _view.DebugDraw(position, 0.75f);
         }
 
-        Collider[] targets = Physics.OverlapSphere(position, 0.75f, _enemyLayer);//, _def.targetMask);
+        Collider[] targets = Physics.OverlapSphere(position, 0.75f, _playerLayer);//, _def.targetMask);
         if(targets != null)
         {
             for(int i = 0; i < targets.Length; ++i)

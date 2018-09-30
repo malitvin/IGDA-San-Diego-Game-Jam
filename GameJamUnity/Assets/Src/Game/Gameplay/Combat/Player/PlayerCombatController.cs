@@ -98,6 +98,7 @@ public class PlayerCombatController
 
             DamageResult dResult = target.TakeDamage(this, _config.weapon.damage);
             _dispatcher.DispatchEvent(GameplayEventType.DAMAGE_TAKEN, false, dResult);
+            Debug.Log("Attacking: " + target);
 
             if(target.physbody)
             {
@@ -152,7 +153,7 @@ public class PlayerCombatController
         target = null;
         raycastHit = default(RaycastHit);
 
-        string[] layerList = { "Bullets" };
+        string[] layerList = { "CombatPlayer" };
         if(Physics.RaycastNonAlloc(fireDirection, rayHits,100.0f, ~LayerMask.GetMask(layerList)) > 0)
         {
             for(int i = 0; i < rayHits.Length; ++i)
