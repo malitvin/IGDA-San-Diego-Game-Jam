@@ -26,6 +26,8 @@ MonoBehaviour:
     displayName: Blocker
     enableCollisionDetection: 1
     currencyCost: 5
+    explodeRadius: 0
+    damage: 0
     key: 0
     buildSpace: 0
     buildRechargeRate: 0.01
@@ -41,6 +43,8 @@ MonoBehaviour:
     displayName: Helix Bomb
     enableCollisionDetection: 0
     currencyCost: 20
+    explodeRadius: 5
+    damage: 105
     key: 1
     buildSpace: 1
     buildRechargeRate: 0.25
@@ -56,6 +60,8 @@ MonoBehaviour:
     displayName: Explosive Barrel
     enableCollisionDetection: 1
     currencyCost: 15
+    explodeRadius: 3
+    damage: 100
     key: 2
     buildSpace: 0
     buildRechargeRate: 0.5
