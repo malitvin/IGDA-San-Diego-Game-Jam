@@ -10,7 +10,7 @@ namespace Gameplay.Inventory
         public class InventoryItem
         {
             public string displayName;
-            public Inventory.Type key;
+            public Storeable.Type key;
             public int startAmount;
             public Sprite inventoryUISprite;
         }
