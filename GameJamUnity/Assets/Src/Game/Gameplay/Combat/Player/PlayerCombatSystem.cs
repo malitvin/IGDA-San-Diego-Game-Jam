@@ -38,6 +38,7 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         _gameplayCam = GameObject.FindObjectOfType<GameplayCamera>();
         _combatCamera = new CombatCamera(_gameplayCam, _playerCombatController.transform);
         _parentController = GameObject.Instantiate<ParentController>(_gameplayResources.parentController);
+        _parentController.Init(_gameConfig.playerConfig);
         _parentController.AddListener(GameplayEventType.DAMAGE_TAKEN, OnParentDamageTaken);
         isEnabled = false;
         _dispatcher = Singleton.instance.notificationDispatcher;

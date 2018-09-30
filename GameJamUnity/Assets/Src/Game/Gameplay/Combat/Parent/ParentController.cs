@@ -19,6 +19,11 @@ public class ParentController : GhostGen.EventDispatcherBehavior, IDamageable
         get { return health <= 0; }
     }
 
+    public void Init(PlayerConfig playerConfig)
+    {
+        health = playerConfig.parentStartHealth;
+    }
+
     public DamageResult TakeDamage(object attacker, float damage)
     {
         DamageResult result = new DamageResult();
