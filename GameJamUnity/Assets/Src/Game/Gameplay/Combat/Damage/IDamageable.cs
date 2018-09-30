@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    float health { get; set; }
+    float health { get; }
 
-    Rigidbody rigidBody { get; }
+    Rigidbody physbody { get; }
     DamageResult TakeDamage(object attacker, float damage);
 }

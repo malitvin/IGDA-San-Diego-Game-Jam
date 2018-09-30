@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4129549093235034}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rotateContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4742559341293532}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: weaponEndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 114909365597833806}
   - component: {fileID: 136957406144815164}
   - component: {fileID: 54989138336555428}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlayerCombatView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 4149153360288496}
   - component: {fileID: 33948740429723884}
   - component: {fileID: 23608330235718218}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: testWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4870245971507226}
   - component: {fileID: 33993587000586664}
   - component: {fileID: 23442953248463950}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4977479553914320}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: positionContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1106269766868640}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e731ad31833292448acc725e707a44a4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

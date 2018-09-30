@@ -13,11 +13,12 @@ public class PlayerCombatController
     private float _fireTimer;
     private RaycastHit[] rayHits = new RaycastHit[10];
     private bool _isEnabled;
-
+    
     public PlayerCombatController(PlayerCombatView view, PlayerConfig config)
     {
         health = config.startHealth;
         _view = view;
+        _view.controller = this;
         _physBody = view._rigidBody;
         _config = config;
 
@@ -40,6 +41,11 @@ public class PlayerCombatController
         }
     }
 
+    public bool isDead
+    {
+        get { return health <= 0; }
+    }
+
     public Transform transform
     {
         get { return _physBody.transform; }
@@ -58,12 +64,17 @@ public class PlayerCombatController
         result.newHealth = health;
         result.victim = this;
         result.attacker = attacker;
+
+        if(isDead && result.prevHealth > 0.0f)
+        {
+
+        }
         return result;
     }
 
     public void FireWeapon(Vector3 targetPos)
     {
-        if(_fireTimer > 0 || !isEnabled)
+        if(_fireTimer > 0 || !isEnabled || isDead)
             return;
         
         Vector3 weaponPos = _view.weaponBarrelPosition;
@@ -81,9 +92,9 @@ public class PlayerCombatController
         {
             Vector3 force = viewDir * 110.0f;
             target.TakeDamage(this, 5.0f);
-            if(target.rigidBody)
+            if(target.physbody)
             {
-                target.rigidBody.AddForceAtPosition(force, hit.point, ForceMode.Impulse);
+                target.physbody.AddForceAtPosition(force, hit.point, ForceMode.Impulse);
             }
 
             adjustedPos = hit.point;
@@ -102,7 +113,7 @@ public class PlayerCombatController
 	// Update is called once per frame
 	public void Tick(float deltaTime)
     {
-        if(!isEnabled)
+        if(!isEnabled || isDead)
         {
             return;
         }
@@ -118,7 +129,7 @@ public class PlayerCombatController
 
     public void FixedTick(float fixedDeltaTime)
     {
-        if(!isEnabled)
+        if(!isEnabled || isDead)
         {
             return;
         }
@@ -134,7 +145,8 @@ public class PlayerCombatController
         target = null;
         raycastHit = default(RaycastHit);
 
-        if(Physics.RaycastNonAlloc(fireDirection, rayHits) > 0)
+        string[] layerList = { "Bullets" };
+        if(Physics.RaycastNonAlloc(fireDirection, rayHits,100.0f, ~LayerMask.GetMask(layerList)) > 0)
         {
             for(int i = 0; i < rayHits.Length; ++i)
             {
