@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d926e7c91f4b65946ab0a9fbaac4e0a4, type: 3}
+  m_Name: EnemyConfig
+  m_EditorClassIdentifier: 
+  basicEnemy:
+    movement:
+      speed: 3.5
+      drag: 0
+    attack:
+      damage: 5
+      refreshDuration: 0.5
+    targetMask:
+      serializedVersion: 2
+      m_Bits: 1847

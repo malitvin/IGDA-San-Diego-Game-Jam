@@ -26,11 +26,11 @@ public class JamStateFactory : ScriptableObjectInstaller, IStateFactory<JameStat
     {
         switch (stateId)
         {
-            case JameStateType.INTRO:                     return Container.Resolve<IntroState>();
-            case JameStateType.MAIN_MENU:                 break;
-            case JameStateType.LOAD_GAMEPLAY:             break;
-            case JameStateType.GAMEPLAY:                  return Container.Resolve<GameplayState>();
-            case JameStateType.CREDITS:                   break;
+            case JameStateType.INTRO:         return Container.Resolve<IntroState>();
+            case JameStateType.MAIN_MENU:     break;
+            case JameStateType.LOAD_GAMEPLAY: break;
+            case JameStateType.GAMEPLAY:      return Container.Resolve<GameplayState>();
+            case JameStateType.CREDITS:       break;
         }
 
         Debug.LogError("Error: state ID: " + stateId + " does not exist!");

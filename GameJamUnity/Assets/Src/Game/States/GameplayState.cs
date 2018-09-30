@@ -47,7 +47,7 @@ public class GameplayState : IGameState
         _particleGod = _diContainer.Resolve<ParticleGOD>();
 
         // Get CombatPlayerView
-        _playerCombatSystem.isEnabled = false;
+        _playerCombatSystem.isEnabled = true;
     }
     
     public void Step( float p_deltaTime )

@@ -15,6 +15,7 @@ public class GameConfig : ScriptableObject, IPostInit
     public BuildConfig bulidConfig;
     public InventoryConfig inventoryConfig;
     public ParticleConfig particleConfig;
+    public EnemyConfig enemyConfig;
 
     public void PostInit()
     {

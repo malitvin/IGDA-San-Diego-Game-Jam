@@ -8,7 +8,8 @@ public class EnemyView : MonoBehaviour
     public NavMeshAgent _agent;
 
     private Transform _target;
-
+    private Vector3 _DEBUG_pos;
+    private float _DEBUG_radius;
 
     private void Start()
     {
@@ -19,6 +20,11 @@ public class EnemyView : MonoBehaviour
         get { return _agent; }
     }
 
+    public void DebugDraw(Vector3 pos, float radius)
+    {
+        _DEBUG_pos = pos;
+        _DEBUG_radius = radius;
+    }
     // Update is called once per frame
     void Update ()
     {
@@ -27,4 +33,9 @@ public class EnemyView : MonoBehaviour
             
         }
 	}
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(_DEBUG_pos, _DEBUG_radius);
+    }
 }
