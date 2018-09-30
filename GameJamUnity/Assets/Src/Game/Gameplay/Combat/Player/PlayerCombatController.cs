@@ -13,7 +13,7 @@ public class PlayerCombatController
     private float _fireTimer;
     private RaycastHit[] rayHits = new RaycastHit[10];
     private bool _isEnabled;
-
+    
     public PlayerCombatController(PlayerCombatView view, PlayerConfig config)
     {
         health = config.startHealth;
@@ -41,6 +41,11 @@ public class PlayerCombatController
         }
     }
 
+    public bool isDead
+    {
+        get { return health <= 0; }
+    }
+
     public Transform transform
     {
         get { return _physBody.transform; }
@@ -53,19 +58,23 @@ public class PlayerCombatController
 
     public DamageResult TakeDamage(object attacker, float damage)
     {
-        Debug.Log("Take some fucken' damage!!!");
         DamageResult result = new DamageResult();
         result.prevHealth = health;
         health = Mathf.Max(health - damage, 0.0f);
         result.newHealth = health;
         result.victim = this;
         result.attacker = attacker;
+
+        if(isDead && result.prevHealth > 0.0f)
+        {
+
+        }
         return result;
     }
 
     public void FireWeapon(Vector3 targetPos)
     {
-        if(_fireTimer > 0 || !isEnabled)
+        if(_fireTimer > 0 || !isEnabled || isDead)
             return;
         
         Vector3 weaponPos = _view.weaponBarrelPosition;
@@ -104,7 +113,7 @@ public class PlayerCombatController
 	// Update is called once per frame
 	public void Tick(float deltaTime)
     {
-        if(!isEnabled)
+        if(!isEnabled || isDead)
         {
             return;
         }
@@ -120,7 +129,7 @@ public class PlayerCombatController
 
     public void FixedTick(float fixedDeltaTime)
     {
-        if(!isEnabled)
+        if(!isEnabled || isDead)
         {
             return;
         }
@@ -136,7 +145,8 @@ public class PlayerCombatController
         target = null;
         raycastHit = default(RaycastHit);
 
-        if(Physics.RaycastNonAlloc(fireDirection, rayHits) > 0)
+        string[] layerList = { "Bullets" };
+        if(Physics.RaycastNonAlloc(fireDirection, rayHits,100.0f, ~LayerMask.GetMask(layerList)) > 0)
         {
             for(int i = 0; i < rayHits.Length; ++i)
             {

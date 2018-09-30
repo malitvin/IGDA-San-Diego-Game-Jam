@@ -71,7 +71,6 @@ public class PlayerCombatView : GhostGen.EventDispatcherBehavior, IDamageable
 
     public DamageResult TakeDamage(object attacker, float damage)
     {
-        Debug.Log("Hit Player!");
         return controller != null ? controller.TakeDamage(attacker, damage) : null;
     }
 

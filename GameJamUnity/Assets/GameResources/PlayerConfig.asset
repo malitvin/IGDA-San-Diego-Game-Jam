@@ -17,4 +17,4 @@ MonoBehaviour:
   weapon:
     bulletSpeed: 90
     fireCooldown: 0.1
-  startHealth: 0
+  startHealth: 100

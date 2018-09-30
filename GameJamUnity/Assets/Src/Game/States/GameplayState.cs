@@ -121,7 +121,7 @@ public class GameplayState : IGameState
         DamageResult data = e.data as DamageResult;
         if(data != null)
         {
-            Debug.Log("new health: " + data.newHealth);
+            Debug.Log("old health: " + data.prevHealth + ", " + data.newHealth);
             Debug.Log("Damge Taken: " + data.attacker.ToString() + ", " + data.victim.ToString());
 
         }
