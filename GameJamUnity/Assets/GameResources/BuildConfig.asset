@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecbc3043e90bc84e843cc7b3933704f, type: 3}
   m_Name: BuildConfig
   m_EditorClassIdentifier: 
-  startingBuildType: 2
+  startingBuildType: 0
   _collisionLayerMask:
     serializedVersion: 2
     m_Bits: 513
@@ -22,7 +22,7 @@ MonoBehaviour:
     buildColor: {r: 0.35169482, g: 1, b: 0, a: 0.19607843}
     cantBuildColor: {r: 1, g: 0, b: 0, a: 0.29411766}
   buildables:
-  - buildHotKey: 257
+  - buildHotKey: 49
     displayName: Blocker
     enableCollisionDetection: 1
     currencyCost: 5
@@ -35,7 +35,7 @@ MonoBehaviour:
     prefab: {fileID: 114153375829066002, guid: c4ba12df166c1cf459683596f8534ca8, type: 2}
     hollogramMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     hologramScale: 1
-  - buildHotKey: 258
+  - buildHotKey: 50
     displayName: Helix Bomb
     enableCollisionDetection: 0
     currencyCost: 20
@@ -48,7 +48,7 @@ MonoBehaviour:
     prefab: {fileID: 114252297097517576, guid: 977d826f9a2529f489ba3879448a3cde, type: 2}
     hollogramMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
     hologramScale: 0.2
-  - buildHotKey: 259
+  - buildHotKey: 51
     displayName: Explosive Barrel
     enableCollisionDetection: 1
     currencyCost: 15

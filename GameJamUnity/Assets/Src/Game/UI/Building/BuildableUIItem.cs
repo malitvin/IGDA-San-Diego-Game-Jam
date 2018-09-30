@@ -13,6 +13,7 @@ public class BuildableUIItem : MonoBehaviour {
 
     public Image _hotKeyBackground;
     public RawImage _renderImage;
+    public Image blur;
     private Camera _cam;
     private Camera _renderCam
     {
@@ -25,7 +26,7 @@ public class BuildableUIItem : MonoBehaviour {
     {
         //do cool ass render texture building prototypes (like fortnite) 
         _text.text = blueprint.currencyCost.ToString();
-        _hotKey.text = blueprint.buildHotKey.ToString().Replace("Keypad", "");
+        _hotKey.text = blueprint.buildHotKey.ToString().Replace("Alpha", "");
         RenderTexture texture = new RenderTexture(128, 128, 16, RenderTextureFormat.ARGB32);
         texture.Create();
         _renderCam.targetTexture = texture;
@@ -58,6 +59,7 @@ public class BuildableUIItem : MonoBehaviour {
     public void ToggleItem(bool on)
     {
         _hotKeyBackground.color = on ? Color.green : Color.red;
+        blur.enabled = on;
     }
 
 }

@@ -12,14 +12,18 @@ namespace UI.Building
 {
     public class BuildViewController : BaseController
     {
+        private BuildingSystem _buildingSystem;
         private InventorySystem _inventorySystem;
         private InventoryConfig.UISpawnData _uiSpawnData;
         private BuildConfig _buildConfig;
 
-        private Dictionary<Inventory.Type, BuildCurrencyItem> _inventoryUIItems = new Dictionary<Inventory.Type, BuildCurrencyItem>();
+        private Dictionary<Storeable.Type, BuildCurrencyItem> _inventoryUIItems = new Dictionary<Storeable.Type, BuildCurrencyItem>();
+        private Dictionary<Buildable.TYPE, BuildableUIItem> _buildItems = new Dictionary<Buildable.TYPE, BuildableUIItem>();
+        private BuildableUIItem _currentItem;
 
-        public BuildViewController(InventorySystem inventorySystem, BuildConfig buildConfig)
+        public BuildViewController(BuildingSystem buildingSystem,InventorySystem inventorySystem, BuildConfig buildConfig)
         {
+            _buildingSystem = buildingSystem;
             _inventorySystem = inventorySystem;
             _buildConfig = buildConfig;
             _uiSpawnData = inventorySystem.GetSpawnData();
@@ -41,7 +45,7 @@ namespace UI.Building
 
         private void CreateInventory()
         {
-            foreach (var element in _inventorySystem.GetInventory())
+            foreach (var element in _inventorySystem.GetInventoryMap())
             {
                 BuildCurrencyItem item = GameObject.Instantiate(_uiSpawnData._buildItem, _buildView._inventoryParent.transform, false) as BuildCurrencyItem;
                 item.SetContent(element.Value);
@@ -58,6 +62,29 @@ namespace UI.Building
                 BuildConfig.BuildableBlueprint blueprint = blueprints[i];
                 BuildableUIItem uiItem = GameObject.Instantiate(_uiData._itemPrefabUI, _buildView._buildableParent.transform, false) as BuildableUIItem;
                 uiItem.SetContent(blueprint,i);
+                _buildItems[blueprint.key] = uiItem;
+            }
+            OnBuildTypeChange(_buildingSystem._currentBuildType);
+        }
+
+        public void OnBuildTypeChange(Buildable.TYPE type)
+        {
+            if(_currentItem)
+            {
+                _currentItem.ToggleItem(false);
+            }
+            if(_buildItems.ContainsKey(type))
+            {
+                _currentItem = _buildItems[type];
+                _currentItem.ToggleItem(true);
+            }
+        }
+
+        public void UpdateInventoryUI(Storeable.Type type, int amount)
+        {
+            if(_inventoryUIItems.ContainsKey(type))
+            {
+                _inventoryUIItems[type].SetText(amount);
             }
         }
     }

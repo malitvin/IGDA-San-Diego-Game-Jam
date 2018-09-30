@@ -11,6 +11,11 @@ public class BuildCurrencyItem : MonoBehaviour {
     public void SetContent(InventoryConfig.InventoryItem item)
     {
         _itemSprite.sprite = item.inventoryUISprite;
-        _text.text = item.startAmount.ToString();
+        SetText(item.startAmount);
+    }
+
+    public void SetText(int amount)
+    {
+        _text.text = amount.ToString();
     }
 }

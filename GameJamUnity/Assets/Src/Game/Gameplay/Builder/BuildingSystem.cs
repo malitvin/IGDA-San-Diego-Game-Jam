@@ -30,7 +30,7 @@ namespace Gameplay.Building
         private RaycastHit[] _hitResults = new RaycastHit[5];
 
         private GenericPooler _buildingGenerator;
-        private Buildable.TYPE _currentBuildType;
+        public Buildable.TYPE _currentBuildType;
         private bool _collisionDetectionEnabled;
         private float _buildRechargeRate;
 
@@ -72,12 +72,11 @@ namespace Gameplay.Building
                 _buildingGenerator.InitPool(blueprint.GetKey(), 10, blueprint.prefab);
             }
 
-            //init currenty build type
-            _currentBuildType = _buildConfig.startingBuildType;
-            SetBuildType(_currentBuildType);
-
             //UI
-            _buildViewController = new BuildViewController(_inventorySystem, _buildConfig);
+            _buildViewController = new BuildViewController(this,_inventorySystem, _buildConfig);
+
+            //init currenty build type
+            SetBuildType(_buildConfig.startingBuildType);
 
         }
         #endregion
@@ -97,13 +96,18 @@ namespace Gameplay.Building
 
         public void SetBuildType(Buildable.TYPE type)
         {
+            _currentBuildType = type;
+
             //morph hologram
             BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(type);
             _buildHologram.SetMesh(blueprint.hollogramMesh);
             _buildHologram.SetScale(blueprint.hologramScale);
+            _buildHologram.UpdateHologram(false, _buildConfig.hologramData);
 
             _collisionDetectionEnabled = blueprint.enableCollisionDetection;
             _buildRechargeRate = blueprint.buildRechargeRate;
+
+            _buildViewController.OnBuildTypeChange(type);
         }
 
         #region Update
@@ -137,6 +141,9 @@ namespace Gameplay.Building
             {
                 return;
             }
+            int cost = _buildConfig.GetCost(_currentBuildType);
+            bool canBuy = _inventorySystem.CanBuy(Storeable.Type.Coin,cost);
+
             //Set our hologram position
             Ray ray = _gameplayCam.ScreenPointToRay(Input.mousePosition);
             //IF WE ARE ON THE GAMEBOARD
@@ -154,11 +161,12 @@ namespace Gameplay.Building
                 {
                     Collider[] overlap = Physics.OverlapBox(_buildHologram.GetPosition(), (_buildHologram.GetScale() / 2.1f), Quaternion.identity, _buildConfig._collisionLayerMask);
                     colliding = overlap.Length > 0;
-                    _buildHologram.UpdateHologram(colliding, _buildConfig.hologramData);
                 }
 
+                _buildHologram.UpdateHologram(!colliding && canBuy, _buildConfig.hologramData);
+
                 //TRY TO BUILD
-                if (!colliding && Input.GetKey(KeyCode.Mouse0))
+                if (canBuy && !colliding && Input.GetKey(KeyCode.Mouse0))
                 {
                     //BUILD!
                     BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(_currentBuildType);
@@ -166,6 +174,7 @@ namespace Gameplay.Building
                     building.Build(_buildHologram.GetPosition(), blueprint.buildTime, blueprint.fallHeight, blueprint.buildEaseType);
 
                     _builderRecharging = true;
+                    BuyBuildable(cost);
                 }
             }
         }
@@ -180,6 +189,13 @@ namespace Gameplay.Building
                     SetBuildType(blueprint.key);
                 }
             }
+        }
+
+        private void BuyBuildable(int cost)
+        {
+            Storeable.Type coin = Storeable.Type.Coin;
+            _inventorySystem.Buy(coin, cost);
+            _buildViewController.UpdateInventoryUI(coin, _inventorySystem.GetAmount(coin));
         }
         #endregion
 

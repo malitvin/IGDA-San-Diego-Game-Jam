@@ -173,7 +173,7 @@ Prefab:
     - target: {fileID: 224976028356207358, guid: a8352630b9420564b92f3ea542041fb1,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224976028356207358, guid: a8352630b9420564b92f3ea542041fb1,
         type: 2}
@@ -218,6 +218,31 @@ Prefab:
     - target: {fileID: 114458883536629776, guid: a8352630b9420564b92f3ea542041fb1,
         type: 2}
       propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224338775490646266, guid: a8352630b9420564b92f3ea542041fb1,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224338775490646266, guid: a8352630b9420564b92f3ea542041fb1,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224338775490646266, guid: a8352630b9420564b92f3ea542041fb1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 26.72998
+      objectReference: {fileID: 0}
+    - target: {fileID: 224338775490646266, guid: a8352630b9420564b92f3ea542041fb1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 224338775490646266, guid: a8352630b9420564b92f3ea542041fb1,
+        type: 2}
+      propertyPath: m_Pivot.x
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -375,6 +400,16 @@ Prefab:
     - target: {fileID: 1477630397789618, guid: b88aca2161b24d046a0594933c7b3b37, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224050845593206240, guid: b88aca2161b24d046a0594933c7b3b37,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114833397560001278, guid: b88aca2161b24d046a0594933c7b3b37,
+        type: 2}
+      propertyPath: m_HorizontalFit
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b88aca2161b24d046a0594933c7b3b37, type: 2}

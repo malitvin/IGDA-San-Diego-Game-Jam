@@ -8,6 +8,10 @@ namespace Gameplay.Building
     {
         private Vector3 _setPosition = new Vector3(0, 0, 0);
         private Renderer _renderer;
+        private Renderer _Renderer
+        {
+            get { return _renderer ?? (_renderer = GetComponent<Renderer>()); }
+        }
 
         private MeshFilter _mesh;
         private MeshFilter _meshFilter
@@ -63,9 +67,9 @@ namespace Gameplay.Building
             return GetSize() / 2;
         }
 
-        public void UpdateHologram(bool colliding,BuildConfig.HologramData data)
+        public void UpdateHologram(bool canBuild,BuildConfig.HologramData data)
         {
-            _renderer.material.color = colliding ? data.cantBuildColor : data.buildColor;
+            _Renderer.material.color = canBuild ? data.buildColor : data.cantBuildColor;
         }
     }
 }

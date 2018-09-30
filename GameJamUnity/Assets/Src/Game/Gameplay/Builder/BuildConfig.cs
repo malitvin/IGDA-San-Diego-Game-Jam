@@ -156,6 +156,24 @@ namespace Gameplay.Building
             }
         }
 
+        public int GetCost(Buildable.TYPE type)
+        {
+            if (_buildableLookup.Count == 0)
+            {
+                InitCharacteristics();
+            }
+
+            if (_buildableLookup.ContainsKey(type))
+            {
+                return _buildableLookup[type].currencyCost;
+            }
+            else
+            {
+                Debug.LogWarning("No buildables of type " + type + " found in buildables blueprint");
+                return 0;
+            }
+        }
+
         #endregion
     }
 }
