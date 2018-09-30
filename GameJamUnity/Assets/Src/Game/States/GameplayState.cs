@@ -4,6 +4,7 @@ using GhostGen;
 using DG.Tweening;
 using Zenject;
 using Gameplay.Building;
+using Gameplay.Particles;
 using Gameplay.Inventory;
 
 public class GameplayState : IGameState
@@ -19,6 +20,7 @@ public class GameplayState : IGameState
     private BuildingSystem _buildSystem;
     private InventorySystem _inventorySystem;
     private EnemySystem _enemySystem;
+    private ParticleGOD _particleGod;
 
     private PlayerCombatController playerCombatController;
 
@@ -46,6 +48,7 @@ public class GameplayState : IGameState
         _buildSystem = _diContainer.Resolve<BuildingSystem>();
         _inventorySystem = _diContainer.Resolve<InventorySystem>();
         _enemySystem = _diContainer.Resolve<EnemySystem>();
+        _particleGod = _diContainer.Resolve<ParticleGOD>();
 
         // Get CombatPlayerView
         _playerCombatSystem.isEnabled = true;

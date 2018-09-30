@@ -8,6 +8,7 @@ using System;
 using Common.Pooling;
 using UI.Building;
 using Gameplay.Inventory;
+using Audio;
 
 namespace Gameplay.Building
 {
@@ -108,6 +109,7 @@ namespace Gameplay.Building
             _buildRechargeRate = blueprint.buildRechargeRate;
 
             _buildViewController.OnBuildTypeChange(type);
+            Singleton.instance.audioSystem.PlaySound(SoundBank.Type.BuildSwitch);
         }
 
         #region Update

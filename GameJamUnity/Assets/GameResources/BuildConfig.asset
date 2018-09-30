@@ -44,7 +44,7 @@ MonoBehaviour:
     buildRechargeRate: 0.25
     fallHeight: 15
     buildTime: 0.5
-    buildEaseType: 15
+    buildEaseType: 14
     prefab: {fileID: 114252297097517576, guid: 977d826f9a2529f489ba3879448a3cde, type: 2}
     hollogramMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
     hologramScale: 0.2

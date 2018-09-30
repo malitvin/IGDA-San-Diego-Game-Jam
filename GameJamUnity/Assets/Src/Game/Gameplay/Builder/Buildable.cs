@@ -29,10 +29,21 @@ namespace Gameplay.Building
             get { return _collider ?? (_collider = GetComponent<BoxCollider>()); }
         }
 
+        private Rigidbody _rigid;
+        protected Rigidbody _rigidBody
+        {
+            get { return _rigid ?? (_rigid = GetComponent<Rigidbody>()); }
+        }
+
         public virtual void Build(Vector3 finalPos,float buildTime,int fallheight,Ease easeType)
         {
             Vector3 startPosition = finalPos + (Vector3.up * fallheight);
             transform.position = startPosition;
+        }
+
+        public virtual void RemovePhysics()
+        {
+
         }
     }
 }

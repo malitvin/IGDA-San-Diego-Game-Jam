@@ -35,6 +35,7 @@ public class BuildableUIItem : MonoBehaviour {
         _renderImage.texture = texture;
 
         _prototype = GameObject.Instantiate(blueprint.prefab) as Buildable;
+        _prototype.RemovePhysics();
         _prototype.gameObject.SetActive(true);
         _prototype.transform.parent = _renderCam.transform;
         _prototype.gameObject.layer = 10;

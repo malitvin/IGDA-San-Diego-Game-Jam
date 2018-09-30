@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 using GhostGen;
+using Gameplay.Particles;
+using Audio;
 
 
 public class Singleton : IInitializable, ILateDisposable
@@ -14,6 +16,9 @@ public class Singleton : IInitializable, ILateDisposable
 
     public GuiManager           gui                 { get; private set; }
     public NetworkManager       networkManager      { get; private set; }
+
+    public ParticleGOD          particleGod         { get; private set; }
+    public AudioSystem          audioSystem         { get; private set; }
 
 
     //[Inject(Id = GameInstaller.GLOBAL_DISPATCHER)]
@@ -36,7 +41,9 @@ public class Singleton : IInitializable, ILateDisposable
         IEventDispatcher eventDispatcher,
         GameConfig pGameConfig,
         NetworkManager pNetworkManager,
-        GuiManager guiManager)
+        GuiManager guiManager,
+        ParticleGOD pparticleGod,
+        AudioSystem pAudioSystem)
     {
         diContainer = container;
         sessionFlags = pSessionFlags;
@@ -45,6 +52,8 @@ public class Singleton : IInitializable, ILateDisposable
         notificationDispatcher = eventDispatcher;
         networkManager = pNetworkManager;
         gui = guiManager;
+        particleGod = pparticleGod;
+        audioSystem = pAudioSystem;
 
         _initialize();
         _instance = this;

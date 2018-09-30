@@ -1,0 +1,14 @@
+﻿
+namespace Audio
+{
+    public class SoundBank
+    {
+        //UI Sound Enum
+        public enum Type
+        {
+            MonsterRoar,
+            HelixBomb,
+            BuildSwitch
+        }
+    }
+}
