@@ -80,6 +80,11 @@ public class EnemyController
 
     public void RefreshTarget(Transform target = null)
     {
+        if(isDead)
+        {
+            return;
+        }
+
         if(target != null)
         {
             _target = target;

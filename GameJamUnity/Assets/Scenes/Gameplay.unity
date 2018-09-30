@@ -192,48 +192,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4566358486217202, guid: 2ae42117a4e71404ea81ab999d3d746b,
     type: 2}
   m_PrefabInternal: {fileID: 276317832}
---- !u!1001 &140289649
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4590420508646048, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 4.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 4590420508646048, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.581
-      objectReference: {fileID: 0}
-    - target: {fileID: 4590420508646048, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -7.1792784
-      objectReference: {fileID: 0}
-    - target: {fileID: 4590420508646048, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4590420508646048, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4590420508646048, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4590420508646048, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4590420508646048, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 854dc938541518541b1fe41312dcd961, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &204254640
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +435,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 339939050}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 

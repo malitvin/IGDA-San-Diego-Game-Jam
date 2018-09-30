@@ -7,6 +7,7 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
     private GameplayResources _gameplayResources;
     private GameConfig _gameConfig;
     private GameplayCamera _gameplayCam;
+    private CombatCamera _combatCamera;
     private PlayerCombatController _playerCombatController;
 
     private RaycastHit[] _hitResults = new RaycastHit[5];
@@ -23,10 +24,12 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         string[] list = { "BoardLayer" };
         _boardLayer = LayerMask.GetMask(list);
 
-        _gameplayCam = GameObject.FindObjectOfType<GameplayCamera>();
-
         PlayerCombatView view = GameObject.Instantiate<PlayerCombatView>(_gameplayResources.playerCombatView);
         _playerCombatController = new PlayerCombatController(view, _gameConfig.playerConfig);
+
+        _gameplayCam = GameObject.FindObjectOfType<GameplayCamera>();
+        _combatCamera = new CombatCamera(_gameplayCam, _playerCombatController.transform);
+
         isEnabled = false;
     }
 
@@ -45,6 +48,13 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
                     Singleton.instance.particleGod.GenerateParticle(
                         Gameplay.Particles.Particle.Type.Escape, 
                         _playerCombatController.transform.position);
+
+                    Singleton.instance.audioSystem.PlaySound(Audio.SoundBank.Type.Teleport);
+                }
+
+                if(_combatCamera != null)
+                {
+                    _combatCamera.isEnabled = value;
                 }
             }
         }
@@ -70,6 +80,11 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
                 _playerCombatController.FireWeapon(aimPos);
             }
             _playerCombatController.Tick(deltaTime);
+        }
+
+        if(_combatCamera != null)
+        {
+            _combatCamera.Tick(deltaTime);
         }
     }
 

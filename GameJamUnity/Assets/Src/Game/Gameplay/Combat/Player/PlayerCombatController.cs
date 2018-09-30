@@ -98,7 +98,6 @@ public class PlayerCombatController
 
             DamageResult dResult = target.TakeDamage(this, _config.weapon.damage);
             _dispatcher.DispatchEvent(GameplayEventType.DAMAGE_TAKEN, false, dResult);
-            Debug.Log("Attacking: " + target);
 
             if(target.physbody)
             {
