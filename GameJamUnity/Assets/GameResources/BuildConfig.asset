@@ -14,7 +14,7 @@ MonoBehaviour:
   startingBuildType: 0
   _collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8193
   _boardTag: GameBoard
   buildHologram: {fileID: 114279590701294756, guid: 7954fa13cccd8eb429e38f47323655e1,
     type: 2}

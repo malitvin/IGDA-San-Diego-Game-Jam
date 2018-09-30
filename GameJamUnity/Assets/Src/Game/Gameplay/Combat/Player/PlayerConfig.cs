@@ -17,6 +17,7 @@ public class PlayerConfig : ScriptableObject
     {
         public float bulletSpeed;
         public float fireCooldown;
+        public float damage;
     }
 
     public Movement movement;

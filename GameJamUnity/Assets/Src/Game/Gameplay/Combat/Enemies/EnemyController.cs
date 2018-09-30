@@ -12,14 +12,23 @@ public class EnemyController
     private EnemyDef _def;
     private float _attackTimer;
     private IEventDispatcher _dispatcher;
+    private int _enemyLayer;
 
     public EnemyController(EnemyDef def, EnemyView view, Transform target)
     {
         _def = def;
         _view = view;
+        _view.controller = this;
         _agent = view.agent;
         _target = target;
         _dispatcher = Singleton.instance.notificationDispatcher;
+        string[] maskList = { "Enemy" };
+        _enemyLayer = LayerMask.GetMask(maskList);
+    }
+
+    public void Init()
+    {
+        health = _def.startHealth;
     }
 
     public Vector3 position
@@ -32,7 +41,30 @@ public class EnemyController
     {
         set { _agent.speed = value; }
     }
+
+    public float health { get; set; }
     
+    public bool isDead
+    {
+        get { return health <= 0; }
+    }
+
+    public DamageResult TakeDamage(object attacker, float damage)
+    {
+        DamageResult result = new DamageResult();
+        result.prevHealth = health;
+        health = Mathf.Max(health - damage, 0.0f);
+        result.newHealth = health;
+        result.victim = this;
+        result.attacker = attacker;
+
+        if(isDead && result.prevHealth > 0.0f)
+        {
+            _view.Die();
+        }
+        return result;
+    }
+
     public void Tick(float deltaTime)
     {
         _attackTimer -= deltaTime;
@@ -69,7 +101,7 @@ public class EnemyController
             _view.DebugDraw(position, 0.75f);
         }
 
-        Collider[] targets = Physics.OverlapSphere(position, 0.75f);//, _def.targetMask);
+        Collider[] targets = Physics.OverlapSphere(position, 0.75f, _enemyLayer);//, _def.targetMask);
         if(targets != null)
         {
             for(int i = 0; i < targets.Length; ++i)
@@ -81,7 +113,7 @@ public class EnemyController
                 {
                     continue;
                 }
-
+                
                 Vector3 direction = (targetXform.position - _agent.transform.position).normalized;
                 Vector3 force = direction * 10.0f;
                 

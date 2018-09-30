@@ -24,6 +24,7 @@ public class EnemyDef
     public Movement movement;
     public Attack attack;
     public LayerMask targetMask;
+    public float startHealth;
 }
 
 

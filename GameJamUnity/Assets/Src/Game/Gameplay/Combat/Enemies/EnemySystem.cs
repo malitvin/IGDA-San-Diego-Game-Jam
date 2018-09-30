@@ -12,7 +12,7 @@ public class EnemySystem : GhostGen.EventDispatcher
 
     private GenericPooler _enemyPool;
     private List<EnemyController> _enemyList = new List<EnemyController>();
-    private Dictionary<int, EnemyView> _lookup = new Dictionary<int, EnemyView>();
+    private Dictionary<int, EnemyController> _lookup = new Dictionary<int, EnemyController>();
 
     private EnemyDef _enemyDef;
 
@@ -48,12 +48,20 @@ public class EnemySystem : GhostGen.EventDispatcher
     {
         EnemyView enemyView = _enemyPool.GetPooledObject(ENEMY) as EnemyView;
         int id = enemyView.gameObject.GetInstanceID();
+        EnemyController enemy;
         if (!_lookup.ContainsKey(id))
         {
-            EnemyController enemy = new EnemyController(_enemyDef, enemyView, target);
+            enemy = new EnemyController(_enemyDef, enemyView, target);
+
             _enemyList.Add(enemy);
-            _lookup.Add(id, enemyView);
+            _lookup.Add(id, enemy);
         }
+        else
+        {
+            enemy = _lookup[id];
+        }
+
+        enemy.Init();
         enemyView.transform.position = position;
     }
 

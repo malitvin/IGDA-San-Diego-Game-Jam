@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GhostGen;
 
 public class PlayerCombatController
 {
@@ -13,7 +14,8 @@ public class PlayerCombatController
     private float _fireTimer;
     private RaycastHit[] rayHits = new RaycastHit[10];
     private bool _isEnabled;
-    
+    private IEventDispatcher _dispatcher;
+
     public PlayerCombatController(PlayerCombatView view, PlayerConfig config)
     {
         health = config.startHealth;
@@ -24,6 +26,8 @@ public class PlayerCombatController
 
         _physBody.drag = _config.movement.drag;
         _moveDirection = Vector3.zero;
+
+        _dispatcher = Singleton.instance.notificationDispatcher;
     }
     
     public float health { get; set; }
@@ -67,7 +71,7 @@ public class PlayerCombatController
 
         if(isDead && result.prevHealth > 0.0f)
         {
-
+            //Do sumthin'
         }
         return result;
     }
@@ -91,7 +95,10 @@ public class PlayerCombatController
         if(getTarget(ray, out hit, out target))
         {
             Vector3 force = viewDir * 110.0f;
-            target.TakeDamage(this, 5.0f);
+
+            DamageResult dResult = target.TakeDamage(this, _config.weapon.damage);
+            _dispatcher.DispatchEvent(GameplayEventType.DAMAGE_TAKEN, false, dResult);
+
             if(target.physbody)
             {
                 target.physbody.AddForceAtPosition(force, hit.point, ForceMode.Impulse);
