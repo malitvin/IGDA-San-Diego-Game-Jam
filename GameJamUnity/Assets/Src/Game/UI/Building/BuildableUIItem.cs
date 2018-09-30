@@ -6,7 +6,8 @@ using Gameplay.Building;
 
 using System.Collections;
 
-public class BuildableUIItem : MonoBehaviour {
+public class BuildableUIItem : MonoBehaviour
+{
 
     public TextMeshProUGUI _text;
     public TextMeshProUGUI _hotKey;
@@ -22,7 +23,7 @@ public class BuildableUIItem : MonoBehaviour {
 
     private Buildable _prototype;
 
-    public void SetContent(BuildConfig.BuildableBlueprint blueprint,int positionOffset)
+    public void SetContent(BuildConfig.BuildableBlueprint blueprint, int positionOffset)
     {
         //do cool ass render texture building prototypes (like fortnite) 
         _text.text = blueprint.currencyCost.ToString();
@@ -38,12 +39,31 @@ public class BuildableUIItem : MonoBehaviour {
         _prototype.RemovePhysics();
         _prototype.gameObject.SetActive(true);
         _prototype.transform.parent = _renderCam.transform;
-        _prototype.gameObject.layer = 10;
+        SetLayerRecursively(_prototype.gameObject, 10);
         _prototype.transform.position = Vector3.zero;
 
         ToggleItem(false);
 
         StartCoroutine(Refresh());
+    }
+
+    private void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (null == obj)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (null == child)
+            {
+                continue;
+            }
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
 
     private IEnumerator Refresh()
@@ -54,7 +74,7 @@ public class BuildableUIItem : MonoBehaviour {
 
     private void Update()
     {
-        _prototype.transform.eulerAngles += new Vector3(12 * Time.deltaTime, 12 * Time.deltaTime, 0);
+        _prototype.transform.eulerAngles += new Vector3(0, 18 * Time.deltaTime, 0);
     }
 
     public void ToggleItem(bool on)

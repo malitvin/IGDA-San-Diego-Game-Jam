@@ -57,6 +57,7 @@ namespace Gameplay.Building
             //Prefab
             public Buildable prefab;
             public Mesh hollogramMesh;
+            public Material hologramMat;
             [Range(0.1f,5)]
             public float hologramScale;
         }

@@ -34,6 +34,7 @@ MonoBehaviour:
     buildEaseType: 30
     prefab: {fileID: 114153375829066002, guid: c4ba12df166c1cf459683596f8534ca8, type: 2}
     hollogramMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    hologramMat: {fileID: 2100000, guid: ca697b03c9b6b6f4780de54b45289546, type: 2}
     hologramScale: 1
   - buildHotKey: 50
     displayName: Helix Bomb
@@ -47,6 +48,7 @@ MonoBehaviour:
     buildEaseType: 2
     prefab: {fileID: 114252297097517576, guid: 977d826f9a2529f489ba3879448a3cde, type: 2}
     hollogramMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+    hologramMat: {fileID: 2100000, guid: 0b0995e23113a014c92ff46354d53c08, type: 2}
     hologramScale: 0.2
   - buildHotKey: 51
     displayName: Explosive Barrel
@@ -60,6 +62,7 @@ MonoBehaviour:
     buildEaseType: 34
     prefab: {fileID: 114827414461211890, guid: d97882d0c75578f40abdafa6c7f9cd65, type: 2}
     hollogramMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+    hologramMat: {fileID: 2100000, guid: ca697b03c9b6b6f4780de54b45289546, type: 2}
     hologramScale: 1
   _uiData:
     _itemPrefabUI: {fileID: 114989327213725004, guid: 343b30137c345b742918aa6260d64e7a,

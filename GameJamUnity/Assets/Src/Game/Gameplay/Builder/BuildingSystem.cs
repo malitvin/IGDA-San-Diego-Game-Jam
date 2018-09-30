@@ -108,6 +108,7 @@ namespace Gameplay.Building
             //morph hologram
             BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(type);
             _buildHologram.SetMesh(blueprint.hollogramMesh);
+            _buildHologram.SetMaterial(blueprint.hologramMat);
             _buildHologram.SetScale(blueprint.hologramScale);
             _buildHologram.UpdateHologram(false, _buildConfig.hologramData);
 

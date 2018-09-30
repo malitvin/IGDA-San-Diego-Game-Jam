@@ -42,6 +42,11 @@ namespace Gameplay.Building
             }
         }
 
+        public void SetMaterial(Material mat)
+        {
+            _Renderer.material = mat;
+        }
+
         public Vector3 GetPosition()
         {
             return transform.position;
