@@ -61,3 +61,10 @@ MonoBehaviour:
     characteristics:
       autoDestruct: 1
       lifeTime: 2
+  - displayName: Parent
+    type: 7
+    particlePrefab: {fileID: 114152106137421788, guid: fd659f9bc0574d245a197a84e9d0ab87,
+      type: 2}
+    characteristics:
+      autoDestruct: 0
+      lifeTime: 1

@@ -16,3 +16,5 @@ MonoBehaviour:
     type: 2}
   basicEnemyView: {fileID: 114602027809904032, guid: ec4a7d88e985cb24db42375e63078472,
     type: 2}
+  parentController: {fileID: 114199908592612690, guid: fffbd19b2c171f94a942feb1a02ce75a,
+    type: 2}

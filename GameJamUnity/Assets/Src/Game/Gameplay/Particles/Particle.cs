@@ -14,7 +14,8 @@ namespace Gameplay.Particles
             BuildingGlow,
             Escape,
             EnemyDeath,
-            Break
+            Break,
+            Parent
         }
 
         public struct SpawnData

@@ -17,6 +17,8 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
     private int _boardLayer;
     private bool _isEnabled;
 
+    private ParentController _parentController;
+
     public PlayerCombatSystem(
         GameplayResources gameplayResources,
         GameConfig gameConfig)
@@ -33,7 +35,7 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
 
         _gameplayCam = GameObject.FindObjectOfType<GameplayCamera>();
         _combatCamera = new CombatCamera(_gameplayCam, _playerCombatController.transform);
-
+        _parentController = GameObject.Instantiate<ParentController>(_gameplayResources.parentController);
         isEnabled = false;
     }
 
@@ -149,7 +151,6 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         DamageResult result = e.data as DamageResult;
         if(result != null)
         {
-            Debug.Log("SET PLAYER HEALTH TO " + result.newHealth);
             _hudController.OnPlayerHealthChange(result.newHealth);
         }
     }
