@@ -13,18 +13,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - spawnDistance: 60
-    waveStartWaitTime: 5
+    waveStartWaitTime: 0
     waves:
     - WAVE: '-----------------------------------------------------------------------'
       enemyCount: 1
       minSpawnIntervalTime: 0.5
       maxSpawnIntervalTime: 1
-      waveCompleteWaitTime: 3
+      waveCompleteWaitTime: 1
     - WAVE: '-----------------------------------------------------------------------'
-      enemyCount: 50
+      enemyCount: 2
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 1.5
-      waveCompleteWaitTime: 4
+      waveCompleteWaitTime: 2
     - WAVE: '-----------------------------------------------------------------------'
       enemyCount: 100
       minSpawnIntervalTime: 1
