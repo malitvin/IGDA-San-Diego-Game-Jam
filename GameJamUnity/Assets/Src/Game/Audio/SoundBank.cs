@@ -8,7 +8,8 @@ namespace Audio
         {
             MonsterRoar,
             HelixBomb,
-            BuildSwitch
+            BuildSwitch,
+            Teleport
         }
     }
 }
