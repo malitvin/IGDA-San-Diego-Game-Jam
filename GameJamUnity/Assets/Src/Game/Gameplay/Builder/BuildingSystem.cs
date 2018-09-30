@@ -90,14 +90,14 @@ namespace Gameplay.Building
 
         public void EnableSystem(bool on)
         {
-            _buildModeEnabled = on;
-            if (on)
+            if(_buildModeEnabled != on)
             {
-
-            }
-            else
-            {
-                _buildViewController.RemoveView();
+                _buildModeEnabled = on;
+                _buildViewController.SetVisible(on);
+                if(_buildHologram != null)
+                {
+                    _buildHologram.gameObject.SetActive(on);
+                }
             }
         }
 
@@ -183,7 +183,7 @@ namespace Gameplay.Building
                     if(colliding)
                     {
                         Debug.Log(overlap[0].transform.name);
-                }
+                    }
                 }
 
 

@@ -35,10 +35,13 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         get { return _isEnabled; }
         set
         {
-            _isEnabled = value;
-            if(_playerCombatController != null)
+            if(_isEnabled != value)
             {
-                _playerCombatController.isEnabled = value;
+                _isEnabled = value;
+                if(_playerCombatController != null)
+                {
+                    _playerCombatController.isEnabled = value;
+                }
             }
         }
     }

@@ -14,7 +14,7 @@ MonoBehaviour:
   startingBuildType: 0
   _collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 1
   _boardTag: GameBoard
   buildHologram: {fileID: 114279590701294756, guid: 7954fa13cccd8eb429e38f47323655e1,
     type: 2}
@@ -51,7 +51,7 @@ MonoBehaviour:
     hollogramMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
     hologramMat: {fileID: 2100000, guid: 0b0995e23113a014c92ff46354d53c08, type: 2}
     hologramScale: 0.2
-    hologramOffset: 0.1
+    hologramOffset: 0.9
   - buildHotKey: 51
     displayName: Explosive Barrel
     enableCollisionDetection: 1

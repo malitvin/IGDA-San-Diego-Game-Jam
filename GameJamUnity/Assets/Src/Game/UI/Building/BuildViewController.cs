@@ -20,6 +20,7 @@ namespace UI.Building
         private Dictionary<Storeable.Type, BuildCurrencyItem> _inventoryUIItems = new Dictionary<Storeable.Type, BuildCurrencyItem>();
         private Dictionary<Buildable.TYPE, BuildableUIItem> _buildItems = new Dictionary<Buildable.TYPE, BuildableUIItem>();
         private BuildableUIItem _currentItem;
+        private bool _isVisible;
 
         public BuildViewController(BuildingSystem buildingSystem,InventorySystem inventorySystem, BuildConfig buildConfig)
         {
@@ -31,10 +32,19 @@ namespace UI.Building
             viewFactory.CreateAsync<BuildView>("GUI/BuildView", (v) =>
             {
                 view = v;
+                SetVisible(_isVisible);
                 OnCreationComplete();
             });
         }
 
+        public void SetVisible(bool isVisible)
+        {
+            _isVisible = isVisible;
+            if(_buildView)
+            {
+                _buildView.SetVisible(isVisible);
+            }
+        }
         private BuildView _buildView { get { return view as BuildView;} }
 
         private void OnCreationComplete()

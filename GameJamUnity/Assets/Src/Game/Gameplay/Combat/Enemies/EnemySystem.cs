@@ -25,14 +25,14 @@ public class EnemySystem : GhostGen.EventDispatcher
         //Create a 
         for(int i = 0; i < 10; ++i)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
+            Vector3 spawnPos = new Vector3(Random.Range(-40, 40), 0, Random.Range(-40, 40));
             EnemyController enemy = AddEnemy(testDef, _playerController.transform, spawnPos);
             enemy.speed = Random.Range(2.3f, 5.0f);
         }
     }
     public EnemyController AddEnemy(EnemyDef def, Transform target, Vector3 position)
     {
-        EnemyView enemyView = GameObject.Instantiate(_gameplayResources.basicEnemyView);
+        EnemyView enemyView = GameObject.Instantiate(_gameplayResources.basicEnemyView, position, Quaternion.identity);
         EnemyController enemy = new EnemyController(def, enemyView, target);
         _enemyList.Add(enemy);
         return enemy;

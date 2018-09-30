@@ -43,8 +43,8 @@ public class BuildableUIItem : MonoBehaviour
         _prototype.transform.position = Vector3.zero;
 
         ToggleItem(false);
-
-        StartCoroutine(Refresh());
+        
+        Singleton.instance.gui.screenFader.StartCoroutine(Refresh());
     }
 
     private void SetLayerRecursively(GameObject obj, int newLayer)

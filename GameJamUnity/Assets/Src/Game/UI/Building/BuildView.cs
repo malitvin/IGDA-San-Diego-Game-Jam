@@ -8,5 +8,10 @@ namespace UI.Building
         public HorizontalLayoutGroup _buildableParent;
         public HorizontalLayoutGroup _inventoryParent;
 
+        public void SetVisible(bool isVisible)
+        {
+            gameObject.SetActive(isVisible);
+        }
+
     }
 }

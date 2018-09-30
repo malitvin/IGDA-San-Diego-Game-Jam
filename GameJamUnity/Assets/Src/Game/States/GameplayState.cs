@@ -9,6 +9,14 @@ using Gameplay.Inventory;
 
 public class GameplayState : IGameState
 {
+    public enum GameMode
+    {
+        NONE,
+
+        BUILD,
+        COMBAT
+    }
+
     private GameStateMachine<JameStateType> _gameStateMachine;
     private GuiManager _gui;
     private GameplayResources _gameplayResources;
@@ -21,6 +29,7 @@ public class GameplayState : IGameState
     private InventorySystem _inventorySystem;
     private EnemySystem _enemySystem;
     private ParticleGOD _particleGod;
+    private GameMode _gameMode;
 
     private PlayerCombatController playerCombatController;
 
@@ -44,6 +53,8 @@ public class GameplayState : IGameState
 
     public void Init(Hashtable changeStateData)
 	{
+        _gameMode = GameMode.COMBAT;
+
         _playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
         _buildSystem = _diContainer.Resolve<BuildingSystem>();
         _inventorySystem = _diContainer.Resolve<InventorySystem>();
@@ -51,7 +62,7 @@ public class GameplayState : IGameState
         _particleGod = _diContainer.Resolve<ParticleGOD>();
 
         // Get CombatPlayerView
-        _playerCombatSystem.isEnabled = true;
+        //_playerCombatSystem.isEnabled = true;
         _dispatcher.AddListener(GameplayEventType.DAMAGE_TAKEN, onDamageTaken);
     }
     
@@ -68,6 +79,22 @@ public class GameplayState : IGameState
         if(_enemySystem != null)
         {
             _enemySystem.Tick(p_deltaTime);
+        }
+
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            _gameMode = _gameMode == GameMode.COMBAT ? GameMode.BUILD : GameMode.COMBAT;
+        }
+
+        if(_gameMode == GameMode.COMBAT)
+        {
+            _playerCombatSystem.isEnabled = true;
+            _buildSystem.EnableSystem(false);
+        }
+        else if(_gameMode == GameMode.BUILD)
+        {
+            _playerCombatSystem.isEnabled = false;
+            _buildSystem.EnableSystem(true);
         }
     }
 
