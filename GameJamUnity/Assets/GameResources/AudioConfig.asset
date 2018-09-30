@@ -11,4 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d40aff17fe88e46bd1870a9cc0629b, type: 3}
   m_Name: AudioConfig
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: Explosion
+    clip: {fileID: 8300000, guid: d4d499854af44034a83b779aa4f6f5fa, type: 3}
+    volume: 1
+    spatialBlend: 0
+    pitch: 1
+    group: {fileID: 0}
+    key: 1
+  - name: Build Switch
+    clip: {fileID: 8300000, guid: 3016b0cacd517a448877c8acadaf3d60, type: 3}
+    volume: 0.2
+    spatialBlend: 0
+    pitch: 1
+    group: {fileID: 0}
+    key: 2

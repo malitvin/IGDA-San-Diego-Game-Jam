@@ -67,6 +67,24 @@ namespace Gameplay.Building
             public BuildableUIItem _itemPrefabUI;
         }
 
+        [System.Serializable]
+        public class BuildCameraData
+        {
+            public int edgeLimit;
+            public float drag;
+            public float speed;
+            public WorldLimit worldLimit;
+        }
+
+        [System.Serializable]
+        public class WorldLimit
+        {
+            public int x;
+            public int y;
+            public int width;
+            public int height;
+        }
+
         public Buildable.TYPE startingBuildType;
 
         public LayerMask _collisionLayerMask;
@@ -76,6 +94,7 @@ namespace Gameplay.Building
 
         public BuildableBlueprint[] buildables;
         public BuildUIData _uiData;
+        public BuildCameraData _buildCamData;
 
         #region Quick buildable lookup by type
 

@@ -20,7 +20,7 @@ namespace Gameplay.Building
         private bool _builderRecharging;
 
         //Components
-        private Camera _gameplayCam;
+        private GameplayCamera _gameplayCam;
         private GameBoard _gameBoard;
         private BuildHologram _buildHologram;
 
@@ -43,11 +43,14 @@ namespace Gameplay.Building
         private InventorySystem _inventorySystem;
         private BuildViewController _buildViewController;
 
+        //cam
+        private BuildCam _buildCam;
+
         #region Init
         public BuildingSystem(GameConfig gameConfig, InventorySystem inventorySystem)
         {
             _inventorySystem = inventorySystem;
-            _gameplayCam = UnityEngine.Object.FindObjectOfType<GameplayCamera>().camera;
+            _gameplayCam = UnityEngine.Object.FindObjectOfType<GameplayCamera>();
             _buildConfig = gameConfig.bulidConfig;
             _buildables = _buildConfig.buildables;
             _gameBoard = GameObject.FindObjectOfType<GameBoard>();
@@ -75,6 +78,9 @@ namespace Gameplay.Building
 
             //UI
             _buildViewController = new BuildViewController(this,_inventorySystem, _buildConfig);
+
+            //Build Cam
+            _buildCam = new BuildCam(_buildConfig,_gameplayCam);
 
             //init currenty build type
             SetBuildType(_buildConfig.startingBuildType);
@@ -120,6 +126,15 @@ namespace Gameplay.Building
                 GetChangeBuildTypeInput();
                 UpdateBuildRecharge(deltaTime);
                 BuildCoreLoop();
+                BuildCameraMovement();
+            }
+        }
+
+        public void FixedTick(float deltaTime)
+        {
+            if (_buildModeEnabled)
+            {
+                BuildCameraMovementFixed();
             }
         }
 
@@ -147,7 +162,7 @@ namespace Gameplay.Building
             bool canBuy = _inventorySystem.CanBuy(Storeable.Type.Coin,cost);
 
             //Set our hologram position
-            Ray ray = _gameplayCam.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _gameplayCam.camera.ScreenPointToRay(Input.mousePosition);
             //IF WE ARE ON THE GAMEBOARD
             if (Physics.RaycastNonAlloc(ray, _hitResults, 100, _gameBoard.GetLayer()) > 0)
             {
@@ -193,6 +208,19 @@ namespace Gameplay.Building
             }
         }
 
+        private void BuildCameraMovement()
+        {
+            _buildCam.OnUpdate();
+        }
+
+        private void BuildCameraMovementFixed()
+        {
+            _buildCam.OnFixedUpdate();
+        }
+        #endregion
+
+
+        #region Buy Buildable
         private void BuyBuildable(int cost)
         {
             Storeable.Type coin = Storeable.Type.Coin;

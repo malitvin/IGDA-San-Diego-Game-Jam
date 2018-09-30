@@ -72,6 +72,10 @@ public class GameplayState : IGameState
         {
             _playerCombatSystem.FixedTick(fixedDeltaTime);
         }
+        if(_buildSystem != null)
+        {
+            _buildSystem.FixedTick(fixedDeltaTime);
+        }
     }
 
     public void Exit( )

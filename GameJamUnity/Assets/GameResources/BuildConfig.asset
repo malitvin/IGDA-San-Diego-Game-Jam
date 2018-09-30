@@ -43,8 +43,8 @@ MonoBehaviour:
     buildSpace: 1
     buildRechargeRate: 0.25
     fallHeight: 15
-    buildTime: 0.5
-    buildEaseType: 14
+    buildTime: 0.15
+    buildEaseType: 2
     prefab: {fileID: 114252297097517576, guid: 977d826f9a2529f489ba3879448a3cde, type: 2}
     hollogramMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
     hologramScale: 0.2
@@ -64,3 +64,12 @@ MonoBehaviour:
   _uiData:
     _itemPrefabUI: {fileID: 114989327213725004, guid: 343b30137c345b742918aa6260d64e7a,
       type: 2}
+  _buildCamData:
+    edgeLimit: 10
+    drag: 15
+    speed: 15000
+    worldLimit:
+      x: 0
+      y: 0
+      width: 0
+      height: 0
