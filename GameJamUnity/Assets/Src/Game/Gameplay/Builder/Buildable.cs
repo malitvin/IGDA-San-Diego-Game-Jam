@@ -35,8 +35,11 @@ namespace Gameplay.Building
             get { return _rigid ?? (_rigid = GetComponent<Rigidbody>()); }
         }
 
-        public virtual void Build(Vector3 finalPos,float buildTime,int fallheight,Ease easeType)
+        protected BuildConfig.BuildableBlueprint _blueprint;
+
+        public virtual void Build(Vector3 finalPos,float buildTime,int fallheight,Ease easeType, BuildConfig.BuildableBlueprint blueprint)
         {
+            _blueprint = blueprint;
             Vector3 startPosition = finalPos + (Vector3.up * fallheight);
             transform.position = startPosition;
         }

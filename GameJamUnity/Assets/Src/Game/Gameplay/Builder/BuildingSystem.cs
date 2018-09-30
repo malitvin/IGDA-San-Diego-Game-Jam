@@ -196,7 +196,7 @@ namespace Gameplay.Building
                     //BUILD!
                     BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(_currentBuildType);
                     Buildable building = _buildingGenerator.GetPooledObject(blueprint.GetKey()) as Buildable;
-                    building.Build(_buildHologram.GetPosition(), blueprint.buildTime, blueprint.fallHeight, blueprint.buildEaseType);
+                    building.Build(_buildHologram.GetPosition(), blueprint.buildTime, blueprint.fallHeight, blueprint.buildEaseType, blueprint);
 
                     _builderRecharging = true;
                     BuyBuildable(cost);

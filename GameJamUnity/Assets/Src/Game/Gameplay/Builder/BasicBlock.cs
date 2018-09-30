@@ -9,13 +9,13 @@ namespace Gameplay.Building
     {
         private Tween _damageShake;
         private Vector3 glowVector = new Vector3(0, 0.5f, 0);
-        public override void Build(Vector3 finalPos, float buildTime, int fallheight, Ease easeType)
+        public override void Build(Vector3 finalPos, float buildTime, int fallheight, Ease easeType, BuildConfig.BuildableBlueprint blueprint)
         {
             health = 8;
 
             Sequence s = DOTween.Sequence();
 
-            base.Build(finalPos, buildTime, fallheight, easeType);
+            base.Build(finalPos, buildTime, fallheight, easeType, blueprint);
             Tween t = transform.DOMove(finalPos, buildTime).SetEase(easeType).OnUpdate(() =>
             {
                 Vector3 center = _boxCollider.center;

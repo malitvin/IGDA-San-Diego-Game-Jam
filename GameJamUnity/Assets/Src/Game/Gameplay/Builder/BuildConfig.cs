@@ -29,6 +29,8 @@ namespace Gameplay.Building
             public string displayName;
             public bool enableCollisionDetection;
             public int currencyCost;
+            public float explodeRadius;
+            public float damage;
             public Buildable.TYPE key;
             [Tooltip("Build space in terms of sea level At is basically 0")]
             public Buildable.BuildSpace buildSpace;
