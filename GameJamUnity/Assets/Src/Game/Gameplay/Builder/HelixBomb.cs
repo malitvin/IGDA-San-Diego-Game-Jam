@@ -19,17 +19,17 @@ namespace Gameplay.Building
 
             Tween t = transform.DOMove(finalPos, buildTime).SetEase(easeType).OnComplete(() =>
             {
-                ////applyDamage(finalPos);
-
+                DamageUtil.ApplyExplosionDamage(this, finalPos, _blueprint.explodeRadius, _blueprint.damage, _explosionMask, ref _cachedColliders);
+                
                 Singleton.instance.particleGod.GenerateParticle(Particle.Type.HelixBomb, finalPos);
                 Singleton.instance.audioSystem.PlaySound(SoundBank.Type.HelixBomb);
                 RemoveFromPool();
             });
         }
 
-        private void applyDamage(Vector3 epicenter)
+        private void applyDamage(Vector3 epicenter, float radius)
         {
-            int count = Physics.OverlapSphereNonAlloc(epicenter, _blueprint.explodeRadius, _cachedColliders, _explosionMask);
+            int count = Physics.OverlapSphereNonAlloc(epicenter, radius, _cachedColliders, _explosionMask);
             for(int i = 0; i < count; ++i)
             {
                 if(i >= _cachedColliders.Length)
@@ -37,12 +37,20 @@ namespace Gameplay.Building
                     break;
                 }
 
-                IDamageable damageable = _cachedColliders[i].GetComponent<IDamageable>();
+                Collider collider = _cachedColliders[i];
+                IDamageable damageable = collider.GetComponent<IDamageable>();
                 if(damageable != null)
                 {
+                    float distMod = radius / Mathf.Clamp(Vector3.Distance(epicenter, collider.transform.position), 0.01f, radius);
+                    float useDamage = _blueprint.damage * distMod;
                     damageable.TakeDamage(this, _blueprint.damage);
-                }
+                    Rigidbody physBod = damageable.physbody;
 
+                    if(physBod != null)
+                    {
+                        physBod.AddExplosionForce(100.0f, epicenter, 20.0f);
+                    }
+                }
             }
         }
     }
