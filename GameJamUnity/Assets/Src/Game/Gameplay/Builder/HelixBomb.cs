@@ -12,7 +12,7 @@ namespace Gameplay.Building
             base.Build(finalPos, buildTime, fallheight, easeType);
             Tween t = transform.DOMove(finalPos, buildTime).SetEase(easeType).OnComplete(() =>
             {
-                Singleton.instance.particleGod.GenerateParticle(Particle.Type.BaseExplosion, finalPos);
+                Singleton.instance.particleGod.GenerateParticle(Particle.Type.HelixBomb, finalPos);
                 RemoveFromPool();
             });
         }

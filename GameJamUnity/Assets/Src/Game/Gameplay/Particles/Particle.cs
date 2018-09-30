@@ -8,7 +8,10 @@ namespace Gameplay.Particles
         public enum Type
         {
             //basic impact
-            BaseExplosion
+            BaseExplosion,
+            BuildZone,
+            HelixBomb,
+            BuildingGlow
         }
 
         public struct SpawnData

@@ -18,7 +18,7 @@ namespace Gameplay.Particles
             _characteristics = characteristics;
 
             //set auto destruct data
-            _autoDestruct = true;
+            _autoDestruct = characteristics.autoDestruct;
             _lifeTime = _characteristics.lifeTime;
             //set position
             transform.position = pos;

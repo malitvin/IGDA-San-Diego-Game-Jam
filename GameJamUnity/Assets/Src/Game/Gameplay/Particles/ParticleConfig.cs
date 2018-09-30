@@ -26,6 +26,7 @@ namespace Gameplay.Particles
         public class Characteristics
         {
             [Tooltip("How long does this particle last in the scene before pooled")]
+            public bool autoDestruct;
             [Range(0.01f, 5)]
             public float lifeTime = 1;
         }
