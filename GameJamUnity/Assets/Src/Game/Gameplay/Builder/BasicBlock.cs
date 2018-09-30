@@ -5,8 +5,11 @@ using Gameplay.Particles;
 
 namespace Gameplay.Building
 {
+    
     public class BasicBlock : Buildable, IDamageable
     {
+        private Tween _damageShake;
+
         private Vector3 glowVector = new Vector3(0, 0.5f, 0);
         public override void Build(Vector3 finalPos, float buildTime, int fallheight, Ease easeType)
         {
@@ -46,9 +49,31 @@ namespace Gameplay.Building
 
             if(isDead && result.prevHealth > 0.0f)
             {
+                killTween();
                 RemoveFromPool();
             }
+            else
+            {
+                damageShake();
+            }
             return result;
+        }
+
+        private void damageShake()
+        {
+            killTween();
+
+            _damageShake = transform.DOShakeRotation(0.4f, 20);
+            _damageShake.OnComplete(() => _damageShake = null);
+        }
+
+        private void killTween()
+        {
+            if(_damageShake != null)
+            {
+                _damageShake.Kill(true);
+                _damageShake = null;
+            }
         }
     }
 }
