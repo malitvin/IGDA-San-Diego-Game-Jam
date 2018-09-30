@@ -44,11 +44,13 @@ namespace UI.HUD
         public void SetPlayerMaxHealth(float max)
         {
             _healthBar.maxValue = max;
+            _healthBar.value = max;
         }
 
         public void SetParentMaxhealth(float max)
         {
             _parentHealthBar.maxValue = max;
+            _parentHealthBar.value = max;
         }
 
         public void OnPlayerHealthChange(float health)

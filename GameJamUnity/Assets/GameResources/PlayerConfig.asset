@@ -19,3 +19,4 @@ MonoBehaviour:
     fireCooldown: 0.1
     damage: 10
   startHealth: 100
+  parentStartHealth: 300

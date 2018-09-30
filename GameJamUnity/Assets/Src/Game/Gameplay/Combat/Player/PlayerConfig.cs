@@ -23,6 +23,7 @@ public class PlayerConfig : ScriptableObject
     public Movement movement;
     public Weapon weapon;
     public float startHealth;
+    public float parentStartHealth;
 
 
 

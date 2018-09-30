@@ -21,17 +21,19 @@ public class MonsterGenerator : EventDispatcher
 
     public HUDController _hudController;
 
+    public bool gameWon = false;
+
     private Dictionary<FlowState.State, IFlowState> _stateMachine = new Dictionary<FlowState.State, IFlowState>(new FastEnumIntEqualityComparer<FlowState.State>());
 
-    public MonsterGenerator(GameConfig gameConfig,EnemySystem enemySystem,PlayerCombatSystem playerSystem)
+    public MonsterGenerator(GameConfig gameConfig,EnemySystem enemySystem)
     {
         _dispatcher = Singleton.instance.notificationDispatcher;
         // TODO: Klean it up!
         _dispatcher.AddListener(GameplayEventType.ENEMY_KILLED, onEnemyKilled);
+        _dispatcher.AddListener(GameplayEventType.GAME_COMPLETE, OnGameComplete);
 
         _levelConfig = gameConfig.levelConfig;
         _enemySystem = enemySystem;
-        _playerSystem = playerSystem;
 
         if (_levelConfig.levels.Count == 0)
         {
@@ -43,9 +45,10 @@ public class MonsterGenerator : EventDispatcher
         }
     }
 
-    public void Init(HUDController hudController)
+    public void Init(HUDController hudController, PlayerCombatSystem playerSystem)
     {
         _hudController = hudController;
+        _playerSystem = playerSystem;
     }
 
     #region State Machine
@@ -55,6 +58,7 @@ public class MonsterGenerator : EventDispatcher
         _stateMachine[FlowState.State.Monster] = new MonsterState(this, _levelConfig);
         _stateMachine[FlowState.State.End] = new EndState(this, _levelConfig);
         _stateMachine[FlowState.State.BetweenWaveState] = new BetweenWaveState(this, _levelConfig);
+        //set to start state
         SetFlowState(FlowState.State.Start);
     }
 
@@ -93,13 +97,14 @@ public class MonsterGenerator : EventDispatcher
         _currentFlowState.OnUpdate();
     }
 
-    public void OnMonsterDestroyed()
+    private void onEnemyKilled(GhostGen.GeneralEvent e)
     {
         _currentFlowState.OnMonsterDestroyed();
     }
 
-    private void onEnemyKilled(GhostGen.GeneralEvent e)
+    private void OnGameComplete(GhostGen.GeneralEvent e)
     {
-        OnMonsterDestroyed();
+        bool win = (bool)e.data;
+        _currentFlowState.OnGameOver();
     }
 }

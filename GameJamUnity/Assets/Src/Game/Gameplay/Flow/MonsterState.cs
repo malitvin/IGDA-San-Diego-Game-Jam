@@ -30,6 +30,7 @@ public class MonsterState : FlowState {
         base.Enter();
         if(_currentWaveIndex >= _maxWaveCount)
         {
+            _generator.gameWon = true;
             _generator.SetFlowState(State.End);
         }else
         {

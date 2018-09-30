@@ -8,4 +8,5 @@ public interface IFlowState  {
     void OnUpdate();
     void Exit();
     void OnMonsterDestroyed();
+    void OnGameOver();
 }

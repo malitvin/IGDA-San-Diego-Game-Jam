@@ -40,4 +40,10 @@ public abstract class FlowState : IFlowState
     {
 
     }
+
+    public virtual void OnGameOver()
+    {
+        _generator.gameWon = false;
+        _generator.SetFlowState(State.End);
+    }
 }

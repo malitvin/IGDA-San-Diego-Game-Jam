@@ -68,7 +68,7 @@ public class GameplayState : IGameState
         //HUD
         _hudController = new HUDController((() => 
         {
-            _monsterGenerator.Init(_hudController);
+            _monsterGenerator.Init(_hudController, _playerCombatSystem);
             _playerCombatSystem.Init(_hudController);
         }));
 

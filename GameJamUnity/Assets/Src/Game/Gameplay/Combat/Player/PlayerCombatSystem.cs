@@ -17,6 +17,8 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
     private int _boardLayer;
     private bool _isEnabled;
 
+    private IEventDispatcher _dispatcher;
+
     private ParentController _parentController;
 
     public PlayerCombatSystem(
@@ -36,13 +38,16 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         _gameplayCam = GameObject.FindObjectOfType<GameplayCamera>();
         _combatCamera = new CombatCamera(_gameplayCam, _playerCombatController.transform);
         _parentController = GameObject.Instantiate<ParentController>(_gameplayResources.parentController);
+        _parentController.AddListener(GameplayEventType.DAMAGE_TAKEN, OnParentDamageTaken);
         isEnabled = false;
+        _dispatcher = Singleton.instance.notificationDispatcher;
     }
 
     public void Init(HUDController hudController)
     {
         _hudController = hudController;
-        _hudController.SetParenMaxHealth(_gameConfig.playerConfig.startHealth);
+        _hudController.SetPlayeMaxHealth(_gameConfig.playerConfig.startHealth);
+        _hudController.SetParenMaxHealth(_gameConfig.playerConfig.parentStartHealth);
     }
 
     public bool isEnabled
@@ -152,6 +157,23 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         if(result != null)
         {
             _hudController.OnPlayerHealthChange(result.newHealth);
+            if (_playerCombatController.isDead)
+            {
+                _dispatcher.DispatchEvent(GameplayEventType.GAME_COMPLETE, false, false);
+            }
+        }
+    }
+
+    private void OnParentDamageTaken(GeneralEvent e)
+    {
+        DamageResult result = e.data as DamageResult;
+        if (result != null)
+        {
+            _hudController.OnParentHealthChange(result.newHealth);
+            if(_parentController.isDead)
+            {
+                _dispatcher.DispatchEvent(GameplayEventType.GAME_COMPLETE, false, false);
+            }
         }
     }
 }
