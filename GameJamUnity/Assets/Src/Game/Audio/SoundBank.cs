@@ -9,7 +9,8 @@ namespace Audio
             MonsterRoar,
             HelixBomb,
             BuildSwitch,
-            Teleport
+            Teleport,
+            WeaponFire
         }
     }
 }
