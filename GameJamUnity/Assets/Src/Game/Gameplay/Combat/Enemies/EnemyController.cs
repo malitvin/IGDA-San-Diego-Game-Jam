@@ -23,7 +23,7 @@ public class EnemyController
         _agent = view.agent;
         _target = target;
         _dispatcher = Singleton.instance.notificationDispatcher;
-        string[] maskList = { "CombatPlayer" };
+        string[] maskList = { "CombatPlayer", "BasicBlock" };
         _playerLayer = LayerMask.GetMask(maskList);
     }
 

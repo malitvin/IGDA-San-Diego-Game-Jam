@@ -96,7 +96,7 @@ public class GameplayState : IGameState
             _monsterGenerator.OnUpdate(p_deltaTime);
         }
 
-        if(Input.GetKeyDown(KeyCode.X))
+        if(Input.GetKeyDown(KeyCode.Q))
         {
             _gameMode = _gameMode == GameMode.COMBAT ? GameMode.BUILD : GameMode.COMBAT;
         }

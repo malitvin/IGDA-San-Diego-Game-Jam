@@ -5,11 +5,13 @@ using Gameplay.Particles;
 
 namespace Gameplay.Building
 {
-    public class BasicBlock : Buildable
+    public class BasicBlock : Buildable, IDamageable
     {
         private Vector3 glowVector = new Vector3(0, 0.5f, 0);
         public override void Build(Vector3 finalPos, float buildTime, int fallheight, Ease easeType)
         {
+            health = 8;
+
             Sequence s = DOTween.Sequence();
 
             base.Build(finalPos, buildTime, fallheight, easeType);
@@ -25,6 +27,28 @@ namespace Gameplay.Building
             {
                 Singleton.instance.particleGod.GenerateParticle(Particle.Type.BuildingGlow, finalPos += glowVector);
             });
+        }
+
+
+        public float health { get; set; }
+        public bool isDead { get { return health <= 0; } }
+
+        public Rigidbody physbody { get; }
+
+        public DamageResult TakeDamage(object attacker, float damage)
+        {
+            DamageResult result = new DamageResult();
+            result.prevHealth = health;
+            health = Mathf.Max(health - damage, 0.0f);
+            result.newHealth = health;
+            result.victim = this;
+            result.attacker = attacker;
+
+            if(isDead && result.prevHealth > 0.0f)
+            {
+                RemoveFromPool();
+            }
+            return result;
         }
     }
 }
