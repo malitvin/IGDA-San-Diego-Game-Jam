@@ -38,10 +38,12 @@ public class EnemySystem : GhostGen.EventDispatcher
         _enemyPool = new GenericPooler(pool.transform);
         _enemyPool.InitPool(ENEMY, 0, _gameplayResources.basicEnemyView);
 
+        /*
         for(int i = 0; i < 6; ++i)
         {
             AddEnemy(_playerController.transform, Vector3.zero);
         }
+        */
     }
 
     public void AddEnemy(Transform target, Vector3 position)

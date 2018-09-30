@@ -2,6 +2,7 @@
 using GhostGen;
 using Common.Util;
 using Zenject;
+using UI.HUD;
 
 using System.Collections.Generic;
 
@@ -18,6 +19,8 @@ public class MonsterGenerator : EventDispatcher
     
     private IEventDispatcher _dispatcher;
 
+    public HUDController _hudController;
+
     private Dictionary<FlowState.State, IFlowState> _stateMachine = new Dictionary<FlowState.State, IFlowState>(new FastEnumIntEqualityComparer<FlowState.State>());
 
     public MonsterGenerator(GameConfig gameConfig,EnemySystem enemySystem,PlayerCombatSystem playerSystem)
@@ -29,6 +32,7 @@ public class MonsterGenerator : EventDispatcher
         _levelConfig = gameConfig.levelConfig;
         _enemySystem = enemySystem;
         _playerSystem = playerSystem;
+
         if (_levelConfig.levels.Count == 0)
         {
             Debug.LogError("NO LEVELS LOADED IN LEVEL CONFIG!");
@@ -37,6 +41,11 @@ public class MonsterGenerator : EventDispatcher
             _levelDef = _levelConfig.levels[0];
             InitMonsterStateMachine();
         }
+    }
+
+    public void Init(HUDController hudController)
+    {
+        _hudController = hudController;
     }
 
     #region State Machine

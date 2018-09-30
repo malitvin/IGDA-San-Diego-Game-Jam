@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using GhostGen;
+using Gameplay.Particles;
 
 public class EnemyController
 {
@@ -61,6 +62,7 @@ public class EnemyController
         if(isDead && result.prevHealth > 0.0f)
         {
             Debug.Log("Enemy Dead!");
+            Singleton.instance.particleGod.GenerateParticle(Particle.Type.EnemyDeath, _view.transform.position);
             _view.Die();
             _dispatcher.DispatchEvent(GameplayEventType.ENEMY_KILLED, false, this);
         }

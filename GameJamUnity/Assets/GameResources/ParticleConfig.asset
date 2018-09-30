@@ -47,3 +47,10 @@ MonoBehaviour:
     characteristics:
       autoDestruct: 1
       lifeTime: 1.5
+  - displayName: Enemy Death
+    type: 5
+    particlePrefab: {fileID: 114235682089096440, guid: 1e71e38c38c607c4ebc7f8416664886a,
+      type: 2}
+    characteristics:
+      autoDestruct: 1
+      lifeTime: 1.5

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Audio;
 
 public class MonsterState : FlowState {
 
@@ -32,13 +33,25 @@ public class MonsterState : FlowState {
             _generator.SetFlowState(State.End);
         }else
         {
-            _currentWave = _waves[_currentWaveIndex];
-            _generator._currentWave = _currentWave;
-            _monsterDestroyedCount = 0;
-            _monstersToDestroyCount = _currentWave.enemyCount;
-            _timer = 0;
-            _currentGenTime = 0;
+            WaveInit();
         }
+    }
+
+    private void WaveInit()
+    {
+        //init sound to let player know monsters are coming
+        Singleton.instance.audioSystem.PlaySound(SoundBank.Type.MonsterRoar);
+
+        //refresh hud
+        _generator._hudController.OnWaveChanged(_currentWaveIndex + 1);
+
+        //wave init
+        _currentWave = _waves[_currentWaveIndex];
+        _generator._currentWave = _currentWave;
+        _monsterDestroyedCount = 0;
+        _monstersToDestroyCount = _currentWave.enemyCount;
+        _timer = 0;
+        _currentGenTime = 0;
     }
 
     public override void OnUpdate()

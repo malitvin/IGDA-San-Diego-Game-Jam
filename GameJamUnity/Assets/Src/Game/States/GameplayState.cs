@@ -6,6 +6,7 @@ using Zenject;
 using Gameplay.Building;
 using Gameplay.Particles;
 using Gameplay.Inventory;
+using UI.HUD;
 
 public class GameplayState : IGameState
 {
@@ -30,6 +31,7 @@ public class GameplayState : IGameState
     private EnemySystem _enemySystem;
     private ParticleGOD _particleGod;
     private MonsterGenerator _monsterGenerator;
+    private HUDController _hudController;
     private GameMode _gameMode;
 
     private PlayerCombatController playerCombatController;
@@ -62,6 +64,13 @@ public class GameplayState : IGameState
         _enemySystem = _diContainer.Resolve<EnemySystem>();
         _particleGod = _diContainer.Resolve<ParticleGOD>();
         _monsterGenerator = _diContainer.Resolve<MonsterGenerator>();
+
+        //HUD
+        _hudController = new HUDController((() => 
+        {
+            _monsterGenerator.Init(_hudController);
+        }));
+
 
         // Get CombatPlayerView
         //_playerCombatSystem.isEnabled = true;
