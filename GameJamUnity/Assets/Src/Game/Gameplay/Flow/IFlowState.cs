@@ -7,4 +7,5 @@ public interface IFlowState  {
     void Enter();
     void OnUpdate();
     void Exit();
+    void OnMonsterDestroyed();
 }
