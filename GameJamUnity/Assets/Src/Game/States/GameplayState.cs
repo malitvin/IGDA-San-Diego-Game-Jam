@@ -18,7 +18,7 @@ public class GameplayState : IGameState
         COMBAT
     }
 
-    private GameStateMachine<JameStateType> _gameStateMachine;
+    private GameStateMachine<JamStateType> _gameStateMachine;
     private GuiManager _gui;
     private GameplayResources _gameplayResources;
     private GameConfig _gameConfig;
@@ -37,7 +37,7 @@ public class GameplayState : IGameState
     private PlayerCombatController playerCombatController;
 
     public GameplayState(
-        GameStateMachine<JameStateType> gameStateMachine,
+        GameStateMachine<JamStateType> gameStateMachine,
         GuiManager gui,
         GameConfig gameConfig,
         DiContainer diContainer,
@@ -64,6 +64,9 @@ public class GameplayState : IGameState
         _enemySystem = _diContainer.Resolve<EnemySystem>();
         _particleGod = _diContainer.Resolve<ParticleGOD>();
         _monsterGenerator = _diContainer.Resolve<MonsterGenerator>();
+        
+        Singleton.instance.audioSystem.GenerateAudioLookupForLevel();
+        _particleGod.InitParticlePool();
 
         //HUD
         _hudController = new HUDController((() =>
