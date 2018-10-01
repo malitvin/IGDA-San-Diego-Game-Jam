@@ -24,7 +24,7 @@ public class EnemyController
         _agent = view.agent;
         _target = target;
         _dispatcher = Singleton.instance.notificationDispatcher;
-        string[] maskList = { "CombatPlayer", "BasicBlock" };
+        string[] maskList = { "CombatPlayer", "BasicBlock","Parent" };
         _playerLayer = LayerMask.GetMask(maskList);
     }
 

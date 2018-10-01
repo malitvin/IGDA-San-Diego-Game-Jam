@@ -83,6 +83,11 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         get { return _playerCombatController; }
     }
 
+    public ParentController parentController
+    {
+        get { return _parentController; }
+    }
+
     public void Tick(float deltaTime)
     {
         if(_playerCombatController != null)
