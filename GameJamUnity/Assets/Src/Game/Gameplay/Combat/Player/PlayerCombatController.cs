@@ -4,6 +4,7 @@ using UnityEngine;
 using GhostGen;
 using Audio;
 using UI.HUD;
+using Gameplay.Particles;
 
 public class PlayerCombatController : EventDispatcher
 {
@@ -75,7 +76,8 @@ public class PlayerCombatController : EventDispatcher
 
         if(isDead && result.prevHealth > 0.0f)
         {
-            //Do sumthin'
+            Singleton.instance.particleGod.GenerateParticle(Particle.Type.BaseExplosion, _view.transform.position);
+            _view.gameObject.SetActive(false);
         }
         return result;
     }

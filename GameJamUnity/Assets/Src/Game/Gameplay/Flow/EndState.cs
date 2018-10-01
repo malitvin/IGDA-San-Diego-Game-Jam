@@ -6,6 +6,8 @@ using Audio;
 public class EndState : FlowState
 {
     private bool gameOver = false;
+    private GameCompleteController _gameCompleteController;
+
     public EndState(MonsterGenerator generator,LevelConfig config) : base(generator,config)
     {
 
@@ -16,7 +18,15 @@ public class EndState : FlowState
         base.Enter();
         if(!gameOver)
         {
-            Singleton.instance.audioSystem.PlaySound(SoundBank.Type.Lose);
+            HandleGameOver();
+            gameOver = true;
         }
+    }
+
+
+    private void HandleGameOver()
+    {
+        Singleton.instance.audioSystem.PlaySound(SoundBank.Type.Lose);
+        _gameCompleteController = new GameCompleteController(_generator.gameWon, null);
     }
 }

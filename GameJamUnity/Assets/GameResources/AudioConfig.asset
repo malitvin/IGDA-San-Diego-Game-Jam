@@ -68,3 +68,10 @@ MonoBehaviour:
     pitch: 1
     group: {fileID: 0}
     key: 7
+  - name: Lose
+    clip: {fileID: 8300000, guid: dfe873f7161e26f48b83981ca5f07b3f, type: 3}
+    volume: 1
+    spatialBlend: 0
+    pitch: 1
+    group: {fileID: 0}
+    key: 8

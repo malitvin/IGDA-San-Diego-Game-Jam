@@ -37,7 +37,8 @@ public class ParentController : GhostGen.EventDispatcherBehavior, IDamageable
 
         if (isDead && result.prevHealth > 0.0f)
         {
-
+            Singleton.instance.particleGod.GenerateParticle(Particle.Type.BaseExplosion, transform.position);
+            gameObject.SetActive(false);
         }
         return result;
     }

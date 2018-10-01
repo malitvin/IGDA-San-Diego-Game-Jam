@@ -35,3 +35,13 @@ MonoBehaviour:
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 6
       waveCompleteWaitTime: 1
+    - WAVE: '---------------------------'
+      enemyCount: 400
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 4
+      waveCompleteWaitTime: 5
+    - WAVE: '---------------------------'
+      enemyCount: 600
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 3
+      waveCompleteWaitTime: 1

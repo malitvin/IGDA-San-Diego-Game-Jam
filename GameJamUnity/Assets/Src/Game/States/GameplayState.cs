@@ -55,7 +55,7 @@ public class GameplayState : IGameState
     }
 
     public void Init(Hashtable changeStateData)
-	{
+    {
         _gameMode = GameMode.COMBAT;
 
         _playerCombatSystem = _diContainer.Resolve<PlayerCombatSystem>();
@@ -66,7 +66,7 @@ public class GameplayState : IGameState
         _monsterGenerator = _diContainer.Resolve<MonsterGenerator>();
 
         //HUD
-        _hudController = new HUDController((() => 
+        _hudController = new HUDController((() =>
         {
             _monsterGenerator.Init(_hudController, _playerCombatSystem);
             _playerCombatSystem.Init(_hudController);
@@ -76,69 +76,81 @@ public class GameplayState : IGameState
         // Get CombatPlayerView
         //_playerCombatSystem.isEnabled = true;
         _dispatcher.AddListener(GameplayEventType.DAMAGE_TAKEN, onDamageTaken);
+        _dispatcher.AddListener(GameplayEventType.GAME_COMPLETE, onGameComplete);
     }
-    
-    public void Step( float p_deltaTime )
-	{
-        if(_playerCombatSystem != null)
+
+    public void Step(float p_deltaTime)
+    {
+        if (_playerCombatSystem != null)
         {
             _playerCombatSystem.Tick(p_deltaTime);
         }
-        if(_buildSystem != null)
+        if (_buildSystem != null)
         {
             _buildSystem.Tick(p_deltaTime);
         }
-        if(_enemySystem != null)
+        if (_enemySystem != null)
         {
             _enemySystem.Tick(p_deltaTime);
         }
-        if(_monsterGenerator != null)
+        if (_monsterGenerator != null)
         {
             _monsterGenerator.OnUpdate(p_deltaTime);
         }
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             _gameMode = _gameMode == GameMode.COMBAT ? GameMode.BUILD : GameMode.COMBAT;
         }
 
-        if(_gameMode == GameMode.COMBAT)
+        if (_gameMode == GameMode.COMBAT)
         {
             _playerCombatSystem.isEnabled = true;
             _buildSystem.EnableSystem(false);
         }
-        else if(_gameMode == GameMode.BUILD)
+        else if (_gameMode == GameMode.BUILD)
         {
             _playerCombatSystem.isEnabled = false;
             _buildSystem.EnableSystem(true);
         }
+        else if (_gameMode == GameMode.NONE)
+        {
+            _playerCombatSystem.isEnabled = false;
+            _buildSystem.EnableSystem(false);
+        }
     }
 
-    public void FixedStep( float fixedDeltaTime)
+    public void FixedStep(float fixedDeltaTime)
     {
-        if(_playerCombatSystem != null)
+        if (_playerCombatSystem != null)
         {
             _playerCombatSystem.FixedTick(fixedDeltaTime);
         }
-        if(_buildSystem != null)
+        if (_buildSystem != null)
         {
             _buildSystem.FixedTick(fixedDeltaTime);
         }
     }
 
-    public void Exit( )
-	{
+    public void Exit()
+    {
         _dispatcher.RemoveListener(GameplayEventType.DAMAGE_TAKEN, onDamageTaken);
 
-    }    
+    }
 
     private void onDamageTaken(GeneralEvent e)
     {
         DamageResult data = e.data as DamageResult;
-        if(data != null)
+        if (data != null)
         {
-            
+
         }
     }
-    
+
+    private void onGameComplete(GeneralEvent e)
+    {
+        _gameMode = GameMode.NONE;
+    }
+
+
 }
