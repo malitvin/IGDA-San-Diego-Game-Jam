@@ -161,25 +161,30 @@ public class PlayerCombatController : EventDispatcher
         raycastHit = default(RaycastHit);
 
         string[] layerList = { "CombatPlayer" };
-        if(Physics.RaycastNonAlloc(fireDirection, rayHits,100.0f, ~LayerMask.GetMask(layerList)) > 0)
+        int count = Physics.RaycastNonAlloc(fireDirection, rayHits, 100.0f, ~LayerMask.GetMask(layerList));
+        
+        for(int i = 0; i < count; ++i)
         {
-            for(int i = 0; i < rayHits.Length; ++i)
+            if(i >= rayHits.Length)
             {
-                RaycastHit hit = rayHits[i];
-                if(hit.collider == null)
-                {
-                    continue;
-                }
+                break;
+            }
 
-                target = hit.collider.GetComponent<IDamageable>();
-                if(target != null)
-                {
-                    raycastHit = hit;
-                    result = true;
-                    break;
-                }
+            RaycastHit hit = rayHits[i];
+            if(hit.collider == null)
+            {
+                continue;
+            }
+
+            target = hit.collider.GetComponent<IDamageable>();
+            if(target != null)
+            {
+                raycastHit = hit;
+                result = true;
+                break;
             }
         }
+        
 
         return result;
     }
