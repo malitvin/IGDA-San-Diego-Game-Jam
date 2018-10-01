@@ -12,7 +12,7 @@ public class Singleton : IInitializable, ILateDisposable
     public GameConfig           gameConfig          { get; private set; }
     public SessionFlags         sessionFlags        { get; private set; }
     
-    public GameStateMachine<JameStateType> gameStateMachine    { get; private set; }
+    public GameStateMachine<JamStateType> gameStateMachine    { get; private set; }
 
     public GuiManager           gui                 { get; private set; }
     public NetworkManager       networkManager      { get; private set; }
@@ -35,7 +35,7 @@ public class Singleton : IInitializable, ILateDisposable
 
     public Singleton(
         DiContainer container,
-        GameStateMachine<JameStateType> gsMachine,
+        GameStateMachine<JamStateType> gsMachine,
         SessionFlags pSessionFlags,
         [Inject(Id = GameInstaller.GLOBAL_DISPATCHER)]
         IEventDispatcher eventDispatcher,
@@ -61,7 +61,7 @@ public class Singleton : IInitializable, ILateDisposable
 
     public void Initialize()
     {
-        JameStateType initialState = gameConfig.initialState;
+        JamStateType initialState = gameConfig.initialState;
         gameStateMachine.ChangeState(initialState);
     }
 

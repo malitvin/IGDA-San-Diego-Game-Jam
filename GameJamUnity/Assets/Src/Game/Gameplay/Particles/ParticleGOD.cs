@@ -18,14 +18,13 @@ namespace Gameplay.Particles
         public ParticleGOD(GameConfig gameConfig)
         {
             _particleConfig = gameConfig.particleConfig;
-            InitParticlePool();
         }
 
         /// <summary>
         /// Adds different particles of type (for example impact) to pool
         /// Particles are stored in different arrays in particle config for readability
         /// </summary>
-        private void InitParticlePool()
+        public void InitParticlePool()
         {
             if(_particleConfig)
             {
@@ -39,6 +38,21 @@ namespace Gameplay.Particles
             }
         }
 
+        private GenericPooler particlePool
+        {
+            get
+            {
+                if(_particlePool == null)
+                {
+                    GameObject pool = GameObject.FindGameObjectWithTag("ScenePool");
+                    if(pool != null)
+                    {
+                        _particlePool = new GenericPooler(pool.transform);
+                    }
+                }
+                return _particlePool;
+            }
+        }
         private void AddToPool(ParticleConfig.ParticleBlueprint[] particles)
         {
             for (int i = 0; i < particles.Length; i++)
@@ -57,8 +71,11 @@ namespace Gameplay.Particles
             string spawnType = type.ToString();
             ParticleConfig.Characteristics characteristics = _particleConfig.GetCharacteristics(type);
             //Spawn particle
-            BaseParticle particle =_particlePool.GetPooledObject(spawnType) as BaseParticle;
-            particle.Init(characteristics, position);
+            if(particlePool != null)
+            {
+                BaseParticle particle = particlePool.GetPooledObject(spawnType) as BaseParticle;
+                particle.Init(characteristics, position);
+            }
         }
         #endregion
     }

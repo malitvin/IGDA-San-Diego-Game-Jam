@@ -4,6 +4,7 @@ using Zenject;
 using Gameplay.Building;
 using Gameplay.Inventory;
 using Gameplay.Particles;
+using Audio;
 
 [CreateAssetMenu(menuName = "IDGA/Game System Installer")]
 public class GameSystemInstaller : ScriptableObjectInstaller
@@ -15,6 +16,8 @@ public class GameSystemInstaller : ScriptableObjectInstaller
         Container.Bind<EnemySystem>().AsSingle();
         Container.Bind<InventorySystem>().AsSingle();
         Container.Bind<MonsterGenerator>().AsSingle();
+        Container.Bind<ParticleGOD>().AsSingle();
+        Container.Bind<AudioSystem>().AsSingle();
         //Container.Bind<GameState>().AsSingle();
         //Container.Bind<GameTimerManager>().AsSingle();
         //Container.Bind<WaveAISystem>().AsSingle();

@@ -43,10 +43,9 @@ public class GameInstaller : ScriptableObjectInstaller
         Container.Bind<GameConfig>().FromInstance(gameConfig).AsSingle();
         Container.Bind<GameplayResources>().FromInstance(gameplayResources).AsSingle();
         Container.BindInterfacesAndSelfTo<GuiManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<GameStateMachine<JameStateType>>().AsSingle().WithArguments(gameStateInstaller);
+        Container.BindInterfacesAndSelfTo<GameStateMachine<JamStateType>>().AsSingle().WithArguments(gameStateInstaller);
         Container.BindInterfacesAndSelfTo<NetworkManager>().FromNewComponentOnNewGameObject().AsSingle();
         Container.BindInterfacesAndSelfTo<Singleton>().AsSingle();
-        Container.Bind<ParticleGOD>().AsSingle();
-        Container.Bind<AudioSystem>().AsSingle();
+        
     }
 }
