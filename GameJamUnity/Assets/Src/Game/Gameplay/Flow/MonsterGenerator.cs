@@ -87,7 +87,10 @@ public class MonsterGenerator : EventDispatcher
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         Vector3 directionalPosition = new Vector3( Mathf.Cos(angle), 0, Mathf.Sin(angle));
         directionalPosition *= _levelDef.spawnDistance;
-        _enemySystem.AddEnemy(_playerSystem.playerController.transform, directionalPosition);
+
+        int randomGen = Random.Range(0, 4);
+        Transform targetPoint = randomGen > 2 ? _playerSystem.playerController.transform : _playerSystem.parentController.transform;
+        _enemySystem.AddEnemy(targetPoint, directionalPosition);
 
     }
     #endregion

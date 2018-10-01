@@ -154,6 +154,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 1311354247157102, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250304796743694, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
   m_IsPrefabAsset: 0
@@ -271,7 +283,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4440354854320000, guid: c42b821a8783eae48846e0debd68c2c1, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 223252943188328862, guid: c42b821a8783eae48846e0debd68c2c1,
         type: 2}
@@ -409,7 +421,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4064878073438916, guid: fffbd19b2c171f94a942feb1a02ce75a, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1611129708210840, guid: fffbd19b2c171f94a942feb1a02ce75a, type: 2}
       propertyPath: m_IsActive
@@ -927,6 +939,18 @@ Prefab:
       propertyPath: m_Name
       value: Palm Tree 1 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1311354247157102, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250304796743694, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
   m_IsPrefabAsset: 0
@@ -977,6 +1001,18 @@ Prefab:
     - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
       propertyPath: m_Name
       value: Palm Tree 1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250304796743694, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311354247157102, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
@@ -1210,6 +1246,18 @@ Prefab:
       propertyPath: m_Name
       value: Palm Tree 1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1311354247157102, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250304796743694, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
   m_IsPrefabAsset: 0
@@ -1302,6 +1350,18 @@ Prefab:
     - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
       propertyPath: m_Name
       value: Palm Tree 1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250304796743694, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311354247157102, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
@@ -1972,6 +2032,18 @@ Prefab:
       propertyPath: m_Name
       value: Palm Tree 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311354247157102, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250304796743694, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
   m_IsPrefabAsset: 0
@@ -2022,6 +2094,18 @@ Prefab:
     - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
       propertyPath: m_Name
       value: Palm Tree 1 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250304796743694, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311354247157102, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712366371456624, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaed9301787fac4ab543cdc8ce83e01, type: 2}
@@ -2350,7 +2434,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4809633850314176, guid: ec4a7d88e985cb24db42375e63078472, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1140755185155356, guid: ec4a7d88e985cb24db42375e63078472, type: 2}
       propertyPath: m_IsActive
@@ -2402,6 +2486,18 @@ Prefab:
       propertyPath: m_Name
       value: Palm Tree 2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1862969214191164, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1689440323868006, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009129264182490, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
   m_IsPrefabAsset: 0
@@ -2448,6 +2544,18 @@ Prefab:
     - target: {fileID: 4404687399498460, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
       propertyPath: m_RootOrder
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009129264182490, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1689440323868006, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862969214191164, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94e8be15ea3b94949b1871340751c0ce, type: 2}
