@@ -11,7 +11,7 @@ using Audio;
 [CreateAssetMenu(menuName = "IDGA/Game Config")]
 public class GameConfig : ScriptableObject, IPostInit
 {
-    public JameStateType initialState;
+    public JamStateType initialState;
     public PlayerConfig playerConfig;
     public BuildConfig bulidConfig;
     public InventoryConfig inventoryConfig;

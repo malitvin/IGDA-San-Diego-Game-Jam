@@ -29,15 +29,28 @@ namespace Audio
         /// </summary>
         public AudioSystem(GameConfig masterConfig)
         {
-            _audioParent = GameObject.FindGameObjectWithTag("ScenePool").transform;
             gameAudio = masterConfig.audioConfig;
-            GenerateAudioLookupForLevel();
+        }
+        private Transform audioParent
+        {
+            get
+            {
+                if(_audioParent == null)
+                {
+                    GameObject a = GameObject.FindGameObjectWithTag("ScenePool");
+                    if(a != null)
+                    {
+                        _audioParent = a.transform;
+                    }
+                }
+                return _audioParent;
+            }
         }
 
         /// <summary>
         /// Generates Audio Map based on enum audio type for this level
         /// </summary>
-        private void GenerateAudioLookupForLevel()
+        public void GenerateAudioLookupForLevel()
         {
             //create map
             _levelAudioMap = new Dictionary<SoundBank.Type, SoundObject>(new FastEnumIntEqualityComparer<SoundBank.Type>());
@@ -63,7 +76,7 @@ namespace Audio
                 {
                     if (!_levelAudioMap.ContainsKey(key))
                     {
-                        tempSoundObj = new SoundObject(file, _audioParent);
+                        tempSoundObj = new SoundObject(file, audioParent);
                         _levelAudioMap[key] = tempSoundObj;
                     }
                     else
@@ -80,6 +93,11 @@ namespace Audio
 
         public void PlaySound(SoundBank.Type key, GameObject obj = null,bool Randompitch = false)
         {
+            if(_levelAudioMap == null)
+            {
+                return;
+            }
+
             if (!_levelAudioMap.ContainsKey(key))
             {
                 Debug.LogError(key + " Not Found in Sound Lookup");
@@ -104,7 +122,8 @@ namespace Audio
 
         public SoundObject(AudioConfig.AudioFile blueprint,Transform parent)
         {
-            _sourceGO = new GameObject("AudioSource: " + blueprint.name);
+            _sourceGO = new GameObject("AudioSource: " + blueprint.name);   
+            GameObject.DontDestroyOnLoad(_sourceGO);
             _sourceGO.transform.SetParent(parent);
             _sourceTR = _sourceGO.transform;
             _source = _sourceGO.AddComponent<AudioSource>();
@@ -122,6 +141,7 @@ namespace Audio
 
         public void PlaySound(GameObject obj = null,bool randomPitch=false)
         {
+            
             if (obj && _source.spatialBlend == 1)
             {
                 _sourceTR.position = obj.transform.position;

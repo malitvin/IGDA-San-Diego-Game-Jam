@@ -16,6 +16,8 @@ public class StartState : FlowState {
 
     private IEnumerator StartGame()
     {
+        yield return new WaitForSeconds(0.5f);
+
         yield return new WaitForSeconds(_generator._levelDef.waveStartWaitTime);
         _generator.SetFlowState(State.Monster);
     }

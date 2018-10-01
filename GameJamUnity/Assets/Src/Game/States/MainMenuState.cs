@@ -3,12 +3,13 @@ using System.Collections;
 using GhostGen;
 using DG.Tweening;
 
-public class IntroState : IGameState
+public class MainMenuState : IGameState
 {
     private GameStateMachine<JamStateType> _gameStateMachine;
     private GuiManager _gui;
+    private MainMenuController _controller;
 
-    public IntroState(
+    public MainMenuState(
         GameStateMachine<JamStateType> gameStateMachine,
         GuiManager gui)
     {
@@ -18,14 +19,20 @@ public class IntroState : IGameState
     
     public void Init(Hashtable changeStateData)
 	{
-		Debug.Log ("Entering In Intro State");
-        DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
-        // More initialization
+        _controller = new MainMenuController();
+        _controller.Start(onViewCreated, onChangeState);
+    }
 
-        _gameStateMachine.ChangeState(JamStateType.MAIN_MENU);
+    private void onViewCreated()
+    {
         _gui.screenFader.FadeIn();
     }
     
+    private void onChangeState(JamStateType type)
+    {
+        _gameStateMachine.ChangeState(type);
+    }
+
     public void Step( float p_deltaTime )
 	{
 
@@ -38,7 +45,10 @@ public class IntroState : IGameState
 
     public void Exit( )
 	{
-        
+        if(_controller != null)
+        {
+            _controller.RemoveView();
+        }
     }    
     
 }

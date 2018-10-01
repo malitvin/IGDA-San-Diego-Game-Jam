@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GhostGen;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class IntroState : IGameState
+public class LoadGameplayState : IGameState
 {
     private GameStateMachine<JamStateType> _gameStateMachine;
     private GuiManager _gui;
+    private AsyncOperation _asyncLoad;
 
-    public IntroState(
+    public LoadGameplayState(
         GameStateMachine<JamStateType> gameStateMachine,
         GuiManager gui)
     {
@@ -18,17 +20,16 @@ public class IntroState : IGameState
     
     public void Init(Hashtable changeStateData)
 	{
-		Debug.Log ("Entering In Intro State");
-        DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
-        // More initialization
-
-        _gameStateMachine.ChangeState(JamStateType.MAIN_MENU);
-        _gui.screenFader.FadeIn();
+        _asyncLoad = SceneManager.LoadSceneAsync("Gameplay", LoadSceneMode.Single);
+        
     }
     
     public void Step( float p_deltaTime )
 	{
-
+        if(_asyncLoad.isDone)
+        {
+            _gameStateMachine.ChangeState(JamStateType.GAMEPLAY);
+        }
     }
 
     public void FixedStep(float fixedDeltaTime)

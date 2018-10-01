@@ -2,7 +2,7 @@
 using GhostGen;
 using Zenject;
 
-public enum JameStateType
+public enum JamStateType
 {
     NO_STATE = -1,
 
@@ -14,23 +14,25 @@ public enum JameStateType
 }
 
 
-public class JamStateFactory : ScriptableObjectInstaller, IStateFactory<JameStateType>
+public class JamStateFactory : ScriptableObjectInstaller, IStateFactory<JamStateType>
 {
     public override void InstallBindings()
     {
         Container.Bind<IntroState>().AsTransient();
+        Container.Bind<MainMenuState>().AsTransient();
+        Container.Bind<LoadGameplayState>().AsTransient();
         Container.Bind<GameplayState>().AsTransient();
     }
 
-    public IGameState CreateState(JameStateType stateId)
+    public IGameState CreateState(JamStateType stateId)
     {
         switch (stateId)
         {
-            case JameStateType.INTRO:         return Container.Resolve<IntroState>();
-            case JameStateType.MAIN_MENU:     break;
-            case JameStateType.LOAD_GAMEPLAY: break;
-            case JameStateType.GAMEPLAY:      return Container.Resolve<GameplayState>();
-            case JameStateType.CREDITS:       break;
+            case JamStateType.INTRO:         return Container.Resolve<IntroState>();
+            case JamStateType.MAIN_MENU:     return Container.Resolve<MainMenuState>();
+            case JamStateType.LOAD_GAMEPLAY: return Container.Resolve<LoadGameplayState>();
+            case JamStateType.GAMEPLAY:      return Container.Resolve<GameplayState>();
+            case JamStateType.CREDITS:       break;
         }
 
         Debug.LogError("Error: state ID: " + stateId + " does not exist!");
