@@ -9,5 +9,6 @@ public class GameplayEventType
     public const string PLAYER_KILLED = "player_killed";
     public const string GAME_COMPLETE = "game_complete";
     public const string ITEM_PICKED_UP = "item_picked_up";
+    public const string GAME_RETRY = "game_retry";
 
 }
