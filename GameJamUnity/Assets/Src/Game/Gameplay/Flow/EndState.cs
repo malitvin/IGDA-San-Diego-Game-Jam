@@ -27,6 +27,10 @@ public class EndState : FlowState
     private void HandleGameOver()
     {
         Singleton.instance.audioSystem.PlaySound(SoundBank.Type.Lose);
-        _gameCompleteController = new GameCompleteController(_generator.gameWon, null);
+        _gameCompleteController = new GameCompleteController(_generator.gameWon);
+        _gameCompleteController.Start(() =>
+        {
+            _gameCompleteController.RemoveView();
+        });
     }
 }

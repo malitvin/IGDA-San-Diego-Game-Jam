@@ -6,7 +6,16 @@ namespace UI.HUD
 {
     public class HUDController : BaseController
     {
-        public HUDController(Action onComplete)
+        private PlayerConfig _playerConfig;
+
+        public HUDController(PlayerConfig config)
+        {
+            _playerConfig = config;
+        }
+
+        private HUDView _hudView { get { return view as HUDView; } }
+
+        public void Start(Action onComplete)
         {
             viewFactory.CreateAsync<HUDView>("GUI/PlayerHUD", (v) =>
             {
@@ -18,8 +27,6 @@ namespace UI.HUD
                 }
             });
         }
-
-        private HUDView _hudView { get { return view as HUDView; } }
 
         public void SetPlayeMaxHealth(float max)
         {
@@ -33,6 +40,9 @@ namespace UI.HUD
 
         private void OnCreationComplete()
         {
+
+            SetPlayeMaxHealth(_playerConfig.startHealth);
+            SetParenMaxHealth(_playerConfig.parentStartHealth);
             _hudView.OnCreationComplete();
         }
 

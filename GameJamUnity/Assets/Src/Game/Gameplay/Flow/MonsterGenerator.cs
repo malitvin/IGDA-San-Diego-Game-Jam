@@ -41,7 +41,6 @@ public class MonsterGenerator : EventDispatcher
         }else
         {
             _levelDef = _levelConfig.levels[0];
-            InitMonsterStateMachine();
         }
     }
 
@@ -49,6 +48,8 @@ public class MonsterGenerator : EventDispatcher
     {
         _hudController = hudController;
         _playerSystem = playerSystem;
+
+        InitMonsterStateMachine();
     }
 
     #region State Machine
@@ -97,7 +98,10 @@ public class MonsterGenerator : EventDispatcher
 
     public void OnUpdate(float deltaTime)
     {
-        _currentFlowState.OnUpdate();
+        if(_currentFlowState != null)
+        {
+            _currentFlowState.OnUpdate();
+        }
     }
 
     private void onEnemyKilled(GhostGen.GeneralEvent e)

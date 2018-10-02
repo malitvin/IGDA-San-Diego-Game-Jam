@@ -52,23 +52,21 @@ namespace Gameplay.Building
         public BuildingSystem(GameConfig gameConfig, InventorySystem inventorySystem)
         {
             _inventorySystem = inventorySystem;
-            _gameplayCam = UnityEngine.Object.FindObjectOfType<GameplayCamera>();
             _buildConfig = gameConfig.bulidConfig;
             _buildables = _buildConfig.buildables;
-            _gameBoard = GameObject.FindObjectOfType<GameBoard>();
-            _buildHologram = GameObject.Instantiate<BuildHologram>(_buildConfig.buildHologram);
-
-            //init builder
-            InitBuilder();
-
+            
             // TODO: Klean it up!
             _dispatcher = Singleton.instance.notificationDispatcher;
             _dispatcher.AddListener(GameplayEventType.ENEMY_KILLED, onItemPickedUp);
         }
 
-        private void InitBuilder()
+        public void Init()
         {
             //init building pool
+            _gameplayCam = GameObject.FindObjectOfType<GameplayCamera>();
+            _gameBoard = GameObject.FindObjectOfType<GameBoard>();
+            _buildHologram = GameObject.Instantiate<BuildHologram>(_buildConfig.buildHologram);
+
             GameObject pool = GameObject.FindGameObjectWithTag("ScenePool");
             if (!pool)
             {
@@ -93,6 +91,11 @@ namespace Gameplay.Building
 
         }
         #endregion
+
+        public void CleanUp()
+        {
+            _buildViewController.RemoveView();
+        }
 
         public void EnableSystem(bool on)
         {

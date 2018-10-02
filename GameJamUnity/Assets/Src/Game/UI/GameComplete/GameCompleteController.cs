@@ -4,16 +4,23 @@ using System;
 
 public class GameCompleteController : BaseController
 {
-    public GameCompleteController(bool win,Action onComplete)
+    private bool didWin;
+    private Action onRetry;
+
+    public GameCompleteController(bool win)
     {
+        didWin = win;
+    }
+
+    public void Start(Action onComplete)
+    {
+        onRetry = onComplete;
+
         viewFactory.CreateAsync<GameCompleteView>("GUI/EndGameView", (v) =>
         {
             view = v;
-            OnCreationComplete(win);
-            if (onComplete != null)
-            {
-                onComplete();
-            }
+            view.AddListener("on_retry", onRetryGame);
+            OnCreationComplete(didWin);
         });
     }
 
@@ -22,6 +29,14 @@ public class GameCompleteController : BaseController
     private void OnCreationComplete(bool win)
     {
         _gameCompleteView.OnCreationComplete(win);
+    }
+
+    private void onRetryGame(GhostGen.GeneralEvent e)
+    {
+        view.RemoveListener("on_retry", onRetryGame);
+        RemoveView();
+
+        Singleton.instance.notificationDispatcher.DispatchEvent(GameplayEventType.GAME_RETRY);
     }
 
 }

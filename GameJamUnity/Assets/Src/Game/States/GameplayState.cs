@@ -69,17 +69,21 @@ public class GameplayState : IGameState
         _particleGod.InitParticlePool();
 
         //HUD
-        _hudController = new HUDController((() =>
+        _hudController = new HUDController(_gameConfig.playerConfig);
+        _hudController.Start(() =>
         {
             _monsterGenerator.Init(_hudController, _playerCombatSystem);
-            _playerCombatSystem.Init(_hudController);
-        }));
+        });
 
+        _playerCombatSystem.Init(_hudController);
+        _buildSystem.Init();
+        _enemySystem.Init();
 
         // Get CombatPlayerView
         //_playerCombatSystem.isEnabled = true;
         _dispatcher.AddListener(GameplayEventType.DAMAGE_TAKEN, onDamageTaken);
         _dispatcher.AddListener(GameplayEventType.GAME_COMPLETE, onGameComplete);
+        _dispatcher.AddListener(GameplayEventType.GAME_RETRY, onGameRetry);
     }
 
     public void Step(float p_deltaTime)
@@ -101,7 +105,7 @@ public class GameplayState : IGameState
             _monsterGenerator.OnUpdate(p_deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _gameMode = _gameMode == GameMode.COMBAT ? GameMode.BUILD : GameMode.COMBAT;
         }
@@ -138,6 +142,11 @@ public class GameplayState : IGameState
     public void Exit()
     {
         _dispatcher.RemoveListener(GameplayEventType.DAMAGE_TAKEN, onDamageTaken);
+        _dispatcher.RemoveListener(GameplayEventType.GAME_COMPLETE, onGameComplete);
+        _dispatcher.RemoveListener(GameplayEventType.GAME_RETRY, onGameRetry);
+
+        _hudController.RemoveView();
+        _buildSystem.CleanUp();
 
     }
 
@@ -155,5 +164,9 @@ public class GameplayState : IGameState
         _gameMode = GameMode.NONE;
     }
 
+    private void onGameRetry(GeneralEvent e)
+    {
+        _gameStateMachine.ChangeState(JamStateType.MAIN_MENU);
+    }
 
 }

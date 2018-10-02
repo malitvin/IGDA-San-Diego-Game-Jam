@@ -18,6 +18,7 @@ public class EnemyController
 
     public EnemyController(EnemyDef def, EnemyView view, Transform target)
     {
+        Debug.Log("INITTED");
         _def = def;
         _view = view;
         _view.controller = this;

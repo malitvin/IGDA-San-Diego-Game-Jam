@@ -31,6 +31,15 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         string[] list = { "BoardLayer" };
         _boardLayer = LayerMask.GetMask(list);
 
+        
+        isEnabled = false;
+        _dispatcher = Singleton.instance.notificationDispatcher;
+    }
+
+    public void Init(HUDController hudController)
+    {
+        _hudController = hudController;
+
         PlayerCombatView view = GameObject.Instantiate<PlayerCombatView>(_gameplayResources.playerCombatView);
         _playerCombatController = new PlayerCombatController(view, _gameConfig.playerConfig);
         _playerCombatController.AddListener(GameplayEventType.DAMAGE_TAKEN, OnPlayeDamageTake);
@@ -40,15 +49,6 @@ public class PlayerCombatSystem : GhostGen.EventDispatcher
         _parentController = GameObject.Instantiate<ParentController>(_gameplayResources.parentController);
         _parentController.Init(_gameConfig.playerConfig);
         _parentController.AddListener(GameplayEventType.DAMAGE_TAKEN, OnParentDamageTaken);
-        isEnabled = false;
-        _dispatcher = Singleton.instance.notificationDispatcher;
-    }
-
-    public void Init(HUDController hudController)
-    {
-        _hudController = hudController;
-        _hudController.SetPlayeMaxHealth(_gameConfig.playerConfig.startHealth);
-        _hudController.SetParenMaxHealth(_gameConfig.playerConfig.parentStartHealth);
     }
 
     public bool isEnabled
