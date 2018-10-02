@@ -7,7 +7,15 @@ using GhostGen;
 
 public class MainMenuController : BaseController
 {
+    private ScreenFader _fader;
     private Action<JamStateType> _onComplete;
+    private const float FADE_TIME = 0.25f;
+
+    public MainMenuController()
+    {
+        _fader = Singleton.instance.gui.screenFader;
+    }
+
     public void Start(Action onViewCreated, Action<JamStateType> onComplete)
     {
         _onComplete = onComplete;
@@ -29,21 +37,37 @@ public class MainMenuController : BaseController
 
     private void onStartGame(GeneralEvent e)
     {
-        _onComplete(JamStateType.LOAD_GAMEPLAY);
+        _fader.FadeOut(FADE_TIME, () =>
+        {
+            _onComplete(JamStateType.LOAD_GAMEPLAY);
+        });
     }
 
     private void onShowFTUE(GeneralEvent e)
     {
-        mainMenu.ShowFTUE();
+        _fader.FadeOut(FADE_TIME, () =>
+        {
+            mainMenu.ShowFTUE();
+            _fader.FadeIn();
+        });
+    
     }
     private void onGotoCredits(GeneralEvent e)
     {
-        mainMenu.ShowCredits();
+        _fader.FadeOut(FADE_TIME, () =>
+        {
+            mainMenu.ShowCredits();
+            _fader.FadeIn();
+        });
     }
 
     private void onBack(GeneralEvent e)
     {
-        mainMenu.ShowMainMenu();
+        _fader.FadeOut(FADE_TIME, () =>
+        {
+            mainMenu.ShowMainMenu();
+            _fader.FadeIn();
+        });
     }
 
     private void onQuit(GeneralEvent e)

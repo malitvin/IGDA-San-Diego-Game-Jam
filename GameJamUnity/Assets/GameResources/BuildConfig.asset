@@ -42,9 +42,9 @@ MonoBehaviour:
   - buildHotKey: 50
     displayName: Helix Bomb
     enableCollisionDetection: 0
-    currencyCost: 75
-    explodeRadius: 5
-    damage: 105
+    currencyCost: 500
+    explodeRadius: 7
+    damage: 200
     key: 1
     buildSpace: 1
     buildRechargeRate: 0.25
@@ -60,13 +60,13 @@ MonoBehaviour:
     displayName: Explosive Barrel
     enableCollisionDetection: 1
     currencyCost: 15
-    explodeRadius: 3
+    explodeRadius: 5
     damage: 100
     key: 2
     buildSpace: 0
-    buildRechargeRate: 0.5
+    buildRechargeRate: 0.08
     fallHeight: 2
-    buildTime: 0.75
+    buildTime: 0.2
     buildEaseType: 34
     prefab: {fileID: 114827414461211890, guid: d97882d0c75578f40abdafa6c7f9cd65, type: 2}
     hollogramMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
@@ -77,9 +77,9 @@ MonoBehaviour:
     _itemPrefabUI: {fileID: 114989327213725004, guid: 343b30137c345b742918aa6260d64e7a,
       type: 2}
   _buildCamData:
-    edgeLimit: 10
+    edgeLimit: 40
     drag: 15
-    speed: 15000
+    speed: 30000
     worldLimit:
       x: -41
       y: -43

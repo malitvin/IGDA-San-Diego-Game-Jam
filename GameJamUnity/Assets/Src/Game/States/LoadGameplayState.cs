@@ -29,6 +29,7 @@ public class LoadGameplayState : IGameState
         if(_asyncLoad.isDone)
         {
             _gameStateMachine.ChangeState(JamStateType.GAMEPLAY);
+            _gui.screenFader.FadeIn();
         }
     }
 

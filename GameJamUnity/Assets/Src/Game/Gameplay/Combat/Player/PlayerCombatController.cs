@@ -87,14 +87,14 @@ public class PlayerCombatController : EventDispatcher
         if(_fireTimer > 0 || !isEnabled || isDead)
             return;
         
-        Vector3 weaponPos = _view.weaponBarrelPosition;
-        Vector3 viewDir = (targetPos - weaponPos).normalized;
+        Vector3 visualWeaponPos = _view.weaponBarrelPosition;
+        Vector3 viewDir = (targetPos - visualWeaponPos).normalized;
         viewDir.y = 0;
-        Vector3 adjustedPos = weaponPos + (viewDir * 50.0f);
+        Vector3 adjustedPos = visualWeaponPos + (viewDir * 50.0f);
 
-        Vector3 rayPoint = _view.rigidPosition;
-        rayPoint.y = weaponPos.y;
-        Ray ray = new Ray(weaponPos, viewDir);
+        Vector3 rayPoint = _view.viewPosition;
+        rayPoint.y = visualWeaponPos.y;
+        Ray ray = new Ray(visualWeaponPos, viewDir);
 
         Singleton.instance.audioSystem.PlaySound(SoundBank.Type.WeaponFire, null, true);
 
