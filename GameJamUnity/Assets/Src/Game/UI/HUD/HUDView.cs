@@ -36,7 +36,7 @@ namespace UI.HUD
                 _waveText.text = wave.ToString();
                 Tween outro = _waveGrid.DOFade(1, 1).SetEase(Ease.InOutCubic).OnComplete(() =>
                 {
-                    _waveText.DOColor(Color.black, 1).SetLoops(2, LoopType.Yoyo);
+                    _waveText.transform.DOScale(3,.5f).SetLoops(2, LoopType.Yoyo);
                 });
             });
         }
