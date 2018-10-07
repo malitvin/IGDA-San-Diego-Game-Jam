@@ -18,7 +18,7 @@ public class IntroState : IGameState
     
     public void Init(Hashtable changeStateData)
 	{
-		Debug.Log ("Entering In Intro State");
+		//Debug.Log ("Entering In Intro State");
         DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
         // More initialization
 

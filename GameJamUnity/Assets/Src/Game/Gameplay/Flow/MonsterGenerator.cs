@@ -65,7 +65,7 @@ public class MonsterGenerator : EventDispatcher
 
     public void SetFlowState(FlowState.State state)
     {
-        Debug.Log("NEW MONSTER GENERATOR STATE " + state.ToString());
+        //Debug.Log("NEW MONSTER GENERATOR STATE " + state.ToString());
         if (_currentFlowState != null)
         {
             _currentFlowState.Exit();

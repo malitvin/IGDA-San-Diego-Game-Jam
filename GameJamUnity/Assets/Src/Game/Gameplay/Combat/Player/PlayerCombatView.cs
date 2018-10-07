@@ -15,7 +15,7 @@ public class PlayerCombatView : GhostGen.EventDispatcherBehavior, IDamageable
     // (This should all be in a weapon class)
     public GameObject _bulletFXPrefab;
     private TrailRenderer[] _fxPool;
-    private Tween _fxTween;
+    private Tween[] _fxTweens;
     private int _fxIndex;
 
     public PlayerCombatController controller { get; set; }
@@ -79,30 +79,31 @@ public class PlayerCombatView : GhostGen.EventDispatcherBehavior, IDamageable
         Vector3 startPos = _weaponEndPoint.position;
 
         TrailRenderer fx = getNextFX();
-        fx.Clear();
-        float time = fx.time;
-        fx.time = 0;
+        Tween t = _fxTweens[_fxIndex];
+
+        //fx.Clear();
+
         fx.transform.position = startPos;
         
-        _fxTween = fx.transform.DOMove(target, speed);
-        _fxTween.SetEase(Ease.Linear);
-        _fxTween.SetSpeedBased(true);
+        t = fx.transform.DOMove(target, speed);
+        t.SetEase(Ease.Linear);
+        t.SetSpeedBased(true);
 
-        _fxTween.OnStart(() =>
+        t.OnStart(() =>
         {
-            fx.time = time;
+           // fx.time = time;
             fx.transform.position = startPos;
             fx.gameObject.SetActive(true);
-            fx.emitting = (true);
+            //fx.emitting = (true);
             fx.Clear();
         });
 
-        _fxTween.OnComplete(()=>
+        t.OnComplete(()=>
         {
-            fx.Clear();
-            fx.emitting = (false);
+            //fx.Clear();
+            //fx.emitting = (false);
             fx.gameObject.SetActive(false);
-            _fxTween = null;
+            t = null;
         });
     }
 
@@ -116,14 +117,16 @@ public class PlayerCombatView : GhostGen.EventDispatcherBehavior, IDamageable
     private void setupFXPool()
     {
         _fxIndex = 0;
+
         _fxPool = new TrailRenderer[kFXPoolSize];
+        _fxTweens = new Tween[kFXPoolSize];
 
         for(int i = 0; i < kFXPoolSize; ++i)
         {
             GameObject fxObj = GameObject.Instantiate<GameObject>(_bulletFXPrefab, transform.position, transform.rotation);
             _fxPool[i] = fxObj.GetComponent<TrailRenderer>();
             _fxPool[i].gameObject.SetActive(false);
-            _fxPool[i].emitting = (false);
+            //_fxPool[i].emitting = (false);
         }
     }
     

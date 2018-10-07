@@ -15,8 +15,8 @@ MonoBehaviour:
     speed: 100
     drag: 4
   weapon:
-    bulletSpeed: 90
-    fireCooldown: 0.1
+    bulletSpeed: 110
+    fireCooldown: 0.12
     damage: 22
   startHealth: 100
   parentStartHealth: 750

@@ -36,9 +36,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4839669128692692}
-  - component: {fileID: 65231640456122320}
   - component: {fileID: 114827414461211890}
   - component: {fileID: 54893115415013876}
+  - component: {fileID: 65790365298241000}
   m_Layer: 0
   m_Name: Explosive Barrel
   m_TagString: Untagged
@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1381959411014778}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.1369057, y: -0.3882208, z: -7.558833}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4612064739045462}
@@ -127,21 +127,21 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &65231640456122320
+--- !u!65 &65790365298241000
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1381959411014778}
-  m_Material: {fileID: 13400000, guid: 7b90bd1c544858348b87e80a94c48ee2, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.75, z: 1.09}
-  m_Center: {x: 0, y: 0.36, z: 0}
+  m_Size: {x: 1.2, y: 1.57, z: 1.2}
+  m_Center: {x: 0, y: 0.24, z: 0}
 --- !u!114 &114827414461211890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,3 +153,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b8568164c66a147b570671e9404f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rigidBody: {fileID: 54893115415013876}

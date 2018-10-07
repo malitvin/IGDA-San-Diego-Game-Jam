@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CombatCamera
 {
-    public float smoothTime = 0.2F;
+    public float smoothTime = 0.1F;
     private Vector3 velocity = Vector3.zero;
 
     private Transform _target;
@@ -30,7 +30,7 @@ public class CombatCamera
             return;
         }
         // Define a target position above and behind the target transform
-        Vector3 targetPosition = _target.TransformPoint(new Vector3(0, 15, -5));
+        Vector3 targetPosition = _target.TransformPoint(new Vector3(0, 18, -7));
 
         // Smoothly move the camera towards that target position
         _gameplayCam.transform.position = Vector3.SmoothDamp(_gameplayCam.transform.position, targetPosition, ref velocity, smoothTime);

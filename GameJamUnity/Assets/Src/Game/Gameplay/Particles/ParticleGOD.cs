@@ -3,6 +3,7 @@ using UnityEngine;
 
 //Game
 using Common.Pooling;
+using System;
 
 namespace Gameplay.Particles
 {
@@ -26,6 +27,13 @@ namespace Gameplay.Particles
         /// </summary>
         public void InitParticlePool()
         {
+
+            var particleTypes = Enum.GetValues(typeof(Particle.Type));
+            foreach(Particle.Type type in particleTypes)
+            {
+                Particle.sParticleTypeString[type] = type.ToString();
+            }
+
             if(_particleConfig)
             {
                 GameObject pool = GameObject.FindGameObjectWithTag("ScenePool");
@@ -36,6 +44,7 @@ namespace Gameplay.Particles
             {
                 Debug.LogError("Particle Config is null in the Particle God System");
             }
+            
         }
 
         private GenericPooler particlePool
@@ -68,7 +77,7 @@ namespace Gameplay.Particles
         public void GenerateParticle(Particle.Type type, Vector3 position)
         {
             //Get data
-            string spawnType = type.ToString();
+            string spawnType = Particle.sParticleTypeString[type];
             ParticleConfig.Characteristics characteristics = _particleConfig.GetCharacteristics(type);
             //Spawn particle
             if(particlePool != null)

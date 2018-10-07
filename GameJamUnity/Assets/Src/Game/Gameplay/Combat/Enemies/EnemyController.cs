@@ -63,7 +63,7 @@ public class EnemyController
 
         if(isDead && result.prevHealth > 0.0f)
         {
-            Debug.Log("Enemy Dead!");
+            //Debug.Log("Enemy Dead!");
             Singleton.instance.particleGod.GenerateParticle(Particle.Type.EnemyDeath, _view.transform.position);
             Singleton.instance.audioSystem.PlaySound(SoundBank.Type.MonsterDeath, null, true);
             _view.Die();

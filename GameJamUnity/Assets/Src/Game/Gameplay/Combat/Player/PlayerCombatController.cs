@@ -5,6 +5,7 @@ using GhostGen;
 using Audio;
 using UI.HUD;
 using Gameplay.Particles;
+using System;
 
 public class PlayerCombatController : EventDispatcher
 {
@@ -17,11 +18,13 @@ public class PlayerCombatController : EventDispatcher
     private float _fireTimer;
     private RaycastHit[] rayHits = new RaycastHit[10];
     private bool _isEnabled;
+    private int _targetMask;
     private IEventDispatcher _dispatcher;
 
     public PlayerCombatController(PlayerCombatView view, PlayerConfig config)
     {
         health = config.startHealth;
+
         _view = view;
         _view.controller = this;
         _physBody = view._rigidBody;
@@ -29,6 +32,9 @@ public class PlayerCombatController : EventDispatcher
 
         _physBody.drag = _config.movement.drag;
         _moveDirection = Vector3.zero;
+        
+        string[] layerList = { "CombatPlayer" };
+        _targetMask = ~LayerMask.GetMask(layerList);
 
         _dispatcher = Singleton.instance.notificationDispatcher;
     }
@@ -72,7 +78,7 @@ public class PlayerCombatController : EventDispatcher
         result.victim = this;
         result.attacker = attacker;
 
-        DispatchEvent(GameplayEventType.DAMAGE_TAKEN,false, result);
+        DispatchEvent(GameplayEventType.DAMAGE_TAKEN, false, result);
 
         if(isDead && result.prevHealth > 0.0f)
         {
@@ -88,8 +94,9 @@ public class PlayerCombatController : EventDispatcher
             return;
         
         Vector3 visualWeaponPos = _view.weaponBarrelPosition;
-        Vector3 viewDir = (targetPos - visualWeaponPos).normalized;
+        Vector3 viewDir = getFireDirection(_view._rotateTransform.forward, 0.08f);//(targetPos - visualWeaponPos).normalized;
         viewDir.y = 0;
+
         Vector3 adjustedPos = visualWeaponPos + (viewDir * 50.0f);
 
         Vector3 rayPoint = _view.viewPosition;
@@ -100,7 +107,8 @@ public class PlayerCombatController : EventDispatcher
 
         IDamageable target;
         RaycastHit hit;
-        if(getTarget(ray, out hit, out target))
+        bool targetFound = getTarget(ray, out hit, out target);
+        if(targetFound)
         {
             Vector3 force = viewDir * 110.0f;
 
@@ -160,9 +168,12 @@ public class PlayerCombatController : EventDispatcher
         target = null;
         raycastHit = default(RaycastHit);
 
-        string[] layerList = { "CombatPlayer" };
-        int count = Physics.RaycastNonAlloc(fireDirection, rayHits, 100.0f, ~LayerMask.GetMask(layerList));
-        
+        int count = Physics.RaycastNonAlloc(fireDirection, rayHits, 100.0f, _targetMask);
+        if(count > 2)
+        {
+            Array.Sort(rayHits, targetSortFunctor);
+        }
+
         for(int i = 0; i < count; ++i)
         {
             if(i >= rayHits.Length)
@@ -184,8 +195,21 @@ public class PlayerCombatController : EventDispatcher
                 break;
             }
         }
-        
-
         return result;
+    }
+
+    private int targetSortFunctor(RaycastHit a, RaycastHit b)
+    {
+        return a.distance.CompareTo(b.distance);
+    }
+
+    private Vector3 getFireDirection(Vector3 forward, float range)
+    {
+        Vector3 result;
+
+        Vector3 perp = Vector3.Cross(forward, transform.up);
+        Vector3 offset = perp.normalized * UnityEngine.Random.Range(-range, range);
+        result = forward + offset;
+        return result.normalized;
     }
 }

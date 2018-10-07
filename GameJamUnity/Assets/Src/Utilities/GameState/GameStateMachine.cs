@@ -31,7 +31,7 @@ namespace GhostGen
 			if (EqualityComparer<T>.Default.Equals(_currentId, stateId))
                 return;
 
-            Debug.LogFormat("Changing state state from: {0} to {1}", _currentId.ToString(), stateId.ToString());
+            //Debug.LogFormat("Changing state state from: {0} to {1}", _currentId.ToString(), stateId.ToString());
 
 			if( _currentState != null )
 				_currentState.Exit( );

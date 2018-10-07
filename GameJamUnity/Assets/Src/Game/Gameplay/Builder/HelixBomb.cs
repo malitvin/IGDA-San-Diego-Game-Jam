@@ -9,7 +9,7 @@ namespace Gameplay.Building
     public class HelixBomb : Buildable
     {
         private int _explosionMask;
-        private Collider[] _cachedColliders = new Collider[40];
+        private Collider[] _cachedColliders = new Collider[100];
         private string[] maskList = { "Enemy", "Default" };
 
         public override void Build(Vector3 finalPos, float buildTime, int fallheight, Ease easeType, BuildConfig.BuildableBlueprint blueprint)

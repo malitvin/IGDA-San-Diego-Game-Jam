@@ -113,7 +113,7 @@ public class GameplayState : IGameState
         if (_gameMode == GameMode.COMBAT)
         {
             _playerCombatSystem.isEnabled = true;
-            _buildSystem.EnableSystem(false);
+            _buildSystem.EnableSystem(true);
         }
         else if (_gameMode == GameMode.BUILD)
         {

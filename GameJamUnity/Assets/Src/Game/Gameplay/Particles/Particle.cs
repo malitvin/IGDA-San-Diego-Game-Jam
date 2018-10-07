@@ -1,5 +1,6 @@
 ﻿//Unity
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Gameplay.Particles
 {
@@ -17,6 +18,8 @@ namespace Gameplay.Particles
             Break,
             Parent
         }
+
+        public static Dictionary<Type, string> sParticleTypeString = new Dictionary<Type, string>();
 
         public struct SpawnData
         {

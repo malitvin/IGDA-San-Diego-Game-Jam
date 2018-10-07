@@ -15,7 +15,7 @@ namespace Gameplay.Building
     public class BuildingSystem : GhostGen.EventDispatcher
     {
         //is build mode enabled
-        private bool _buildModeEnabled = true;
+        private bool _buildModeEnabled = false;
         private float buildTimer;
         private bool _builderRecharging;
 
@@ -84,7 +84,7 @@ namespace Gameplay.Building
             _buildViewController = new BuildViewController(this,_inventorySystem, _buildConfig);
 
             //Build Cam
-            _buildCam = new BuildCam(_buildConfig,_gameplayCam);
+            //_buildCam = new BuildCam(_buildConfig,_gameplayCam);
 
             //init currenty build type
             SetBuildType(_buildConfig.startingBuildType);
@@ -189,10 +189,10 @@ namespace Gameplay.Building
                 {
                     Collider[] overlap = Physics.OverlapBox(_buildHologram.GetPosition(), (_buildHologram.GetScale() / 2.1f), Quaternion.identity, _buildConfig._collisionLayerMask);
                     colliding = overlap.Length > 0;
-                    if(colliding)
-                    {
-                        Debug.Log(overlap[0].transform.name);
-                    }
+                    //if(colliding)
+                    //{
+                    //    Debug.Log(overlap[0].transform.name);
+                    //}
                 }
 
 
@@ -200,7 +200,7 @@ namespace Gameplay.Building
                 _buildHologram.UpdateHologram(!colliding && canBuy, _buildConfig.hologramData);
 
                 //TRY TO BUILD
-                if (canBuy && !colliding && Input.GetKey(KeyCode.Mouse0))
+                if (canBuy && !colliding && Input.GetKey(KeyCode.Mouse1))
                 {
                     //BUILD!
                     BuildConfig.BuildableBlueprint blueprint = _buildConfig.GetBuildableBlueprint(_currentBuildType);
@@ -227,12 +227,18 @@ namespace Gameplay.Building
 
         private void BuildCameraMovement()
         {
-            _buildCam.OnUpdate();
+            if(_buildCam != null)
+            {
+                _buildCam.OnUpdate();
+            }
         }
 
         private void BuildCameraMovementFixed()
         {
-            _buildCam.OnFixedUpdate();
+            if(_buildCam != null)
+            {
+                _buildCam.OnFixedUpdate();
+            }
         }
         #endregion
 
