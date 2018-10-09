@@ -25,6 +25,9 @@ namespace Gameplay.Particles
         [System.Serializable]
         public class Characteristics
         {
+            [Tooltip("Amount to initially spawn in the particle pool")]
+            [Range(0,25)]
+            public int warmPoolAmount;
             [Tooltip("How long does this particle last in the scene before pooled")]
             public bool autoDestruct;
             [Range(0.01f, 5)]

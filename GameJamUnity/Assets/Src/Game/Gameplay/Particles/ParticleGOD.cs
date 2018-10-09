@@ -13,8 +13,6 @@ namespace Gameplay.Particles
 
         private ParticleConfig _particleConfig;
 
-        private const int PARTICLE_POOL_WARM_AMOUNT = 5;
-
         #region Init
         public ParticleGOD(GameConfig gameConfig)
         {
@@ -68,7 +66,8 @@ namespace Gameplay.Particles
             {
                 ParticleConfig.ParticleBlueprint particle = particles[i];
                 string type = particle.type.ToString();
-                _particlePool.InitPool(type, PARTICLE_POOL_WARM_AMOUNT, particle.particlePrefab);
+                int poolAmount = particle.characteristics.warmPoolAmount;
+                _particlePool.InitPool(type, poolAmount, particle.particlePrefab);
             }
         }
         #endregion
