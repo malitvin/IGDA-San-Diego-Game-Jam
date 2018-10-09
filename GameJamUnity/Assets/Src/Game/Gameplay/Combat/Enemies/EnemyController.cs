@@ -52,6 +52,11 @@ public class EnemyController
         get { return health <= 0; }
     }
 
+    public int instanceID 
+    {
+        get { return _view.gameObject.GetInstanceID(); }
+    }
+
     public DamageResult TakeDamage(object attacker, float damage)
     {
         DamageResult result = new DamageResult();
