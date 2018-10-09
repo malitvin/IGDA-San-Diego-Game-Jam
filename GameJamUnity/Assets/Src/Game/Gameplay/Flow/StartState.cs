@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StartState : FlowState {
 
-    public StartState(MonsterGenerator generator, LevelConfig config) : base(generator, config)
+    public StartState(MonsterGenerator generator, LevelConfig.LevelDef levelDef) : base(generator, levelDef)
     {
         
     }
@@ -18,7 +18,7 @@ public class StartState : FlowState {
     {
         yield return new WaitForSeconds(0.5f);
 
-        yield return new WaitForSeconds(_generator._levelDef.waveStartWaitTime);
+        yield return new WaitForSeconds(_levelDef.waveStartWaitTime);
         _generator.SetFlowState(State.Monster);
     }
 

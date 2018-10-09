@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 public abstract class FlowState : IFlowState
 {
     protected MonsterGenerator _generator;
-    protected LevelConfig _levelConfig;
+    protected LevelConfig.LevelDef _levelDef;
 
     public enum State
     {
@@ -15,10 +12,10 @@ public abstract class FlowState : IFlowState
         BetweenWaveState
     }
 
-    public FlowState(MonsterGenerator generator,LevelConfig levelConfig)
+    public FlowState(MonsterGenerator generator,LevelConfig.LevelDef levelDef)
     {
         _generator = generator;
-        _levelConfig = levelConfig;
+        _levelDef = levelDef;
     }
 
     public virtual void Enter()

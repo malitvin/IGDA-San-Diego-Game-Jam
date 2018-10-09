@@ -8,7 +8,7 @@ public class EndState : FlowState
     private bool gameOver = false;
     private GameCompleteController _gameCompleteController;
 
-    public EndState(MonsterGenerator generator,LevelConfig config) : base(generator,config)
+    public EndState(MonsterGenerator generator, LevelConfig.LevelDef levelDef) : base(generator,levelDef)
     {
 
     }

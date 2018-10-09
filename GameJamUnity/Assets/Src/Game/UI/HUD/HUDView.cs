@@ -20,9 +20,6 @@ namespace UI.HUD
         private Color _healthyColor;
         private Color _unhealthyColor = Color.red;
 
-        private Tween _playerSliderTween;
-        private Tween _parentSliderTween;
-
         public void OnCreationComplete()
         {
             _waveGrid.alpha = 0;
@@ -55,21 +52,18 @@ namespace UI.HUD
 
         public void OnPlayerHealthChange(float health)
         {
-            ChangeHealthBar(_healthBar, _healthBarImg, health,_playerSliderTween);
+            ChangeHealthBar(_healthBar, _healthBarImg, health);
         }
 
         public void OnParentHealthChange(float health)
         {
-            ChangeHealthBar(_parentHealthBar, _parenthealthBarImg, health, _parentSliderTween);
+            ChangeHealthBar(_parentHealthBar, _parenthealthBarImg, health);
         }
 
-        private void ChangeHealthBar(Slider slider,Image fill,float health, Tween t)
+        private void ChangeHealthBar(Slider slider,Image fill,float health)
         {
-            if(t != null)
-            {
-                t.Kill(true);
-            }
-            t = slider.DOValue(health, .1f).SetEase(Ease.InElastic);
+            slider.DOKill();
+            slider.DOValue(health, .1f).SetEase(Ease.OutElastic);
             fill.color = health >= (slider.maxValue*0.35f) ? _healthyColor : _unhealthyColor;
         }
     }

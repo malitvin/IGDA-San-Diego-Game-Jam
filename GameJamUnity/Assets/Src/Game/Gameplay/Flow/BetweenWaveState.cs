@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class BetweenWaveState : FlowState
 {
-
-    public BetweenWaveState(MonsterGenerator generator, LevelConfig config) : base(generator, config)
+    public BetweenWaveState(MonsterGenerator generator, LevelConfig.LevelDef levelDef) : base(generator, levelDef)
     {
  
     }

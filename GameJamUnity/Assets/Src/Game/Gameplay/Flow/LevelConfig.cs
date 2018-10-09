@@ -17,12 +17,12 @@ public class LevelConfig : ScriptableObject
     [System.Serializable]
     public class WaveDef
     {
-        public string WAVE;
+        [Space(10)]
+
         public int enemyCount;
         public float minSpawnIntervalTime;
         public float maxSpawnIntervalTime;
 
-        [Space(10)]
         public float waveCompleteWaitTime;
     }
 

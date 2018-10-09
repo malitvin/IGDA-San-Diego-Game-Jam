@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374f669a70e1e9d489ba66aedcb8104c, type: 3}
+  m_Name: TestLevels
+  m_EditorClassIdentifier: 
+  levels:
+  - spawnDistance: 60
+    waveStartWaitTime: 3
+    waves:
+    - WAVE: '-----------------------------------------------------------------------'
+      enemyCount: 2
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 3
+      waveCompleteWaitTime: 1
+    - WAVE: '-----------------------------------------------------------------------'
+      enemyCount: 3
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 2
+      waveCompleteWaitTime: 2
+    - WAVE: '-----------------------------------------------------------------------'
+      enemyCount: 4
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 2
+      waveCompleteWaitTime: 5
+    - WAVE: '----------------------------------------------'
+      enemyCount: 5
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 6
+      waveCompleteWaitTime: 1
+    - WAVE: '---------------------------'
+      enemyCount: 6
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 4
+      waveCompleteWaitTime: 5
+    - WAVE: '---------------------------'
+      enemyCount: 7
+      minSpawnIntervalTime: 1
+      maxSpawnIntervalTime: 3
+      waveCompleteWaitTime: 1
