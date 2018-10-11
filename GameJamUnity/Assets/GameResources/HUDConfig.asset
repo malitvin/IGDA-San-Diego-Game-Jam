@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551b1424403b31b48abfda4daaf09285, type: 3}
+  m_Name: HUDConfig
+  m_EditorClassIdentifier: 
+  flowIndicatorData:
+    enemyCountFlashColor: {r: 1, g: 0, b: 0, a: 1}
+    enemyCountFlashTime: 0.25
+    enemyCountFadeTime: 1
+    enemyCountFadeEaseType: 10
+    enemyCountScaleTime: 0.5
+    enemyCountScale: 1.33
+    enemyCountScaleEaseType: 32
+    waveBarVisibleWidth: 175
+    waveBarHiddenWidth: 55
+    waveBarMorphSpeed: 0.5
+    waveBarMorphEaseType: 29
+  healthBarData:
+    healthyColor: {r: 0, g: 1, b: 0.18364692, a: 1}
+    unhealthyColor: {r: 0.6792453, g: 0, b: 0, a: 1}
+    unhealthyThreshold: 0.35

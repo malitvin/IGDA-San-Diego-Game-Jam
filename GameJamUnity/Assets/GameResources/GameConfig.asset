@@ -19,3 +19,4 @@ MonoBehaviour:
   enemyConfig: {fileID: 11400000, guid: 2809fd324edc5484b9fec6430f534c0e, type: 2}
   audioConfig: {fileID: 11400000, guid: 6cbb42d071514d54585359ddb45f61d2, type: 2}
   levelConfig: {fileID: 11400000, guid: 0c640f161507d5346a32eed4f8e2f944, type: 2}
+  hudConfig: {fileID: 11400000, guid: e657646e3ca63424c833a0159c925a66, type: 2}

@@ -24,6 +24,11 @@ public class LevelConfig : ScriptableObject
         public float maxSpawnIntervalTime;
 
         public float waveCompleteWaitTime;
+
+        public float waveIndex
+        {
+            get; set;
+        }
     }
 
     public List<LevelDef> levels;

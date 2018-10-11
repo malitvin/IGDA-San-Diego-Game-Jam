@@ -7,6 +7,9 @@ using Audio;
 //C#
 using System.Collections.Generic;
 
+//UI
+using UI.HUD;
+
 public class MonsterState : FlowState
 {
     private int _currentWaveIndex;
@@ -18,17 +21,25 @@ public class MonsterState : FlowState
     private float _waveTimer;
     private float _currentGenTime;
 
+    private int _maxWaves;
+
     private Queue<LevelConfig.WaveDef> _waveQueue;
     private LevelConfig.WaveDef _currentWave;
 
-    public MonsterState(MonsterGenerator generator, LevelConfig.LevelDef levelDef) : base(generator, levelDef)
+    private HUDController _hudController;
+
+    public MonsterState(MonsterGenerator generator, LevelConfig.LevelDef levelDef,HUDController hudController) : base(generator, levelDef)
     {
         _currentWaveIndex = 0;
+        _hudController = hudController;
 
         _waveQueue = new Queue<LevelConfig.WaveDef>();
-        for(int i=0; i <levelDef.waves.Length; i++)
+        _maxWaves = levelDef.waves.Length;
+        for (int i=0; i < _maxWaves; i++)
         {
-            _waveQueue.Enqueue(levelDef.waves[i]);
+            LevelConfig.WaveDef def = levelDef.waves[i];
+            def.waveIndex = i;
+            _waveQueue.Enqueue(def);
         }
     }
 
@@ -53,9 +64,6 @@ public class MonsterState : FlowState
         //init sound to let player know monsters are coming
         Singleton.instance.audioSystem.PlaySound(SoundBank.Type.MonsterRoar);
 
-        //refresh hud
-        _generator._hudController.OnWaveChanged(_currentWaveIndex + 1);
-
         //set generator current wave
         _generator._currentWave = _currentWave;
 
@@ -64,6 +72,9 @@ public class MonsterState : FlowState
         _waveTimer = 0;
         _currentGenTime = 0;
         _monsterDestroyedCount = 0;
+
+        //refresh hud
+        _hudController.OnWaveChanged(_currentWave, _maxWaves);
     }
 
     public override void OnUpdate()
@@ -82,6 +93,10 @@ public class MonsterState : FlowState
     {
         base.OnMonsterDestroyed();
         _monsterDestroyedCount++;
+
+        //refresh hud
+        _hudController.OnEnemyCountChanged(_monstersToDestroyCount - _monsterDestroyedCount);
+
         if (_monsterDestroyedCount >= _monstersToDestroyCount)
         {
             _generator.SetFlowState(State.BetweenWaveState);

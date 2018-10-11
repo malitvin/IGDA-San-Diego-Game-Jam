@@ -54,7 +54,7 @@ public class MonsterGenerator : EventDispatcher
     private void InitMonsterStateMachine()
     {
         _stateMachine[FlowState.State.Start] = new StartState(this, _levelDef);
-        _stateMachine[FlowState.State.Monster] = new MonsterState(this, _levelDef);
+        _stateMachine[FlowState.State.Monster] = new MonsterState(this, _levelDef,_hudController);
         _stateMachine[FlowState.State.End] = new EndState(this, _levelDef);
         _stateMachine[FlowState.State.BetweenWaveState] = new BetweenWaveState(this, _levelDef);
         //set to start state

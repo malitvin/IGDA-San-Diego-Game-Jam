@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using GhostGen;
 using Gameplay.Building;
 using Gameplay.Inventory;
 using Gameplay.Particles;
+using UI.HUD;
 using Audio;
 
 
@@ -19,6 +18,9 @@ public class GameConfig : ScriptableObject, IPostInit
     public EnemyConfig enemyConfig;
     public AudioConfig audioConfig;
     public LevelConfig levelConfig;
+
+    [Header("UI")]
+    public HUDConfig hudConfig;
 
     public void PostInit()
     {

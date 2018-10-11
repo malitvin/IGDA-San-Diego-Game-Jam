@@ -17,6 +17,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 114877908867029818, guid: df1b288987f2df44ea8990b4849b3acb,
       type: 2}
     characteristics:
+      warmPoolAmount: 5
       autoDestruct: 1
       lifeTime: 1.75
   - displayName: Build Zone
@@ -24,6 +25,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 114810541558165160, guid: 43694edd85cf4564faf685ebb840c043,
       type: 2}
     characteristics:
+      warmPoolAmount: 8
       autoDestruct: 0
       lifeTime: 0.01
   - displayName: Helix Bomb
@@ -31,6 +33,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 114870425695816356, guid: a51e068d1d3c8d24182ae6699cee53b3,
       type: 2}
     characteristics:
+      warmPoolAmount: 4
       autoDestruct: 1
       lifeTime: 2
   - displayName: Build Glow
@@ -38,6 +41,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 114146312419315070, guid: 93e5e42a2aaf4a141b2b0da579e0a770,
       type: 2}
     characteristics:
+      warmPoolAmount: 25
       autoDestruct: 1
       lifeTime: 1.5
   - displayName: Escape
@@ -45,6 +49,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 114802075612915088, guid: 3a7dc38b871a40e4992e01a02225f384,
       type: 2}
     characteristics:
+      warmPoolAmount: 2
       autoDestruct: 1
       lifeTime: 1.5
   - displayName: Enemy Death
@@ -52,6 +57,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 114235682089096440, guid: 1e71e38c38c607c4ebc7f8416664886a,
       type: 2}
     characteristics:
+      warmPoolAmount: 10
       autoDestruct: 1
       lifeTime: 1.5
   - displayName: Break
@@ -59,6 +65,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 114857578773636414, guid: b03d0f8963df9544c8e8df24a5ebff38,
       type: 2}
     characteristics:
+      warmPoolAmount: 0
       autoDestruct: 1
       lifeTime: 2
   - displayName: Parent
@@ -66,5 +73,6 @@ MonoBehaviour:
     particlePrefab: {fileID: 114152106137421788, guid: fd659f9bc0574d245a197a84e9d0ab87,
       type: 2}
     characteristics:
+      warmPoolAmount: 1
       autoDestruct: 0
       lifeTime: 1

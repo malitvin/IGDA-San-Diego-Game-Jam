@@ -69,7 +69,7 @@ public class GameplayState : IGameState
         _particleGod.InitParticlePool();
 
         //HUD
-        _hudController = new HUDController(_gameConfig.playerConfig);
+        _hudController = new HUDController(_gameConfig.playerConfig,_gameConfig.hudConfig);
         _hudController.Start(() =>
         {
             _monsterGenerator.Init(_hudController, _playerCombatSystem);
