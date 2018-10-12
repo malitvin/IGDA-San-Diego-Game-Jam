@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Gameplay.Loot;
 
 [System.Serializable]
 public class EnemyDef
