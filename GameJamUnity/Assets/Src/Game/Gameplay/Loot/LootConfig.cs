@@ -40,9 +40,8 @@ namespace Gameplay.Loot
             [OnInspectorGUI("onGUIUpdate", append: false)]
             public List<ProbabilityDef> probabilities;
 
-            private Dictionary<int, float> changeMap;
-
 #if UNITY_EDITOR
+            #region Editor
             private void onGUIUpdate()
             {
                 Loot.Rarity[] probTypes = Enum.GetValues(typeof(Loot.Rarity)) as Loot.Rarity[];
@@ -55,50 +54,36 @@ namespace Gameplay.Loot
             private void GenerateProbabilities(Loot.Rarity[] probTypes)
             {
                 probabilities = new List<ProbabilityDef>();
-                changeMap = new Dictionary<int, float>();
                 int index = 0;
                 foreach (Loot.Rarity type in probTypes)
                 {
                     float prob = index == 0 ? 1 : 0;
                     ProbabilityDef def = new ProbabilityDef(type, prob);
                     probabilities.Add(def);
-                    changeMap[index] = prob;
                     index++;
                 }
             }
 
             private void onElementUpdate(int index)
             {
-                if(changeMap == null)
+                ProbabilityDef def = probabilities[index];
+                //sum all elements
+                float sum = 0;
+                int probCount = probabilities.Count;
+                int i = 0;
+                for (i = 0; i < probCount; i++)
                 {
-                    Loot.Rarity[] probTypes = Enum.GetValues(typeof(Loot.Rarity)) as Loot.Rarity[];
-                    GenerateProbabilities(probTypes);
+                    sum += probabilities[i].probability;
                 }
-                else if(changeMap != null && changeMap.ContainsKey(index))
-                {
-                    float previousProbabliity = changeMap[index];
-                    ProbabilityDef def = probabilities[index];
-                    if (previousProbabliity != def.probability)
-                    {
-                        //sum all elements
-                        float sum = 0;
-                        int probCount = probabilities.Count;
-                        int i = 0;
-                        for (i=0; i < probCount; i++)
-                        {
-                            sum += probabilities[i].probability;
-                        }
 
-                        //divide elements by sum
-                        for (i = 0; i < probCount; i++)
-                        {
-                            def = probabilities[i];
-                            def.probability = def.probability / sum;
-                            changeMap[i] = def.probability;
-                        }
-                    }
+                //divide elements by sum
+                for (i = 0; i < probCount; i++)
+                {
+                    def = probabilities[i];
+                    def.probability = def.probability / sum;
                 }
             }
+            #endregion
 #endif
         }
 
