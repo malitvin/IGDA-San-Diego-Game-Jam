@@ -23,34 +23,42 @@ MonoBehaviour:
   lootDefs:
   - rarity: 0
     color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+    pooledWarmAmount: 25
     lootItems:
     - type: 0
-      name: CoinStack
-      prefab: {fileID: 0}
+      name: Coin Stack
+      prefab: {fileID: 114411774443473810, guid: 87e5f838232f46044b75c2a2cb4edf2e,
+        type: 2}
       min: 0
       max: 10
       multipleQuantities: 1
   - rarity: 1
     color: {r: 0.39703214, g: 1, b: 0, a: 1}
+    pooledWarmAmount: 15
     lootItems:
     - type: 0
       name: Coin Purse
-      prefab: {fileID: 0}
+      prefab: {fileID: 114411774443473810, guid: 87e5f838232f46044b75c2a2cb4edf2e,
+        type: 2}
       min: 0
       max: 40
       multipleQuantities: 1
     - type: 1
       name: Health Potion
-      prefab: {fileID: 0}
+      prefab: {fileID: 114747203523537184, guid: 3a77a440459bd484e97c1e9dbec19b3f,
+        type: 2}
       min: 0
       max: 1
       multipleQuantities: 0
   - rarity: 2
     color: {r: 0, g: 0.22399688, b: 1, a: 1}
+    pooledWarmAmount: 5
     lootItems: []
-  - rarity: 0
+  - rarity: 3
     color: {r: 0.7608986, g: 0, b: 1, a: 1}
+    pooledWarmAmount: 2
     lootItems: []
   - rarity: 4
     color: {r: 1, g: 0.8812718, b: 0, a: 1}
+    pooledWarmAmount: 1
     lootItems: []

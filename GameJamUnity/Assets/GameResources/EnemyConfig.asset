@@ -28,9 +28,9 @@ MonoBehaviour:
       max: 4
       probabilities:
       - rarity: 0
-        probability: 0.79403114
+        probability: 0.7226185
       - rarity: 1
-        probability: 0.20596889
+        probability: 0.27738148
       - rarity: 2
         probability: 0
       - rarity: 3

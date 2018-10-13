@@ -6,6 +6,7 @@ using Common.Util;
 using GhostGen;
 
 //C#
+using System;
 using System.Collections.Generic;
 
 namespace Gameplay.Inventory
@@ -98,8 +99,25 @@ namespace Gameplay.Inventory
     {
         public enum Type
         {
-            Coin,
-            HealthPotion
+            Coin = 0,
+            HealthPotion = 1
+        }
+
+        private static Dictionary<Type, string> sStoreableLookup;
+
+        public static string GetCachedStoreableKey(Type type)
+        {
+            if(sStoreableLookup == null)
+            {
+                sStoreableLookup = new Dictionary<Type, string>();
+                var storeAbleTypes = Enum.GetValues(typeof(Type));
+                foreach (Type storeable in storeAbleTypes)
+                {
+                    sStoreableLookup[storeable] = storeable.ToString();
+                }
+            }
+
+            return sStoreableLookup[type];
         }
     }
 }

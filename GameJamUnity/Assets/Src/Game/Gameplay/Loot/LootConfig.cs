@@ -24,13 +24,19 @@ namespace Gameplay.Loot
             [ReadOnly]
             public Loot.Rarity rarity;
             public Color color;
-            [ListDrawerSettings(ShowPaging = false, DraggableItems = true,Expanded =false)]
+            [Range(0,25)]
+            [Tooltip("Amount to warm in pool for this element")]
+            public int pooledWarmAmount = 5;
+            [ListDrawerSettings(ShowPaging = false, DraggableItems = true,Expanded =false,ListElementLabelName = "name")]
             public List<LootItemDef> lootItems;
+
+            private string name;
 
             public LootDef(Loot.Rarity rarity, string name, Color color)
             {
                 this.rarity = rarity;
                 this.color = color;
+                this.name = name;
             }
         }
 
@@ -74,7 +80,7 @@ namespace Gameplay.Loot
             private int max;
 
             [ShowInInspector, MinMaxSlider(0, 15)]
-            private Vector2 randomDropRange
+            public Vector2 randomDropRange
             {
                 get
                 {
@@ -89,11 +95,11 @@ namespace Gameplay.Loot
 
             [Space(10)]
 
-            [ListDrawerSettings(HideAddButton = true, ShowPaging = false, DraggableItems = false)]
+            [ListDrawerSettings(HideAddButton = true, ShowPaging = true, DraggableItems = false)]
             [OnInspectorGUI("OnProbUpdate", append: false)]
             public List<ProbabilityDef> probabilities;
 
-            #region Loot Def Editor
+            #region Loot Drop Def Editor
             #if UNITY_EDITOR
 
             private void OnProbUpdate()
@@ -145,6 +151,7 @@ namespace Gameplay.Loot
         public class ProbabilityDef
         {
             [ReadOnly]
+            [GUIColor(1f, 0.5f, 0f, 1f)]
             public Loot.Rarity rarity;
             [Range(0, 1)]
             public float probability;
@@ -159,7 +166,7 @@ namespace Gameplay.Loot
         [ListDrawerSettings(HideAddButton = true, ShowPaging = false, DraggableItems = false)]
         [OnInspectorGUI("OnLootDefUpdate", append: false)]
         [SerializeField]
-        private List<LootDef> lootDefs;
+        public List<LootDef> lootDefs;
 
         #region Loot Defs Editor
         #if UNITY_EDITOR
@@ -224,11 +231,11 @@ namespace Gameplay.Loot
     {
         public enum Rarity
         {
-            Common,
-            Uncommon,
-            Rare,
-            Legendary,
-            Exotic
+            Common = 0,
+            Uncommon = 1,
+            Rare = 2,
+            Legendary = 3,
+            Exotic = 4
         }
     }
 }

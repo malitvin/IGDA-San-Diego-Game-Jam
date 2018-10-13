@@ -29,7 +29,6 @@ public class EnemyDef
     public LootConfig.LootDropDef lootDropDef;
 }
 
-
 [CreateAssetMenu(menuName = "IDGA/Enemy Config")]
 public class EnemyConfig : ScriptableObject
 {

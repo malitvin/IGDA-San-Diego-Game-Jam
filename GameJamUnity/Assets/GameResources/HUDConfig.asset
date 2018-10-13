@@ -22,7 +22,7 @@ MonoBehaviour:
     waveBarVisibleWidth: 175
     waveBarHiddenWidth: 55
     waveBarMorphSpeed: 0.5
-    waveBarMorphEaseType: 29
+    waveBarMorphEaseType: 30
   healthBarData:
     healthyColor: {r: 0, g: 1, b: 0.18364692, a: 1}
     unhealthyColor: {r: 0.6792453, g: 0, b: 0, a: 1}

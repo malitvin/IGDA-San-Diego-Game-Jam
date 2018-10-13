@@ -55,6 +55,7 @@ public class EnemyController : ILootable
         get { return _view.gameObject.GetInstanceID(); }
     }
 
+    #region ILootable
     public LootConfig.LootDropDef _lootDropDef
     {
         get
@@ -62,6 +63,7 @@ public class EnemyController : ILootable
             return _def.lootDropDef;
         }
     }
+    #endregion
 
     public DamageResult TakeDamage(object attacker, float damage)
     {
