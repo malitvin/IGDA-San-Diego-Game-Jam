@@ -1,19 +1,39 @@
 ﻿//Unity
+using UnityEngine;
+
 //Odin
 using Sirenix.OdinInspector;
+
 //C#
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+
+//Game
+using Common.Util;
+
 
 namespace Gameplay.Loot
 {
     [ExecuteInEditMode]
     [CreateAssetMenu(fileName = "Loot Config", menuName = "Gameplay/Loot Config")]
-    public class LootConfig : ScriptableObject
+    public class LootConfig : SerializedScriptableObject
     {
-        [System.Serializable]
+        [Serializable]
         public class LootDef
+        {
+            [ReadOnly]
+            public Loot.Rarity rarity;
+            public Color color;
+
+            public LootDef(Loot.Rarity rarity, string name, Color color)
+            {
+                this.rarity = rarity;
+                this.color = color;
+            }
+        }
+
+        [Serializable]
+        public class LootDropDef
         {
             [SerializeField, HideInInspector]
             private int min;
@@ -36,18 +56,39 @@ namespace Gameplay.Loot
 
             [Space(10)]
 
-            [ListDrawerSettings(HideAddButton = true, ShowPaging = false, DraggableItems = false, OnBeginListElementGUI = "onElementUpdate")]
-            [OnInspectorGUI("onGUIUpdate", append: false)]
+            [ListDrawerSettings(HideAddButton = true, ShowPaging = false, DraggableItems = false)]
+            [OnInspectorGUI("OnProbUpdate", append: false)]
             public List<ProbabilityDef> probabilities;
 
+            #region Loot Def Editor
 #if UNITY_EDITOR
-            #region Editor
-            private void onGUIUpdate()
+
+            private void OnProbUpdate()
             {
-                Loot.Rarity[] probTypes = Enum.GetValues(typeof(Loot.Rarity)) as Loot.Rarity[];
-                if (probabilities.Count != probTypes.Length)
+                if (Event.current.type == EventType.Repaint)
                 {
-                    GenerateProbabilities(probTypes);
+                    Loot.Rarity[] probTypes = Enum.GetValues(typeof(Loot.Rarity)) as Loot.Rarity[];
+                    if (probabilities.Count != probTypes.Length)
+                    {
+                        GenerateProbabilities(probTypes);
+                    }
+                }
+
+                //sum all elements
+                float sum = 0;
+                int probCount = probabilities.Count;
+                int i = 0;
+                for (i = 0; i < probCount; i++)
+                {
+                    sum += probabilities[i].probability;
+                }
+
+                ProbabilityDef def = null;
+                //divide elements by sum
+                for (i = 0; i < probCount; i++)
+                {
+                    def = probabilities[i];
+                    def.probability = def.probability / sum;
                 }
             }
 
@@ -63,31 +104,11 @@ namespace Gameplay.Loot
                     index++;
                 }
             }
-
-            private void onElementUpdate(int index)
-            {
-                ProbabilityDef def = probabilities[index];
-                //sum all elements
-                float sum = 0;
-                int probCount = probabilities.Count;
-                int i = 0;
-                for (i = 0; i < probCount; i++)
-                {
-                    sum += probabilities[i].probability;
-                }
-
-                //divide elements by sum
-                for (i = 0; i < probCount; i++)
-                {
-                    def = probabilities[i];
-                    def.probability = def.probability / sum;
-                }
-            }
-            #endregion
 #endif
+            #endregion
         }
 
-        [System.Serializable]
+        [Serializable]
         public class ProbabilityDef
         {
             [ReadOnly]
@@ -102,7 +123,68 @@ namespace Gameplay.Loot
             }
         }
 
-        public LootDef def;
+        [ListDrawerSettings(HideAddButton = true, ShowPaging = false, DraggableItems = false)]
+        [OnInspectorGUI("OnLootDefUpdate", append: false)]
+        [SerializeField]
+        private List<LootDef> lootDefs;
+
+        #region Loot Defs Editor
+#if UNITY_EDITOR
+        private void OnLootDefUpdate()
+        {
+            if (Event.current.type == EventType.Repaint)
+            {
+                Loot.Rarity[] probTypes = Enum.GetValues(typeof(Loot.Rarity)) as Loot.Rarity[];
+                if (lootDefs.Count != probTypes.Length)
+                {
+                    GenerateDefs(probTypes);
+                }
+            }
+        }
+
+        private void GenerateDefs(Loot.Rarity[] probTypes)
+        {
+            lootDefs = new List<LootDef>();
+            foreach (Loot.Rarity type in probTypes)
+            {
+                LootDef def = new LootDef(type, type.ToString(), Color.white);
+                lootDefs.Add(def);
+            }
+        }
+#endif
+#endregion
+
+        #region Lookups
+        private Dictionary<Loot.Rarity, LootDef> _lootDefLookup = new Dictionary<Loot.Rarity, LootDef>(new FastEnumIntEqualityComparer<Loot.Rarity>());
+        private void GenerateLootDefLookup()
+        {
+            int i = 0;
+            int particleLength = lootDefs.Count;
+            for (i = 0; i < particleLength; i++)
+            {
+                LootDef blueprint = lootDefs[i];
+                Loot.Rarity type = blueprint.rarity;
+                if (!_lootDefLookup.ContainsKey(type))
+                {
+                    _lootDefLookup.Add(type, blueprint);
+                }
+            }
+        }
+
+        public LootDef GetLootDef(Loot.Rarity key)
+        {
+            if(_lootDefLookup.Count == 0)
+            {
+                GenerateLootDefLookup();
+            }
+
+            if(_lootDefLookup.ContainsKey(key))
+            {
+                return _lootDefLookup[key];
+            }
+            return null;
+        }
+        #endregion
     }
 
     public class Loot
