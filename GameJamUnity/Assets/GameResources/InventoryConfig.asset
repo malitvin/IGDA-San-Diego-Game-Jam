@@ -17,6 +17,11 @@ MonoBehaviour:
     startAmount: 1200
     inventoryUISprite: {fileID: 21300000, guid: 6a897ceb6da46db4280d314b13d1bc2c,
       type: 3}
+  - displayName: Health Potion
+    key: 1
+    startAmount: 0
+    inventoryUISprite: {fileID: 21300000, guid: 11a3b8af0494ee04a9603e782fdf297d,
+      type: 3}
   uiSpawnData:
     _buildItem: {fileID: 114948461914811384, guid: a8352630b9420564b92f3ea542041fb1,
       type: 2}
