@@ -11,5 +11,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd2f80cd34fea744b993342972b27de, type: 3}
   m_Name: Loot Config
   m_EditorClassIdentifier: 
-  def:
-    probablity: {x: 0, y: 0}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  lootDefs:
+  - rarity: 0
+    color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+    lootItems:
+    - type: 0
+      name: CoinStack
+      prefab: {fileID: 0}
+      min: 0
+      max: 10
+      multipleQuantities: 1
+  - rarity: 1
+    color: {r: 0.39703214, g: 1, b: 0, a: 1}
+    lootItems:
+    - type: 0
+      name: Coin Purse
+      prefab: {fileID: 0}
+      min: 0
+      max: 40
+      multipleQuantities: 1
+    - type: 1
+      name: Health Potion
+      prefab: {fileID: 0}
+      min: 0
+      max: 1
+      multipleQuantities: 0
+  - rarity: 2
+    color: {r: 0, g: 0.22399688, b: 1, a: 1}
+    lootItems: []
+  - rarity: 0
+    color: {r: 0.7608986, g: 0, b: 1, a: 1}
+    lootItems: []
+  - rarity: 4
+    color: {r: 1, g: 0.8812718, b: 0, a: 1}
+    lootItems: []

@@ -10,5 +10,5 @@ public class GameplayEventType
     public const string GAME_COMPLETE = "game_complete";
     public const string ITEM_PICKED_UP = "item_picked_up";
     public const string GAME_RETRY = "game_retry";
-
+    public const string LOOT_DROPPED = "loot_dropped";
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 using Gameplay.Loot;
 
@@ -27,6 +25,8 @@ public class EnemyDef
     public LayerMask targetMask;
     public int rewardsForKill;
     public float startHealth;
+
+    public LootConfig.LootDropDef lootDropDef;
 }
 
 

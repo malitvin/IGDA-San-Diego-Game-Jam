@@ -3,6 +3,7 @@ using UnityEngine;
 using Zenject;
 using Gameplay.Building;
 using Gameplay.Inventory;
+using Gameplay.Loot;
 using Gameplay.Particles;
 using Audio;
 
@@ -18,6 +19,7 @@ public class GameSystemInstaller : ScriptableObjectInstaller
         Container.Bind<MonsterGenerator>().AsSingle();
         Container.Bind<ParticleGOD>().AsSingle();
         Container.Bind<AudioSystem>().AsSingle();
+        Container.Bind<LootSystem>().AsSingle();
         //Container.Bind<GameState>().AsSingle();
         //Container.Bind<GameTimerManager>().AsSingle();
         //Container.Bind<WaveAISystem>().AsSingle();

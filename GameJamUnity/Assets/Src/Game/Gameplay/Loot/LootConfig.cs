@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 //Game
 using Common.Util;
-
+using Gameplay.Inventory;
 
 namespace Gameplay.Loot
 {
@@ -24,11 +24,44 @@ namespace Gameplay.Loot
             [ReadOnly]
             public Loot.Rarity rarity;
             public Color color;
+            [ListDrawerSettings(ShowPaging = false, DraggableItems = true,Expanded =false)]
+            public List<LootItemDef> lootItems;
 
             public LootDef(Loot.Rarity rarity, string name, Color color)
             {
                 this.rarity = rarity;
                 this.color = color;
+            }
+        }
+
+        [Serializable]
+        public class LootItemDef
+        {
+            public Storeable.Type type;
+            public string name;
+            public BaseLootItem prefab;
+
+            [SerializeField, HideInInspector]
+            private int min;
+            [SerializeField, HideInInspector]
+            private int max;
+
+            [Tooltip("Should this item give you more than one of this item")]
+            public bool multipleQuantities;
+
+            [ShowIf("multipleQuantities")]
+            [ShowInInspector, MinMaxSlider(1, 100)]
+            private Vector2 quantity
+            {
+                get
+                {
+                    return new Vector2(min, max);
+                }
+                set
+                {
+                    min = (int)value.x;
+                    max = (int)value.y;
+                }
             }
         }
 
@@ -61,7 +94,7 @@ namespace Gameplay.Loot
             public List<ProbabilityDef> probabilities;
 
             #region Loot Def Editor
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
 
             private void OnProbUpdate()
             {
@@ -104,7 +137,7 @@ namespace Gameplay.Loot
                     index++;
                 }
             }
-#endif
+            #endif
             #endregion
         }
 
@@ -129,7 +162,7 @@ namespace Gameplay.Loot
         private List<LootDef> lootDefs;
 
         #region Loot Defs Editor
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         private void OnLootDefUpdate()
         {
             if (Event.current.type == EventType.Repaint)
@@ -151,8 +184,8 @@ namespace Gameplay.Loot
                 lootDefs.Add(def);
             }
         }
-#endif
-#endregion
+        #endif
+        #endregion
 
         #region Lookups
         private Dictionary<Loot.Rarity, LootDef> _lootDefLookup = new Dictionary<Loot.Rarity, LootDef>(new FastEnumIntEqualityComparer<Loot.Rarity>());

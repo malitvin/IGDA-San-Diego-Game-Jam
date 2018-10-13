@@ -98,7 +98,8 @@ namespace Gameplay.Inventory
     {
         public enum Type
         {
-            Coin
+            Coin,
+            HealthPotion
         }
     }
 }

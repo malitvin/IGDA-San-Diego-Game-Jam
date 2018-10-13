@@ -23,3 +23,17 @@ MonoBehaviour:
       m_Bits: 1847
     rewardsForKill: 10
     startHealth: 25
+    lootDropDef:
+      min: 0
+      max: 4
+      probabilities:
+      - rarity: 0
+        probability: 0.79403114
+      - rarity: 1
+        probability: 0.20596889
+      - rarity: 2
+        probability: 0
+      - rarity: 3
+        probability: 0
+      - rarity: 4
+        probability: 0
