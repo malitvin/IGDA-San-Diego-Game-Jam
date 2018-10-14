@@ -29,7 +29,8 @@ namespace Gameplay.Loot
 
         protected LootConfig _lootConfig;
         protected LootConfig.LootDef _lootDef;
-        public LootConfig.LootItemDef _itemDef;
+
+        public LootConfig.LootItemDef _itemDef { get; private set; }
 
         private Transform _followPosition;
 

@@ -6,7 +6,6 @@ using Gameplay.Inventory;
 using Common.Pooling;
 
 //C#
-using System;
 using System.Collections.Generic;
 
 namespace Gameplay.Loot
@@ -90,9 +89,8 @@ namespace Gameplay.Loot
             {
                 Loot.Rarity rarity = LootUtil.GetWeightedRarity(probabilities, totalSum);
                 LootConfig.LootDef lootDef = _lootConfig.GetLootDef(rarity);
-                int bucket = UnityEngine.Random.Range(0,lootDef.lootItems.Count);
+                int bucket = Random.Range(0,lootDef.lootItems.Count);
                 LootConfig.LootItemDef itemDef = lootDef.lootItems[bucket];
-
                 string key = Storeable.GetCachedStoreableKey(itemDef.type);
                 ILootItem item = _lootPool.GetPooledObject(key).GetComponent<ILootItem>();
                 if (item != null)
