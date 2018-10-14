@@ -15,7 +15,7 @@ MonoBehaviour:
   - spawnDistance: 60
     waveStartWaitTime: 3
     waves:
-    - enemyCount: 25
+    - enemyCount: 100
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 3
       waveCompleteWaitTime: 1

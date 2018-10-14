@@ -21,7 +21,6 @@ namespace Gameplay.Inventory
             new Dictionary<Storeable.Type, int>(new FastEnumIntEqualityComparer<Storeable.Type>());
 
         private InventoryConfig _inventoryConfig;
-        private EnemyConfig _enemyConfig;
 
         private IEventDispatcher _dispatcher;
 
@@ -29,7 +28,6 @@ namespace Gameplay.Inventory
         public InventorySystem(GameConfig gameConfig)
         {
             _inventoryConfig = gameConfig.inventoryConfig;
-            _enemyConfig = gameConfig.enemyConfig;
             InitInventory();
         }
 
