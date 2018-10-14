@@ -80,7 +80,7 @@ namespace Gameplay.Loot
         private Vector3 _previousFramePosition;
         private bool CustomCollisionDetection()
         {
-            Vector3 itemPosition = _lootItem.transform.position;
+            Vector3 itemPosition = GetPosition();
             Ray ray = new Ray(_previousFramePosition, (itemPosition - _previousFramePosition).normalized);
             float distance = (itemPosition - _previousFramePosition).magnitude;
             RaycastHit[] hits = Physics.RaycastAll(ray, distance, _collisionMask);
@@ -94,7 +94,7 @@ namespace Gameplay.Loot
 
         private void BoomEffect()
         {
-            Vector3 itemPosition = _lootItem.transform.position;
+            Vector3 itemPosition = GetPosition();
             float angle = Random.Range(0, Mathf.PI * 360);
             Vector3 origin = new Vector3(itemPosition.x, _boomDef.boomHeight, itemPosition.z);
             Vector3 directionPos = origin - new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));

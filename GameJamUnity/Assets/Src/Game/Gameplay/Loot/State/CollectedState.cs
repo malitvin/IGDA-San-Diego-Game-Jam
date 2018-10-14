@@ -12,7 +12,7 @@
         public override void Begin()
         {
             _dispatcher.DispatchEvent(GameplayEventType.LOOT_PICKED_UP, false, _lootItem._itemDef);
-            _lootItem.PickUp();
+            _lootItem.Pickup();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace Gameplay.Loot
+﻿//Unity
+using UnityEngine;
+
+namespace Gameplay.Loot
 {
     public interface ILootState
     {
@@ -7,5 +10,8 @@
         void LateTick();
         void FixedTick();
         void Exit();
+
+        Vector3 GetPosition();
+        void SetPosition(Vector3 pos);
     }
 }

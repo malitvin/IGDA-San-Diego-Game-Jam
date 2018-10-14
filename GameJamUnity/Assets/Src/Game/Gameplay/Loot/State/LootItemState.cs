@@ -1,4 +1,7 @@
-﻿namespace Gameplay.Loot
+﻿//Unity
+using UnityEngine;
+
+namespace Gameplay.Loot
 {
     public abstract class LootItemState : ILootState
     {
@@ -33,6 +36,16 @@
         public virtual void Exit()
         {
             
+        }
+
+        public Vector3 GetPosition()
+        {
+            return _lootItem.GetPosition();
+        }
+
+        public void SetPosition(Vector3 pos)
+        {
+            _lootItem.transform.position = pos;
         }
         #endregion
     }

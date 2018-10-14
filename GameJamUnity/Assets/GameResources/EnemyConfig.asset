@@ -25,15 +25,15 @@ MonoBehaviour:
     startHealth: 25
     lootDropDef:
       min: 0
-      max: 4
+      max: 2
       probabilities:
-      - rarity: 0
-        probability: 0.7226185
-      - rarity: 1
-        probability: 0.27738148
       - rarity: 2
         probability: 0
       - rarity: 3
         probability: 0
       - rarity: 4
         probability: 0
+      - rarity: 1
+        probability: 0.27738148
+      - rarity: 0
+        probability: 0.7226185

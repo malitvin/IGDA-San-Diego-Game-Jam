@@ -67,7 +67,12 @@ namespace Gameplay.Loot
             }
         }
 
-        public void PickUp()
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
+
+        public void Pickup()
         {
             RemoveFromPool();
         }

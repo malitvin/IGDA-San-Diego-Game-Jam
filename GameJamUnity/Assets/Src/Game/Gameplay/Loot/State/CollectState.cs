@@ -33,10 +33,10 @@ namespace Gameplay.Loot
             if (!_agent.isOnNavMesh)
             {
                 NavMeshHit closestHit;
-                Vector3 itemPos = _lootItem.transform.position;
+                Vector3 itemPos = GetPosition();
                 if (NavMesh.SamplePosition(itemPos, out closestHit, 500f, NavMesh.AllAreas))
                 {
-                    _lootItem.transform.position = closestHit.position;
+                    SetPosition(closestHit.position);
                 }
             }
             _agent.enabled = true;
@@ -60,7 +60,8 @@ namespace Gameplay.Loot
                 {
                     _agent.isStopped = false;
                     Vector3 playerPos = _followPoint.position;
-                    float dist = (_lootItem.transform.position - playerPos).sqrMagnitude;
+                    Vector3 lootPos = GetPosition();
+                    float dist = (lootPos - playerPos).sqrMagnitude;
                     if (dist < _playerAttractDistance)
                     {
                         _agent.SetDestination(playerPos);

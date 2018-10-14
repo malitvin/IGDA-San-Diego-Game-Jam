@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 114411774443473810}
   - component: {fileID: 54163779035333158}
   - component: {fileID: 65804425058852704}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,13 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c98f21466388749802331a362cb7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemDef:
-    type: 0
-    name: 
-    prefab: {fileID: 0}
-    min: 0
-    max: 0
-    multipleQuantities: 0
 --- !u!195 &195721522688803056
 NavMeshAgent:
   m_ObjectHideFlags: 1
