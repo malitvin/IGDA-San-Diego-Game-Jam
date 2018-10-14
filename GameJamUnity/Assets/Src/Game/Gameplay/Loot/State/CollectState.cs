@@ -29,14 +29,24 @@ namespace Gameplay.Loot
         public override void Begin()
         {
             base.Begin();
-            _lootItem._navMeshAgent.enabled = true;
+
+            if (!_agent.isOnNavMesh)
+            {
+                NavMeshHit closestHit;
+                Vector3 itemPos = _lootItem.transform.position;
+                if (NavMesh.SamplePosition(itemPos, out closestHit, 500f, NavMesh.AllAreas))
+                {
+                    _lootItem.transform.position = closestHit.position;
+                }
+            }
+            _agent.enabled = true;
             _refreshTimer = 0;
         }
 
         public override void Exit()
         {
             base.Exit();
-            _lootItem._navMeshAgent.enabled = false;
+            _agent.enabled = false;
         }
 
         public override void Tick()
@@ -46,13 +56,13 @@ namespace Gameplay.Loot
             {
                 _refreshTimer = 0;
 
-                if (_followPoint)
+                if (_followPoint && _agent.isActiveAndEnabled)
                 {
+                    _agent.isStopped = false;
                     Vector3 playerPos = _followPoint.position;
                     float dist = (_lootItem.transform.position - playerPos).sqrMagnitude;
                     if (dist < _playerAttractDistance)
                     {
-                        _agent.isStopped = false;
                         _agent.SetDestination(playerPos);
 
                         if (dist < _collectRange)
@@ -62,13 +72,10 @@ namespace Gameplay.Loot
                     }
                     else
                     {
-                        if (_agent.isActiveAndEnabled)
-                        {
-                            _agent.isStopped = true;
-                        }
+                       _agent.isStopped = true;
                     }
                 }
-                else
+                else if(_followPoint == null)
                 {
                     _agent.enabled = false;
                 }
