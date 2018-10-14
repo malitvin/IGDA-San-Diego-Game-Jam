@@ -22,9 +22,12 @@ namespace Gameplay.Loot
         //dispatcher
         private GhostGen.IEventDispatcher _dispatcher;
 
-        public LootSystem(GameConfig gameConfig)
+        private PlayerCombatSystem _playerCombatSystem;
+
+        public LootSystem(GameConfig gameConfig, PlayerCombatSystem playerCombatSystem)
         {
             _lootConfig = gameConfig.lootConfig;
+            _playerCombatSystem = playerCombatSystem;
             _dispatcher = Singleton.instance.notificationDispatcher;
         }
 
@@ -95,7 +98,7 @@ namespace Gameplay.Loot
                 ILootItem item = _lootPool.GetPooledObject(key).GetComponent<ILootItem>();
                 if (item != null)
                 {
-                    item.Init(lootable,lootDef);
+                    item.Init(lootable,_playerCombatSystem.playerController.transform, lootDef,_lootConfig,itemDef);
                 }else
                 {
                     Debug.LogError("Item of type " + key + " does not implement  ILootItem");

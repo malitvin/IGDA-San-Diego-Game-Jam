@@ -62,3 +62,10 @@ MonoBehaviour:
     color: {r: 1, g: 0.8812718, b: 0, a: 1}
     pooledWarmAmount: 1
     lootItems: []
+  lootAnimDef:
+    playerAttractDistance: 25
+    playerAttractSpeed: 15
+    boomHeight: 1
+    boomForce: 350
+  autoDestroyTime: 25
+  collectRange: 2

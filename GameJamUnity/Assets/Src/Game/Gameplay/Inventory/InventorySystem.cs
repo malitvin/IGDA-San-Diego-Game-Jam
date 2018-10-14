@@ -3,6 +3,7 @@ using UnityEngine;
 using Common.Util;
 
 //Game
+using Gameplay.Loot;
 using GhostGen;
 
 //C#
@@ -42,9 +43,29 @@ namespace Gameplay.Inventory
                 _inventory[item.key] = item.startAmount;
             }
 
-            // TODO: Klean it up!
             _dispatcher = Singleton.instance.notificationDispatcher;
-            _dispatcher.AddListener(GameplayEventType.ENEMY_KILLED, onEnemyKilled);
+        }
+
+        public void Init()
+        {
+            _dispatcher.AddListener(GameplayEventType.LOOT_PICKED_UP, onLootPickedUp);
+        }
+
+        public void Dispose()
+        {
+            _dispatcher.RemoveListener(GameplayEventType.LOOT_PICKED_UP, onLootPickedUp);
+        }
+        #endregion
+
+        #region Events
+        private void onLootPickedUp(GhostGen.GeneralEvent e)
+        {
+            LootConfig.LootItemDef itemDef = e.data as LootConfig.LootItemDef;
+            if(itemDef != null)
+            {
+                AddItem(itemDef.type, itemDef.GetQuantitiy());
+                _dispatcher.DispatchEvent(GameplayEventType.INVENTORY_UPDATED,false,itemDef.type);
+            }
         }
         #endregion
 
@@ -64,7 +85,7 @@ namespace Gameplay.Inventory
             _inventory[type] = currentAmount + amount;
         }
 
-        public void Buy(Storeable.Type type,int amount)
+        public void RemoveItem(Storeable.Type type,int amount)
         {
             _inventory[type] -= amount;
         }
@@ -84,14 +105,6 @@ namespace Gameplay.Inventory
         public int GetAmount(Storeable.Type type)
         {
             return _inventory[type];
-        }
-
-        private void onEnemyKilled(GhostGen.GeneralEvent e)
-        {
-            int rewardCoins = _enemyConfig.basicEnemy.rewardsForKill;
-            AddItem(Storeable.Type.Coin, rewardCoins);
-            int totalCoins = GetAmount(Storeable.Type.Coin);
-            _dispatcher.DispatchEvent(GameplayEventType.ITEM_PICKED_UP, false, totalCoins);
         }
     }
 

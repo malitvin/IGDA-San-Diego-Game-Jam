@@ -82,6 +82,7 @@ public class GameplayState : IGameState
         _buildSystem.Init();
         _enemySystem.Init();
         _lootSystem.Init();
+        _inventorySystem.Init();
 
         // Get CombatPlayerView
         //_playerCombatSystem.isEnabled = true;
@@ -152,6 +153,7 @@ public class GameplayState : IGameState
         _hudController.RemoveView();
         _buildSystem.CleanUp();
         _lootSystem.Dispose();
+        _inventorySystem.Dispose();
     }
 
     private void onDamageTaken(GeneralEvent e)

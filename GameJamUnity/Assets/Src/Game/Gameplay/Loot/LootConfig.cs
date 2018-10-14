@@ -69,6 +69,15 @@ namespace Gameplay.Loot
                     max = (int)value.y;
                 }
             }
+
+            public int GetQuantitiy()
+            {
+                if(multipleQuantities)
+                {
+                    return UnityEngine.Random.Range(min, max+1);
+                }
+                return 1;
+            }
         }
 
         [Serializable]
@@ -163,10 +172,31 @@ namespace Gameplay.Loot
             }
         }
 
+        [Serializable]
+        public class LootAnimDef
+        {
+            [Range(0, 1000)]
+            public float playerAttractDistance = 150;
+            [Range(0, 15)]
+            public float playerAttractSpeed = 8;
+            [Range(0,10)]
+            public float boomHeight = 3;
+            [Range(0,2000)]
+            public float boomForce = 350;
+        }
+
         [ListDrawerSettings(HideAddButton = true, ShowPaging = false, DraggableItems = false)]
         [OnInspectorGUI("OnLootDefUpdate", append: false)]
         [SerializeField]
         public List<LootDef> lootDefs;
+
+        public LootAnimDef lootAnimDef;
+
+        [Range(5, 25)]
+        public float autoDestroyTime = 20;
+
+        [Range(0.01f, 5f)]
+        public float collectRange = 2f;
 
         #region Loot Defs Editor
         #if UNITY_EDITOR
