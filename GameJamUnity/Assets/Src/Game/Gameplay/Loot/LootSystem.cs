@@ -55,7 +55,6 @@ namespace Gameplay.Loot
                     _lootPool.InitPool(type, warmAmount, item.prefab);
                 }
             }
-            
 
             _dispatcher.AddListener(GameplayEventType.ENEMY_KILLED, OnEnemyDestroyed);
         }
@@ -106,8 +105,6 @@ namespace Gameplay.Loot
 
             }
         }
-
-
         #endregion
 
     }

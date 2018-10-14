@@ -22,7 +22,7 @@ MonoBehaviour:
     SerializationNodes: []
   lootDefs:
   - rarity: 0
-    color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+    color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 0.4627451}
     pooledWarmAmount: 25
     lootItems:
     - type: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
       max: 10
       multipleQuantities: 1
   - rarity: 1
-    color: {r: 0.39703214, g: 1, b: 0, a: 1}
+    color: {r: 0.39703214, g: 1, b: 0, a: 0.5803922}
     pooledWarmAmount: 15
     lootItems:
     - type: 0
@@ -51,21 +51,22 @@ MonoBehaviour:
       max: 1
       multipleQuantities: 0
   - rarity: 2
-    color: {r: 0, g: 0.22399688, b: 1, a: 1}
+    color: {r: 0, g: 0.22399688, b: 1, a: 0.5254902}
     pooledWarmAmount: 5
     lootItems: []
   - rarity: 3
-    color: {r: 0.7608986, g: 0, b: 1, a: 1}
+    color: {r: 0.7608986, g: 0, b: 1, a: 0.5254902}
     pooledWarmAmount: 2
     lootItems: []
   - rarity: 4
-    color: {r: 1, g: 0.8812718, b: 0, a: 1}
+    color: {r: 1, g: 0.8812718, b: 0, a: 0.42745098}
     pooledWarmAmount: 1
     lootItems: []
-  lootAnimDef:
-    playerAttractDistance: 25
-    playerAttractSpeed: 15
-    boomHeight: 1
+  lootBoomDef:
+    boomHeight: 3
     boomForce: 350
   autoDestroyTime: 25
   collectRange: 2
+  refreshRate: 2
+  playerAttractDistance: 150
+  playerAttractSpeed: 8

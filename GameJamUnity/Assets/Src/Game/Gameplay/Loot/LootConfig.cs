@@ -30,13 +30,13 @@ namespace Gameplay.Loot
             [ListDrawerSettings(ShowPaging = false, DraggableItems = true,Expanded =false,ListElementLabelName = "name")]
             public List<LootItemDef> lootItems;
 
-            private string name;
+            //private string name;
 
             public LootDef(Loot.Rarity rarity, string name, Color color)
             {
                 this.rarity = rarity;
                 this.color = color;
-                this.name = name;
+                //this.name = name;
             }
         }
 
@@ -173,12 +173,8 @@ namespace Gameplay.Loot
         }
 
         [Serializable]
-        public class LootAnimDef
+        public class LootBoomDef
         {
-            [Range(0, 1000)]
-            public float playerAttractDistance = 150;
-            [Range(0, 15)]
-            public float playerAttractSpeed = 8;
             [Range(0,10)]
             public float boomHeight = 3;
             [Range(0,2000)]
@@ -190,7 +186,7 @@ namespace Gameplay.Loot
         [SerializeField]
         public List<LootDef> lootDefs;
 
-        public LootAnimDef lootAnimDef;
+        public LootBoomDef lootBoomDef;
 
         [Range(5, 25)]
         public float autoDestroyTime = 20;
@@ -198,8 +194,17 @@ namespace Gameplay.Loot
         [Range(0.01f, 5f)]
         public float collectRange = 2f;
 
+        [Tooltip("Times per frame to refresh")]
+        public int refreshRate = 3;
+
+        [Range(0, 1000)]
+        public float playerAttractDistance = 150;
+
+        [Range(0, 35)]
+        public float playerAttractSpeed = 8;
+
         #region Loot Defs Editor
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         private void OnLootDefUpdate()
         {
             if (Event.current.type == EventType.Repaint)
@@ -266,6 +271,13 @@ namespace Gameplay.Loot
             Rare = 2,
             Legendary = 3,
             Exotic = 4
+        }
+
+        public enum State
+        {
+            Boom = 0,
+            Collect = 1,
+            Collected = 2
         }
     }
 }
