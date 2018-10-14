@@ -129,10 +129,6 @@ namespace Common.Pooling
 
                 WarmPool(warmAmount, key, pool);
             }
-            else
-            {
-                Debug.LogError("You are trying to add duplicates key of " + key + " to the pool map");
-            }
         }
 
         private void WarmPool(int amount, string key, ObjectPool<PoolableObject> pool)

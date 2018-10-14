@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using GhostGen;
+using Gameplay.Loot;
 using Gameplay.Particles;
 using Audio;
 
-public class EnemyController
+public class EnemyController : ILootable
 {
     private EnemyView _view;
     private Transform _target;
@@ -56,6 +55,16 @@ public class EnemyController
         get { return _view.gameObject.GetInstanceID(); }
     }
 
+    #region ILootable
+    public LootConfig.LootDropDef _lootDropDef
+    {
+        get
+        {
+            return _def.lootDropDef;
+        }
+    }
+    #endregion
+
     public DamageResult TakeDamage(object attacker, float damage)
     {
         DamageResult result = new DamageResult();
@@ -67,7 +76,6 @@ public class EnemyController
 
         if(isDead && result.prevHealth > 0.0f)
         {
-            //Debug.Log("Enemy Dead!");
             Singleton.instance.particleGod.GenerateParticle(Particle.Type.EnemyDeath, _view.transform.position);
             Singleton.instance.audioSystem.PlaySound(SoundBank.Type.MonsterDeath, null, true);
             _view.Die();

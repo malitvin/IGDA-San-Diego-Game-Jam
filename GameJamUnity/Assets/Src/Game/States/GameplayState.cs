@@ -4,6 +4,7 @@ using GhostGen;
 using DG.Tweening;
 using Zenject;
 using Gameplay.Building;
+using Gameplay.Loot;
 using Gameplay.Particles;
 using Gameplay.Inventory;
 using UI.HUD;
@@ -28,6 +29,7 @@ public class GameplayState : IGameState
     private PlayerCombatSystem _playerCombatSystem;
     private BuildingSystem _buildSystem;
     private InventorySystem _inventorySystem;
+    private LootSystem _lootSystem;
     private EnemySystem _enemySystem;
     private ParticleGOD _particleGod;
     private MonsterGenerator _monsterGenerator;
@@ -62,6 +64,7 @@ public class GameplayState : IGameState
         _buildSystem = _diContainer.Resolve<BuildingSystem>();
         _inventorySystem = _diContainer.Resolve<InventorySystem>();
         _enemySystem = _diContainer.Resolve<EnemySystem>();
+        _lootSystem = _diContainer.Resolve<LootSystem>();
         _particleGod = _diContainer.Resolve<ParticleGOD>();
         _monsterGenerator = _diContainer.Resolve<MonsterGenerator>();
         
@@ -78,6 +81,8 @@ public class GameplayState : IGameState
         _playerCombatSystem.Init(_hudController);
         _buildSystem.Init();
         _enemySystem.Init();
+        _lootSystem.Init();
+        _inventorySystem.Init();
 
         // Get CombatPlayerView
         //_playerCombatSystem.isEnabled = true;
@@ -147,7 +152,8 @@ public class GameplayState : IGameState
 
         _hudController.RemoveView();
         _buildSystem.CleanUp();
-
+        _lootSystem.Dispose();
+        _inventorySystem.Dispose();
     }
 
     private void onDamageTaken(GeneralEvent e)

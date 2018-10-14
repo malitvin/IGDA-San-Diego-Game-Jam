@@ -3,6 +3,7 @@ using GhostGen;
 using Gameplay.Building;
 using Gameplay.Inventory;
 using Gameplay.Particles;
+using Gameplay.Loot;
 using UI.HUD;
 using Audio;
 
@@ -18,6 +19,7 @@ public class GameConfig : ScriptableObject, IPostInit
     public EnemyConfig enemyConfig;
     public AudioConfig audioConfig;
     public LevelConfig levelConfig;
+    public LootConfig lootConfig;
 
     [Header("UI")]
     public HUDConfig hudConfig;

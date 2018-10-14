@@ -15,33 +15,27 @@ MonoBehaviour:
   - spawnDistance: 60
     waveStartWaitTime: 3
     waves:
-    - WAVE: '-----------------------------------------------------------------------'
-      enemyCount: 15
+    - enemyCount: 25
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 3
       waveCompleteWaitTime: 1
-    - WAVE: '-----------------------------------------------------------------------'
-      enemyCount: 25
+    - enemyCount: 2
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 2
       waveCompleteWaitTime: 2
-    - WAVE: '-----------------------------------------------------------------------'
-      enemyCount: 100
+    - enemyCount: 100
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 2
       waveCompleteWaitTime: 5
-    - WAVE: '----------------------------------------------'
-      enemyCount: 300
+    - enemyCount: 300
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 6
       waveCompleteWaitTime: 1
-    - WAVE: '---------------------------'
-      enemyCount: 400
+    - enemyCount: 400
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 4
       waveCompleteWaitTime: 5
-    - WAVE: '---------------------------'
-      enemyCount: 600
+    - enemyCount: 600
       minSpawnIntervalTime: 1
       maxSpawnIntervalTime: 3
       waveCompleteWaitTime: 1

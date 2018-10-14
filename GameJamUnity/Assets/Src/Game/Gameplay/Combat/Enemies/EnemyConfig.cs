@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+using Gameplay.Loot;
 
 [System.Serializable]
 public class EnemyDef
@@ -26,8 +25,9 @@ public class EnemyDef
     public LayerMask targetMask;
     public int rewardsForKill;
     public float startHealth;
-}
 
+    public LootConfig.LootDropDef lootDropDef;
+}
 
 [CreateAssetMenu(menuName = "IDGA/Enemy Config")]
 public class EnemyConfig : ScriptableObject

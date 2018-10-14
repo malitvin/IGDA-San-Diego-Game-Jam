@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd2f80cd34fea744b993342972b27de, type: 3}
+  m_Name: Loot Config
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  lootDefs:
+  - rarity: 0
+    color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+    pooledWarmAmount: 25
+    lootItems:
+    - type: 0
+      name: Coin Stack
+      prefab: {fileID: 114411774443473810, guid: 87e5f838232f46044b75c2a2cb4edf2e,
+        type: 2}
+      min: 0
+      max: 10
+      multipleQuantities: 1
+  - rarity: 1
+    color: {r: 0.39703214, g: 1, b: 0, a: 1}
+    pooledWarmAmount: 15
+    lootItems:
+    - type: 0
+      name: Coin Purse
+      prefab: {fileID: 114411774443473810, guid: 87e5f838232f46044b75c2a2cb4edf2e,
+        type: 2}
+      min: 0
+      max: 40
+      multipleQuantities: 1
+    - type: 1
+      name: Health Potion
+      prefab: {fileID: 114747203523537184, guid: 3a77a440459bd484e97c1e9dbec19b3f,
+        type: 2}
+      min: 0
+      max: 1
+      multipleQuantities: 0
+  - rarity: 2
+    color: {r: 0, g: 0.22399688, b: 1, a: 1}
+    pooledWarmAmount: 5
+    lootItems: []
+  - rarity: 3
+    color: {r: 0.7608986, g: 0, b: 1, a: 1}
+    pooledWarmAmount: 2
+    lootItems: []
+  - rarity: 4
+    color: {r: 1, g: 0.8812718, b: 0, a: 1}
+    pooledWarmAmount: 1
+    lootItems: []
+  lootAnimDef:
+    playerAttractDistance: 25
+    playerAttractSpeed: 15
+    boomHeight: 1
+    boomForce: 350
+  autoDestroyTime: 25
+  collectRange: 2

@@ -57,7 +57,7 @@ namespace Gameplay.Building
             
             // TODO: Klean it up!
             _dispatcher = Singleton.instance.notificationDispatcher;
-            _dispatcher.AddListener(GameplayEventType.ENEMY_KILLED, onItemPickedUp);
+            _dispatcher.AddListener(GameplayEventType.INVENTORY_UPDATED, onInventoryUpdated);
         }
 
         public void Init()
@@ -246,7 +246,7 @@ namespace Gameplay.Building
         private void BuyBuildable(int cost)
         {
             Storeable.Type coin = Storeable.Type.Coin;
-            _inventorySystem.Buy(coin, cost);
+            _inventorySystem.RemoveItem(coin, cost);
             _buildViewController.UpdateInventoryUI(coin, _inventorySystem.GetAmount(coin));
         }
         #endregion
@@ -279,10 +279,13 @@ namespace Gameplay.Building
         #endregion
 
         #region Events
-        private void onItemPickedUp(GhostGen.GeneralEvent e)
+        private void onInventoryUpdated(GhostGen.GeneralEvent e)
         {
-            Storeable.Type coin = Storeable.Type.Coin;
-            _buildViewController.UpdateInventoryUI(coin, _inventorySystem.GetAmount(coin));
+            Storeable.Type type = (Storeable.Type)e.data;
+            if (type >= 0)
+            {
+                _buildViewController.UpdateInventoryUI(type, _inventorySystem.GetAmount(type));
+            }
         }
         #endregion
     }
